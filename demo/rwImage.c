@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
             grayImage->val[index] = 255 - grayImage->val[index];
         }
     }
-    WriteGrayImage(grayImage,"outputGray");
+    WriteGrayImage(grayImage,"outputGray.pgm");
 
     //color image
     ColorImage *colorImage = ReadColorImage("../data/lenaColor.ppm");
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
             colorImage->cor[i][j].val[2] = 255 - colorImage->cor[i][j].val[2];
         }
     }
-    WriteColorImage(colorImage,"outputColor");
+    WriteColorImage(colorImage,"outputColor.ppm");
 
     return 0;
 }
