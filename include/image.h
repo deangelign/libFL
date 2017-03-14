@@ -31,6 +31,8 @@ GrayImage    *CreateGrayImage(int ncols,int nrows);
 void          DestroyGrayImage(GrayImage **img);
 GrayImage     *ReadGrayImage(char *filename);
 void          WriteGrayImage(GrayImage *img, char *filename);
+int           MinimumValue(GrayImage *img);
+int           MaximumValue(GrayImage *img);
 
 ColorImage   *CreateColorImage(int nx, int ny); 
 void          DestroyColorImage(ColorImage **I);

@@ -3,5 +3,6 @@
 
 #include "common.h"
 #include "image.h"
+#include "histogram.h"
 
 #endif

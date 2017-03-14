@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <malloc.h>
+//#include <malloc.h>
 #include <math.h>
 #include <string.h>
 #include <limits.h>
@@ -15,8 +15,8 @@
 #define MSG1  "Cannot allocate memory space"
 #define MSG2  "Cannot open file"
 
-/* Common data types to all programs */ 
-
+/* Common data types to all programs */
+typedef unsigned short ushort;
 #ifndef __cplusplus
 #ifndef _WIN32
 #ifndef __cplusplus
