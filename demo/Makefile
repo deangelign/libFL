@@ -19,6 +19,9 @@ $@.cpp: libft $@.cpp
 clean:	
 	find . -type f -executable -exec rm '{}' \;
 
+cleanImages:
+	rm *.ppm *.pgm
+
 
 
 

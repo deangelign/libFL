@@ -25,23 +25,32 @@ typedef struct _colorimage {
 } ColorImage;
 
 
+void         *readImageByExt(char *filename);
+GrayImage    *createGrayImage(int ncols,int nrows);
+void          destroyGrayImage(GrayImage **img);
+GrayImage     *readGrayImage(char *filename);
+void          writeGrayImage(GrayImage *img, char *filename);
+int           minimumValue(GrayImage *img);
+int           maximumValue(GrayImage *img);
 
-void         *ReadImageByExt(char *filename);
-GrayImage    *CreateGrayImage(int ncols,int nrows);
-void          DestroyGrayImage(GrayImage **img);
-GrayImage     *ReadGrayImage(char *filename);
-void          WriteGrayImage(GrayImage *img, char *filename);
-int           MinimumValue(GrayImage *img);
-int           MaximumValue(GrayImage *img);
+ColorImage   *createColorImage(int nx, int ny);
+void          destroyColorImage(ColorImage **I);
+ColorImage   *readColorImage(char *filename);
+void          writeColorImage(ColorImage *I, char *filename);
+int minimumColorValue(ColorImage *img);
+int maximumColorValue(ColorImage *img);
+int minimumIntensityColor(ColorImage *img, int c);
+int maximumIntensityColor(ColorImage *img, int c);
 
-ColorImage   *CreateColorImage(int nx, int ny); 
-void          DestroyColorImage(ColorImage **I);
-ColorImage   *ReadColorImage(char *filename);
-void          WriteColorImage(ColorImage *I, char *filename);
-int MinimumColorValue(ColorImage *img);
-int MaximumColorValue(ColorImage *img);
-int MinimumIntensityColor(ColorImage *img, int c);
-int MaximumIntensityColor(ColorImage *img, int c);
+bool isValidPixelCoordinate(GrayImage *image,int pixelCoordinateX,int pixelCoordinateY);
+bool isImagesSameDomain(GrayImage *image1,GrayImage *image2);
+void copyImage(GrayImage *image1,GrayImage **image2);
+/* Subtrai a imagem2 da imagem1 e guarda o resultado na imagem1.
+ * O parametro saturation define se valores abaixo de zero serao armazenados na imagem1 ou nao*/
+GrayImage *imageSubtraction(GrayImage *image1, GrayImage *image2, bool saturation);
+/* soma a intensidade de todos os pixels na imagem*/
+int sumUpAllPixelsValues(GrayImage *image);
 
 
 #endif
+

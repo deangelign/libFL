@@ -13,26 +13,38 @@ libFL: $(LIB)/libFL.a
 	echo "libFL.a built..."
 
 $(LIB)/libFL.a: \
-$(OBJ)/image.o \
 $(OBJ)/common.o \
+$(OBJ)/adjacencyRelation.o \
+$(OBJ)/image.o \
 $(OBJ)/histogram.o \
+$(OBJ)/morphology.o \
 
 	ar csr $(LIB)/libFL.a \
 $(OBJ)/common.o \
+$(OBJ)/adjacencyRelation.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
+$(OBJ)/morphology.o \
 
 $(OBJ)/common.o: $(SRC)/common.cpp
 	$(CC) $(FLAGS) -c $(SRC)/common.cpp -I$(INCLUDE) \
-	-o $(OBJ)/common.o 
+	-o $(OBJ)/common.o
+
+$(OBJ)/adjacencyRelation.o: $(SRC)/adjacencyRelation.cpp
+	$(CC) $(FLAGS) -c $(SRC)/adjacencyRelation.cpp -I$(INCLUDE) \
+	-o $(OBJ)/adjacencyRelation.o
 
 $(OBJ)/image.o: $(SRC)/image.cpp
 	$(CC) $(FLAGS) -c $(SRC)/image.cpp -I$(INCLUDE) \
-	-o $(OBJ)/image.o 
+	-o $(OBJ)/image.o
 
 $(OBJ)/histogram.o: $(SRC)/histogram.cpp
 	$(CC) $(FLAGS) -c $(SRC)/histogram.cpp -I$(INCLUDE) \
 	-o $(OBJ)/histogram.o
+
+$(OBJ)/morphology.o: $(SRC)/morphology.cpp
+	$(CC) $(FLAGS) -c $(SRC)/morphology.cpp -I$(INCLUDE) \
+	-o $(OBJ)/morphology.o
 
 clean: 
 	rm $(LIB)/lib*.a; rm $(OBJ)/*.o;

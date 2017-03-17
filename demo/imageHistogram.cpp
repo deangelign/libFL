@@ -13,13 +13,13 @@ int main(int argc, char **argv) {
     sscanf(pos,"%s",ext);
 
     if (strcmp(ext,"pgm")==0){
-        GrayImage *grayImage = ReadGrayImage(argv[1]);
+        GrayImage *grayImage = readGrayImage(argv[1]);
         hist = GrayHistogram(grayImage,atoi(argv[2]));
-        DestroyGrayImage(&grayImage);
+        destroyGrayImage(&grayImage);
     } else { /* ppm */
-        ColorImage *colorImage =  ReadColorImage(argv[1]);
+        ColorImage *colorImage =  readColorImage(argv[1]);
         hist = ColorHistogram(colorImage,atoi(argv[2]));
-        DestroyColorImage(&colorImage);
+        destroyColorImage(&colorImage);
     }
 
     WriteHistogram(hist,argv[3]);

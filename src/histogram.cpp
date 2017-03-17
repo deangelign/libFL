@@ -7,7 +7,7 @@ Histogram *GrayHistogram(GrayImage *grayImage, int nbins)
 {
     Histogram *hist = (Histogram *) calloc(1,sizeof(Histogram));
     int p, n = grayImage->ncols*grayImage->nrows;
-    int i, Imax=MaximumValue(grayImage), Imin=MinimumValue(grayImage);
+    int i, Imax = maximumValue(grayImage), Imin=minimumValue(grayImage);
     int K = (Imax-Imin)/MIN(nbins,Imax-Imin); /* size of each interval */
 
     hist->n   = nbins+1;
@@ -76,7 +76,7 @@ Histogram *ColorHistogram(ColorImage *colorImage, int nbins)
 {
     Histogram *hist = (Histogram *) calloc(1,sizeof(Histogram));
     int xp, yp, n = colorImage->nx*colorImage->ny;
-    int i,  w = (pow((double)nbins,(1.0/3.0))+0.5), K = (MaximumColorValue(colorImage)+1) / w + 1;
+    int i,  w = (pow((double)nbins,(1.0/3.0))+0.5), K = (maximumColorValue(colorImage)+1) / w + 1;
 
 
     hist->n   = w*w*w + 1;
@@ -102,7 +102,7 @@ Histogram *ColorHistogram(ColorImage *colorImage, int nbins)
 }
 
 
-Histogram *ColorHistogramFrom8bitColorIMage(ColorImage *colorImage, int nbinsPerChannel)
+Histogram *ColorHistogramFrom8bitColorImage(ColorImage *colorImage, int nbinsPerChannel)
 {
     Histogram *hist = (Histogram *) calloc(1,sizeof(Histogram));
     int xp, yp, n = colorImage->nx*colorImage->ny;
@@ -132,38 +132,6 @@ Histogram *ColorHistogramFrom8bitColorIMage(ColorImage *colorImage, int nbinsPer
 }
 
 
-GrayImage *DensidadeProbabilidadeComDistanciaEuclidiana(ColorImage *img, float K)
-{
-    GrayImage *pdf = CreateGrayImage(img->nx, img->ny);
-    int n = pdf->nrows*pdf->ncols;
-
-#pragma omp parallel for
-    for (int p=0; p < n; p++) {
-        double val=0.0, Rp, Gp, Bp;
-        Rp = img->cor[p/img->nx][p%img->nx].val[0]/255.0;
-        Gp = img->cor[p/img->nx][p%img->nx].val[1]/255.0;
-        Bp = img->cor[p/img->nx][p%img->nx].val[2]/255.0;
-
-        for (int q=0; q < n; q++) {
-            if (p != q) {
-                double dist, Rq, Gq, Bq;
-                Rq = img->cor[q/img->nx][q%img->nx].val[0]/255.0;
-                Gq = img->cor[q/img->nx][q%img->nx].val[1]/255.0;
-                Bq = img->cor[q/img->nx][q%img->nx].val[2]/255.0;
-                dist = (Rp-Rq)*(Rp-Rq) + (Gp-Gq)*(Gp-Gq) + (Bp-Bq)*(Bp-Bq);
-                dist = sqrt(dist);
-                //if (dist < K) {
-                val += exp(-dist);
-                //}
-            }
-        }
-        val /= (n-1);
-        pdf->val[p] = (int)(255*val);
-    }
-
-    return(pdf);
-}
-
 void WriteHistogram(Histogram *hist, char *filename)
 {
     FILE *fp = fopen(filename,"w");
@@ -177,11 +145,11 @@ void WriteHistogram(Histogram *hist, char *filename)
 
 GrayImage *ProbabilityDensityFunction(ColorImage *img, double stdev)
 {
-    GrayImage *pdf = CreateGrayImage(img->nx, img->ny);
+    GrayImage *pdf = createGrayImage(img->nx, img->ny);
     int n = pdf->nrows*pdf->ncols;
     float  *val = (float *)calloc(img->nx*img->ny,sizeof(float));
     double  K = 2.0*stdev*stdev, maxdist = 3*stdev*3*stdev;
-    float   Imax = MaximumColorValue(img), maxval, minval;
+    float   Imax = maximumColorValue(img), maxval, minval;
 
     printf("maxdist %f\n",maxdist);
 
@@ -222,11 +190,11 @@ GrayImage *ProbabilityDensityFunction(ColorImage *img, double stdev)
 
 GrayImage *ProbabilityDensityFunction(GrayImage *img, double stdev)
 {
-    GrayImage *pdf = CreateGrayImage(img->ncols, img->nrows);
+    GrayImage *pdf = createGrayImage(img->ncols, img->nrows);
     int n = pdf->nrows*pdf->ncols;
     float  *val = (float *)calloc(img->ncols*img->nrows,sizeof(float));
     double  K = 2.0*stdev*stdev, maxdist = 3*stdev*3*stdev;
-    float   Imax = MaximumValue(img), maxval, minval;
+    float   Imax = maximumValue(img), maxval, minval;
 
     printf("maxdist %f\n",maxdist);
 
@@ -272,39 +240,3 @@ void DestroyHistogram(Histogram **hist)
     }
     *hist = NULL;
 }
-
-
-
-//int main(int argc, char **argv) {
-//  char             ext[10],*pos;
-//  Histogram       *hist=NULL;
-//
-//  if (argc != 3) {
-//    printf("histogram <image.[pgm,ppm]> <histogram.txt>\n");
-//    exit(-1);
-//  }
-//
-//  pos = strrchr(argv[1],'.') + 1;
-//  sscanf(pos,"%s",ext);
-//
-//  if (strcmp(ext,"pgm")==0){
-//    GrayImage *grayImage = ReadGrayImage(argv[1]);
-//
-//    hist = GrayHistogram(grayImage);
-//
-//  } else { /* ppm */
-//
-//    ColorImage *colorImage =  ReadColorImage(argv[1]);
-//
-//    hist = ColorHistogram(colorImage,512);
-//    GrayImage *pdf = DensidadeProbabilidade(colorImage,0.5);
-//    WriteGrayImage(pdf,"densidade.pgm");
-//    DestroyGrayImage(&pdf);
-//  }
-//
-//
-//  WriteHistogram(hist,argv[2]);
-//  DestroyHistogram(&hist);
-//
-//  return 0;
-//}

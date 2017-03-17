@@ -11,21 +11,21 @@ int main(int argc, char **argv) {
     sscanf(pos,"%s",ext);
 
     if (strcmp(ext,"ppm")==0){
-        ColorImage *colorImage =  ReadColorImage(argv[1]);
+        ColorImage *colorImage =  readColorImage(argv[1]);
         //ColorImage *ycbcr      = RGBtoYCbCr(colorImage);
         //GrayImage  *pdf        = ProbabilityDensityFunction(ycbcr,atof(argv[2]));
         GrayImage  *pdf        = ProbabilityDensityFunction(colorImage,atof(argv[2]));
-        WriteGrayImage(pdf,argv[3]);
+        writeGrayImage(pdf,argv[3]);
 
-        DestroyGrayImage(&pdf);
-        DestroyColorImage(&colorImage);
+        destroyGrayImage(&pdf);
+        destroyColorImage(&colorImage);
         //DestroyColorImage(&ycbcr);
     }else{ /* ppm */
-        GrayImage *grayImage =  ReadGrayImage(argv[1]);
+        GrayImage *grayImage =  readGrayImage(argv[1]);
         GrayImage  *pdf        = ProbabilityDensityFunction(grayImage,atof(argv[2]));
-        WriteGrayImage(pdf,argv[3]);
-        DestroyGrayImage(&pdf);
-        DestroyGrayImage(&grayImage);
+        writeGrayImage(pdf,argv[3]);
+        destroyGrayImage(&pdf);
+        destroyGrayImage(&grayImage);
     }
     return 0;
 }

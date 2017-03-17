@@ -1,6 +1,6 @@
 #include "image.h"
 
-GrayImage *CreateGrayImage(int ncols, int nrows)
+GrayImage *createGrayImage(int ncols, int nrows)
 {
   GrayImage *img=NULL;
   int i;
@@ -22,7 +22,7 @@ GrayImage *CreateGrayImage(int ncols, int nrows)
   return(img);
 }
 
-void DestroyGrayImage(GrayImage **img)
+void destroyGrayImage(GrayImage **img)
 {
   GrayImage *aux;
 
@@ -35,7 +35,7 @@ void DestroyGrayImage(GrayImage **img)
   }
 }
 
-GrayImage *ReadGrayImage(char *filename)
+GrayImage *readGrayImage(char *filename)
 {
   FILE *fp=NULL;
   unsigned char *value=NULL;
@@ -65,7 +65,7 @@ GrayImage *ReadGrayImage(char *filename)
       exit(-1);
     }
     fclose(fp);
-    img = CreateGrayImage(ncols,nrows);
+    img = createGrayImage(ncols,nrows);
     for (i=0; i < n; i++)
       img->val[i]=(int)value[i];
     free(value);
@@ -76,7 +76,7 @@ GrayImage *ReadGrayImage(char *filename)
       n = ncols*nrows;
       NCFgets(z,255,fp);
       sscanf(z,"%d\n",&i);
-      img = CreateGrayImage(ncols,nrows);
+      img = createGrayImage(ncols,nrows);
       for (i=0; i < n; i++)
         fscanf(fp,"%d",&img->val[i]);
       fclose(fp);
@@ -89,7 +89,7 @@ GrayImage *ReadGrayImage(char *filename)
   return(img);
 }
 
-void WriteGrayImage(GrayImage *img,char *filename)
+void writeGrayImage(GrayImage *img,char *filename)
 {
   FILE *fp;
   int i, n, Imax,Imin;
@@ -124,7 +124,7 @@ void WriteGrayImage(GrayImage *img,char *filename)
 }
 
 
-int MinimumValue(GrayImage *img){
+int minimumValue(GrayImage *img){
   int i,min;
 
   min = img->val[0];
@@ -136,7 +136,7 @@ int MinimumValue(GrayImage *img){
   }
   return min;
 }
-int MaximumValue(GrayImage *img){
+int maximumValue(GrayImage *img){
   int i,max;
 
   max = img->val[0];
@@ -149,7 +149,7 @@ int MaximumValue(GrayImage *img){
   return max;
 }
 
-ColorImage *CreateColorImage(int nx, int ny)
+ColorImage *createColorImage(int nx, int ny)
 {
   ColorImage *I=(ColorImage *)calloc(1,sizeof(ColorImage));
   int y;
@@ -162,18 +162,18 @@ ColorImage *CreateColorImage(int nx, int ny)
 
   I->cor = (Cor **)calloc(ny,sizeof(Cor *));
   if (I->cor == NULL)
-    Error(MSG1,"CreateColorImage");
+    Error(MSG1,"createColorImage");
   else{
     for (y=0; y < I->ny; y++){
       I->cor[y] = (Cor *)calloc(nx,sizeof(Cor));
       if (I->cor[y] == NULL)
-        Error(MSG1,"CreateColorImage");
+        Error(MSG1,"createColorImage");
     }
   }
   return(I);
 }
 
-ColorImage *ReadColorImage(char *filename)
+ColorImage *readColorImage(char *filename)
 {
   FILE *fp=NULL;
   char type[10];
@@ -190,7 +190,7 @@ ColorImage *ReadColorImage(char *filename)
     if (strcmp(type,"P6")==0){
       fscanf(fp,"%d",&nx);
       fscanf(fp,"%d\n",&ny);
-      I = CreateColorImage(nx,ny);
+      I = createColorImage(nx,ny);
       fscanf(fp,"%d\n",&Imax);
       I->Imax = Imax;
 
@@ -231,7 +231,7 @@ ColorImage *ReadColorImage(char *filename)
   return(I);
 }
 
-void WriteColorImage(ColorImage *I, char *filename)
+void writeColorImage(ColorImage *I, char *filename)
 {
   FILE *fp=NULL;
   int  x,y;
@@ -242,8 +242,8 @@ void WriteColorImage(ColorImage *I, char *filename)
     fprintf(fp,"P6\n");
     fprintf(fp,"%d %d\n",I->nx,I->ny);
 
-    int max_val = MaximumColorValue(I);
-    int min_val = MinimumColorValue(I);
+    int max_val = maximumColorValue(I);
+    int min_val = minimumColorValue(I);
 
     if (min_val < 0){
       Error(MSG2,"WriteColorImage");
@@ -260,7 +260,7 @@ void WriteColorImage(ColorImage *I, char *filename)
         }
     } else if (max_val < 65536){
       int rgbBitDepth = 9;
-      // find the bit depth for the maximum value img_max_val            
+      // find the bit depth for the maximum value img_max_val
       while ((1 << rgbBitDepth) <= max_val) {
         rgbBitDepth++;
       }
@@ -284,7 +284,7 @@ void WriteColorImage(ColorImage *I, char *filename)
 
 }
 
-void DestroyColorImage(ColorImage **I)
+void destroyColorImage(ColorImage **I)
 {
   int y;
 
@@ -298,21 +298,21 @@ void DestroyColorImage(ColorImage **I)
 }
 
 
-int MinimumColorValue(ColorImage *img){
+int minimumColorValue(ColorImage *img){
 
   int img_min_val[3];
   for (int i=0; i<3; i++){
-    img_min_val[i] = MinimumIntensityColor(img,i);
+    img_min_val[i] = minimumIntensityColor(img,i);
   }
 
   return MIN(MIN(img_min_val[RED],img_min_val[GREEN]),img_min_val[BLUE]);
 }
 
-int MaximumColorValue(ColorImage *img){
+int maximumColorValue(ColorImage *img){
 
   int img_max_val[3];
   for (int i=0; i<3; i++){
-    img_max_val[i] = MaximumIntensityColor(img,i);
+    img_max_val[i] = maximumIntensityColor(img,i);
   }
 
   return MAX(MAX(img_max_val[RED],img_max_val[GREEN]),img_max_val[BLUE]);
@@ -320,7 +320,7 @@ int MaximumColorValue(ColorImage *img){
 
 
 
-int MinimumIntensityColor(ColorImage *img, int c){
+int minimumIntensityColor(ColorImage *img, int c){
   int i,j,min;
 
   min = INT_MAX;
@@ -332,7 +332,7 @@ int MinimumIntensityColor(ColorImage *img, int c){
   return min;
 }
 
-int MaximumIntensityColor(ColorImage *img, int c){
+int maximumIntensityColor(ColorImage *img, int c){
   int i,j,max;
 
   max = -1;
@@ -342,4 +342,62 @@ int MaximumIntensityColor(ColorImage *img, int c){
         max = img->cor[j][i].val[c];
 
   return max;
+}
+
+bool isValidPixelCoordinate(GrayImage *image,int pixelCoordinateX,int pixelCoordinateY){
+  if(pixelCoordinateX < 0 || pixelCoordinateY < 0){
+    return false;
+  }
+  if(pixelCoordinateX >= image->ncols || pixelCoordinateY >= image->ncols){
+    return false;
+  }
+  return true;
+}
+
+bool isImagesSameDomain(GrayImage *image1,GrayImage *image2){
+
+  if(image1->nrows == image2->nrows && image1->ncols == image2->ncols){
+    return true;
+  }
+  return false;
+}
+
+void copyImage(GrayImage *image1,GrayImage **image2){
+  if((*image2) == NULL){
+    *image2 = createGrayImage(image1->ncols,image1->nrows);
+  }
+
+  if(isImagesSameDomain(image1,*image2)){
+    for (int n = 0; n < image1->nrows*image1->ncols; ++n) {
+      (*image2)->val[n] = image1->val[n];
+    }
+  }
+  else{
+    printf("different domains");
+  }
+}
+
+GrayImage *imageSubtraction(GrayImage *image1, GrayImage *image2, bool saturation){
+  GrayImage *outputImage = NULL;
+  if(isImagesSameDomain(image1,image2)){
+    outputImage = createGrayImage(image1->ncols,image1->nrows);
+    int n = image1->ncols*image1->nrows;
+    int result;
+    for (int i = 0; i < n; ++i) {
+      result = image1->val[i] - image2->val[i];
+      if(saturation){
+        result = (result<0)?0:result;
+      }
+      outputImage->val[i] = result;
+    }
+  }
+  return outputImage;
+}
+
+int sumUpAllPixelsValues(GrayImage *image){
+  int sum = 0;
+  for (int n = 0; n < image->nrows*image->ncols; ++n) {
+    sum += image->val[n];
+  }
+  return sum;
 }

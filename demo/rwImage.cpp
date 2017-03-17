@@ -3,7 +3,7 @@
 int main(int argc, char **argv) {
 
     //gray image
-    GrayImage *grayImage = ReadGrayImage("../data/lena.pgm");
+    GrayImage *grayImage = readGrayImage("../data/lena.pgm");
     int index=0;
     for (int i = 0; i < grayImage->nrows; ++i) {
         for (int j = 0; j < grayImage->ncols; ++j) {
@@ -11,10 +11,10 @@ int main(int argc, char **argv) {
             grayImage->val[index] = 255 - grayImage->val[index];
         }
     }
-    WriteGrayImage(grayImage,"outputGray.pgm");
+    writeGrayImage(grayImage,"outputGray.pgm");
 
     //color image
-    ColorImage *colorImage = ReadColorImage("../data/lenaColor.ppm");
+    ColorImage *colorImage = readColorImage("../data/lenaColor.ppm");
     for (int i = 0; i < colorImage->ny; ++i) {
         for (int j = 0; j < colorImage->nx; ++j) {
             colorImage->cor[i][j].val[0] = 255 - colorImage->cor[i][j].val[0];
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
             colorImage->cor[i][j].val[2] = 255 - colorImage->cor[i][j].val[2];
         }
     }
-    WriteColorImage(colorImage,"outputColor.ppm");
+    writeColorImage(colorImage,"outputColor.ppm");
 
     return 0;
 }
