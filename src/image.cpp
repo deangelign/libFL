@@ -344,6 +344,42 @@ int maximumIntensityColor(ColorImage *img, int c){
   return max;
 }
 
+ColorImage *RGBtoYCbCr(ColorImage *rgb)
+{
+  ColorImage *ycbcr;
+  float a = 16.0;
+  float b = 128.0;
+
+  ycbcr = createColorImage(rgb->nx,rgb->ny);
+
+  for (int y=0; y < rgb->ny; y++)
+    for (int x=0; x < rgb->nx; x++){
+      float lum  = (0.257*(float)rgb->cor[y][x].val[0]+
+                    0.504*(float)rgb->cor[y][x].val[1]+
+                    0.098*(float)rgb->cor[y][x].val[2]+a);
+      float Cb = (-0.148*(float)rgb->cor[y][x].val[0]+
+                  -0.291*(float)rgb->cor[y][x].val[1]+
+                  0.439*(float)rgb->cor[y][x].val[2]+b);
+      float Cr = (0.439*(float)rgb->cor[y][x].val[0]+
+                  -0.368*(float)rgb->cor[y][x].val[1]+
+                  -0.071*(float)rgb->cor[y][x].val[2]+b);
+
+      if (lum < 0)   lum = 0.0;
+      if (lum > 255) lum = 255;
+      if (Cb < 0)   Cb = 0.0;
+      if (Cb > 255) Cb = 255;
+      if (Cr < 0)   Cr = 0.0;
+      if (Cr > 255) Cr = 255;
+
+      ycbcr->cor[y][x].val[0] = lum;
+      ycbcr->cor[y][x].val[1] = Cb;
+      ycbcr->cor[y][x].val[2] = Cr;
+
+    }
+
+  return(ycbcr);
+}
+
 bool isValidPixelCoordinate(GrayImage *image,int pixelCoordinateX,int pixelCoordinateY){
   if(pixelCoordinateX < 0 || pixelCoordinateY < 0){
     return false;

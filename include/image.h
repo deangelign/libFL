@@ -41,6 +41,7 @@ int minimumColorValue(ColorImage *img);
 int maximumColorValue(ColorImage *img);
 int minimumIntensityColor(ColorImage *img, int c);
 int maximumIntensityColor(ColorImage *img, int c);
+ColorImage *RGBtoYCbCr(ColorImage *rgb);
 
 bool isValidPixelCoordinate(GrayImage *image,int pixelCoordinateX,int pixelCoordinateY);
 bool isImagesSameDomain(GrayImage *image1,GrayImage *image2);
