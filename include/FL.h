@@ -6,5 +6,6 @@
 #include "image.h"
 #include "histogram.h"
 #include "morphology.h"
+#include "filtering.h"
 
 #endif

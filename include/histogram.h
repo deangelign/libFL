@@ -22,6 +22,10 @@ Histogram *GrayHistogram(GrayImage *grayImage, int nbins, int maxValueAllowed, i
 Histogram *GrayHistogramFrom8BitGrayImage(GrayImage *grayImage);
 Histogram *ColorHistogram(ColorImage *colorImage, int nbins);
 Histogram *ColorHistogramFrom8bitColorIMage(ColorImage *colorImage, int nbinsPerChannel);
+Histogram* computeHistogram(GrayImage* grayImage, int numberBins);
+Histogram* computeHistogram(ColorImage* colorImage, int numberBins);
+void DestroyHistogram(Histogram **hist);
+FeatureVector* createFeatureVector(Histogram *histogram);
 /*
  * computa a densidade de probabilidade para cada pixel da imagem baseado em todos os outros pixels
  * */

@@ -240,3 +240,21 @@ void DestroyHistogram(Histogram **hist)
     }
     *hist = NULL;
 }
+
+Histogram* computeHistogram(GrayImage* grayImage, int numberBins){
+    return GrayHistogram(grayImage,numberBins);
+}
+
+Histogram* computeHistogram(ColorImage* colorImage, int numberBins){
+    return ColorHistogram(colorImage,numberBins);
+}
+
+FeatureVector* createFeatureVector(Histogram *histogram){
+    FeatureVector* featureVector = (FeatureVector*)calloc(1,sizeof(FeatureVector));
+    featureVector->size = histogram->n;
+    featureVector->features = (float *)calloc(histogram->n,sizeof(float));
+    for (int i = 0; i < histogram->n; ++i) {
+        featureVector->features[i] = histogram->val[i];
+    }
+    return featureVector;
+}

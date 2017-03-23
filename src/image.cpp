@@ -188,10 +188,25 @@ ColorImage *readColorImage(char *filename)
     NCFgets(remarks,255,fp);
 
     if (strcmp(type,"P6")==0){
-      fscanf(fp,"%d",&nx);
-      fscanf(fp,"%d\n",&ny);
+      int c = getc(fp);
+      while (c == '#') {
+        while (getc(fp) != '\n');
+        c = getc(fp);
+      }
+      ungetc(c, fp);
+      if (fscanf(fp, "%d %d", &nx, &ny) != 2) {
+        fprintf(stderr, "Invalid image size (error loading '%s')\n", filename);
+        exit(1);
+      }
+
       I = createColorImage(nx,ny);
-      fscanf(fp,"%d\n",&Imax);
+
+      if (fscanf(fp, "%d", &Imax) != 1) {
+        fprintf(stderr, "Invalid rgb component (error loading '%s')\n",
+                filename);
+        exit(1);
+      }
+
       I->Imax = Imax;
 
       if (Imax <= 255){
@@ -219,8 +234,42 @@ ColorImage *readColorImage(char *filename)
           }
         }
       }
-    }else{
-      Error("GrayImage type invalid","ReadColormage");
+    }else if(strcmp(type,"P3")==0){
+      int c = getc(fp);
+      while (c == '#') {
+        while (getc(fp) != '\n');
+        c = getc(fp);
+      }
+      ungetc(c, fp);
+      if (fscanf(fp, "%d %d", &nx, &ny) != 2) {
+        fprintf(stderr, "Invalid image size (error loading '%s')\n", filename);
+        exit(1);
+      }
+
+      I = createColorImage(nx,ny);
+
+      if (fscanf(fp, "%d", &Imax) != 1) {
+        fprintf(stderr, "Invalid rgb component (error loading '%s')\n",
+                filename);
+        exit(1);
+      }
+
+      I->Imax = Imax;
+
+      int R=0,G=0,B=0;
+
+      for (y=0; y < ny; y++) {
+        for (x=0; x < nx; x++){
+          (void)fscanf(fp, "%d %d %d",&R,&G,&B);
+          I->cor[y][x].val[0] = R;
+          I->cor[y][x].val[1] = G;
+          I->cor[y][x].val[2] = B;
+        }
+      }
+    }
+
+    else{
+      Error("ColorImage type invalid","ReadColormage");
     }
 
     fclose(fp);
@@ -344,42 +393,6 @@ int maximumIntensityColor(ColorImage *img, int c){
   return max;
 }
 
-ColorImage *RGBtoYCbCr(ColorImage *rgb)
-{
-  ColorImage *ycbcr;
-  float a = 16.0;
-  float b = 128.0;
-
-  ycbcr = createColorImage(rgb->nx,rgb->ny);
-
-  for (int y=0; y < rgb->ny; y++)
-    for (int x=0; x < rgb->nx; x++){
-      float lum  = (0.257*(float)rgb->cor[y][x].val[0]+
-                    0.504*(float)rgb->cor[y][x].val[1]+
-                    0.098*(float)rgb->cor[y][x].val[2]+a);
-      float Cb = (-0.148*(float)rgb->cor[y][x].val[0]+
-                  -0.291*(float)rgb->cor[y][x].val[1]+
-                  0.439*(float)rgb->cor[y][x].val[2]+b);
-      float Cr = (0.439*(float)rgb->cor[y][x].val[0]+
-                  -0.368*(float)rgb->cor[y][x].val[1]+
-                  -0.071*(float)rgb->cor[y][x].val[2]+b);
-
-      if (lum < 0)   lum = 0.0;
-      if (lum > 255) lum = 255;
-      if (Cb < 0)   Cb = 0.0;
-      if (Cb > 255) Cb = 255;
-      if (Cr < 0)   Cr = 0.0;
-      if (Cr > 255) Cr = 255;
-
-      ycbcr->cor[y][x].val[0] = lum;
-      ycbcr->cor[y][x].val[1] = Cb;
-      ycbcr->cor[y][x].val[2] = Cr;
-
-    }
-
-  return(ycbcr);
-}
-
 bool isValidPixelCoordinate(GrayImage *image,int pixelCoordinateX,int pixelCoordinateY){
   if(pixelCoordinateX < 0 || pixelCoordinateY < 0){
     return false;
@@ -436,4 +449,149 @@ int sumUpAllPixelsValues(GrayImage *image){
     sum += image->val[n];
   }
   return sum;
+}
+
+
+void writeImageAsASCII(GrayImage* image,const char *filename,unsigned int maxValueOnChanel){
+  int i, j;
+  FILE *fp = fopen(filename, "w");
+  (void) fprintf(fp, "P2\n%d %d\n%d\n", image->ncols,image->nrows, (int) maxValueOnChanel);
+  int k = 0;
+  for (i = 0; i < image->nrows; i++){
+    for (j = 0; j < image->ncols; j++){
+      (void) fprintf(fp,"%d ",image->val[k]);
+      k++;
+    }
+    (void) fprintf(fp,"\n");
+  }
+  (void) fclose(fp);
+}
+
+void writeImageAsASCII(ColorImage* image,const char *filename, unsigned int maxValueOnChanel){
+  int i, j;
+  FILE *fp = fopen(filename, "w");
+  (void) fprintf(fp, "P3\n%d %d\n%d\n", image->nx,image->ny, (int) maxValueOnChanel);
+  for (i = 0; i < image->ny; i++){
+    for (j = 0; j < image->nx; j++){
+      (void) fprintf(fp,"%d %d %d ",image->cor[i][j].val[0],image->cor[i][j].val[1],image->cor[i][j].val[2]);
+    }
+    (void) fprintf(fp,"\n");
+  }
+  (void) fclose(fp);
+}
+
+void writeImageAsBinary(GrayImage* image,const char *filename,unsigned int maxValueOnChanel){
+  int i, j;
+  FILE *fp = fopen(filename, "wb");
+  (void) fprintf(fp, "P5\n%d %d\n%d\n", image->ncols,image->nrows, (int) maxValueOnChanel);
+  int k = 0;
+  for (i = 0; i < image->nrows; i++){
+    for (j = 0; j < image->ncols; j++){
+      static unsigned char gray[1];
+      gray[0] = image->val[k];
+      (void) fwrite(gray, 1, 1, fp);
+      k++;
+    }
+    //(void) fprintf(fp,"\n");
+  }
+  (void) fclose(fp);
+}
+
+void writeImageAsBinary(ColorImage* image,const char *filename, unsigned int maxValueOnChanel){
+  int i, j;
+  FILE *fp = fopen(filename, "wb");
+  (void) fprintf(fp, "P6\n%d %d\n%d\n", image->nx,image->ny, (int) maxValueOnChanel);
+  for (i = 0; i < image->ny; i++){
+    for (j = 0; j < image->nx; j++){
+      static unsigned char color[3];
+      color[0] = image->cor[i][j].val[0];
+      color[1] = image->cor[i][j].val[1];
+      color[2] = image->cor[i][j].val[2];
+      (void) fwrite(color, 1, 3, fp);
+    }
+    //(void) fprintf(fp,"\n");
+  }
+  (void) fclose(fp);
+}
+
+void writeImage(ColorImage* image,const char *filename, const char *magicNumber,unsigned int maxValueOnChanel){
+  //ASCII
+  if (strcmp(magicNumber,"P3")==0){
+    writeImageAsASCII(image,filename,maxValueOnChanel);
+  }//Binary
+  else if(strcmp(magicNumber,"P6")==0){
+    writeImageAsBinary(image,filename,maxValueOnChanel);
+  }else{
+    fprintf(stderr,"magic number desconhecido. Por favor, acesse https://en.wikipedia.org/wiki/Netpbm_format "
+            "para saber mais sobre");
+  }
+}
+
+void writeImage(GrayImage* image,const char *filename, const char *magicNumber,unsigned int maxValueOnChanel){
+  //ASCII
+  if (strcmp(magicNumber,"P2")==0){
+    writeImageAsASCII(image,filename,maxValueOnChanel);
+  }//Binary
+  else if(strcmp(magicNumber,"P5")==0){
+    writeImageAsBinary(image,filename,maxValueOnChanel);
+  }else{
+    fprintf(stderr,"magic number desconhecido. Por favor, acesse https://en.wikipedia.org/wiki/Netpbm_format "
+            "para saber mais sobre");
+  }
+}
+
+void writeImage(GrayImage* image,const char *filename){
+  writeImage(image,filename, "P5",255);
+}
+
+void writeImage(ColorImage* image,const char *filename){
+  writeImage(image,filename, "P6",255);
+}
+
+ColorImage *RGBtoYCbCr(ColorImage *rgb)
+{
+  ColorImage *ycbcr;
+  float a = 16.0;
+  float b = 128.0;
+
+  ycbcr = createColorImage(rgb->nx,rgb->ny);
+
+  for (int y=0; y < rgb->ny; y++)
+    for (int x=0; x < rgb->nx; x++){
+      float lum  = (0.257*(float)rgb->cor[y][x].val[0]+
+                    0.504*(float)rgb->cor[y][x].val[1]+
+                    0.098*(float)rgb->cor[y][x].val[2]+a);
+      float Cb = (-0.148*(float)rgb->cor[y][x].val[0]+
+                  -0.291*(float)rgb->cor[y][x].val[1]+
+                  0.439*(float)rgb->cor[y][x].val[2]+b);
+      float Cr = (0.439*(float)rgb->cor[y][x].val[0]+
+                  -0.368*(float)rgb->cor[y][x].val[1]+
+                  -0.071*(float)rgb->cor[y][x].val[2]+b);
+
+      if (lum < 0)   lum = 0.0;
+      if (lum > 255) lum = 255;
+      if (Cb < 0)   Cb = 0.0;
+      if (Cb > 255) Cb = 255;
+      if (Cr < 0)   Cr = 0.0;
+      if (Cr > 255) Cr = 255;
+
+      ycbcr->cor[y][x].val[0] = lum;
+      ycbcr->cor[y][x].val[1] = Cb;
+      ycbcr->cor[y][x].val[2] = Cr;
+
+    }
+
+  return(ycbcr);
+}
+
+GrayImage* extractColorChannelAsGrayImage(ColorImage* colorImage,int channel){
+  GrayImage* grayImage= createGrayImage(colorImage->nx,colorImage->ny);
+  int k=0;
+  for (int i = 0; i < colorImage->ny; ++i) {
+    for (int j = 0; j < colorImage->nx; ++j) {
+      grayImage->val[k] = colorImage->cor[i][j].val[channel];
+      k++;
+    }
+  }
+  return grayImage;
 }

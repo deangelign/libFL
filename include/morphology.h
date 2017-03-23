@@ -25,5 +25,7 @@ float *applyGranulometryOnImage(GrayImage *image, float startRadius, float endRa
  * e gera uma feature para cada um deles. O elemento estruturante usado tem formato de losango
  * */
 float *applyGranulometryOnImage(GrayImage *image, int k);
+FeatureVector *getMorphologicalPdf(GrayImage *image, int k);
+FeatureVector *getMorphologicalPdf(ColorImage *image, int k);
 
 #endif //LIBFL_MORPHOLOGY_H

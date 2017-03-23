@@ -18,6 +18,7 @@ $(OBJ)/adjacencyRelation.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
 $(OBJ)/morphology.o \
+$(OBJ)/filtering.o \
 
 	ar csr $(LIB)/libFL.a \
 $(OBJ)/common.o \
@@ -25,6 +26,7 @@ $(OBJ)/adjacencyRelation.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
 $(OBJ)/morphology.o \
+$(OBJ)/filtering.o \
 
 $(OBJ)/common.o: $(SRC)/common.cpp
 	$(CC) $(FLAGS) -c $(SRC)/common.cpp -I$(INCLUDE) \
@@ -42,9 +44,14 @@ $(OBJ)/histogram.o: $(SRC)/histogram.cpp
 	$(CC) $(FLAGS) -c $(SRC)/histogram.cpp -I$(INCLUDE) \
 	-o $(OBJ)/histogram.o
 
+
 $(OBJ)/morphology.o: $(SRC)/morphology.cpp
 	$(CC) $(FLAGS) -c $(SRC)/morphology.cpp -I$(INCLUDE) \
 	-o $(OBJ)/morphology.o
+
+$(OBJ)/filtering.o: $(SRC)/filtering.cpp
+	$(CC) $(FLAGS) -c $(SRC)/filtering.cpp -I$(INCLUDE) \
+	-o $(OBJ)/filtering.o
 
 clean: 
 	rm $(LIB)/lib*.a; rm $(OBJ)/*.o;

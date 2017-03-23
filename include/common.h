@@ -37,6 +37,20 @@ typedef struct _voxel {
     int x, y, z;
 } Voxel;
 
+typedef struct _featureVector {
+	float* features;
+	int size;
+} FeatureVector;
+
+FeatureVector* createFeatureVector(int size);
+FeatureVector* createFeatureVector(float* vec,int size);
+void wirteFeatureVector(FeatureVector* vector, FILE *fp);
+void wirteFeatureVectors(FeatureVector** vectors, int nVectors, char *filename);
+void destroyFeatureVector(FeatureVector** vector);
+void printFeatureVector(FeatureVector* featureVector);
+FeatureVector* mergeFeatureVectors(FeatureVector* vector1,FeatureVector* vector2);
+float vectorDifference(FeatureVector* vector1,FeatureVector* vector2);
+
 /* Common definitions */
 
 
