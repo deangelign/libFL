@@ -121,3 +121,11 @@ void getAdjacentsInCircle(float radius,AdjacencyRelation* AdjRel){
     }
 }
 
+AdjacencyRelation *createLineAdjacency(int n, int origin){
+    return NULL;
+}
+
+
+AdjacencyRelation *copyAdjacency(AdjacencyRelation *adjacencyRelation){
+    return NULL;
+}

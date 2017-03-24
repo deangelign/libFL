@@ -4,27 +4,50 @@
 #include "filtering.h"
 
 
-
-
-float* circularCrossCorrelation1D(float *X1,float *X2,int N1,int N2,bool normalization){
+FeatureVector* correlation1D(FeatureVector*X1,FeatureVector*X2,bool normalization){
+    return NULL;
+}
+FeatureVector* correlation1D(FeatureVector*X1,Kernel kernel){
+    return NULL;
+}
+float* correlation1D(FeatureVector*X1,Kernel *kernel, int n){
     return NULL;
 }
 
 FeatureVector* circularCrossCorrelation1D(FeatureVector*X1,FeatureVector*X2,bool normalization){
     return NULL;
 }
-
-FeatureVector* correlation1D(FeatureVector*X1,FeatureVector*X2,bool normalization){
+FeatureVector* circularCrossCorrelation1D(FeatureVector*X1,Kernel *kernel){
     return NULL;
 }
 
-FeatureVector* matchingWithCorrelationUsingErrorSquared(FeatureVector*X1,FeatureVector*X2){
+float* circularCrossCorrelation1D(FeatureVector*X1,Kernel *kernel, int *n){
     return NULL;
 }
 
-FeatureVector* Convolution1D(FeatureVector*X1,FeatureVector*X2){
+
+FeatureVector* covolution1D(FeatureVector*X1,FeatureVector*X2){
     return NULL;
 }
+FeatureVector* covolution1D(FeatureVector*X1,Kernel *kernel){
+    return NULL;
+}
+float* covolutionn1D(FeatureVector*X1,Kernel *kernel, int n){
+    return NULL;
+}
+
+FeatureVector* circularCovolution1D(FeatureVector*X1,FeatureVector*X2){
+    return NULL;
+}
+FeatureVector* circularCovolution1D(FeatureVector*X1,Kernel *kernel){
+    return NULL;
+}
+
+float* circularCovolution1D(FeatureVector*X1,Kernel *kernel, int n){
+    return NULL;
+}
+
+
 
 
 

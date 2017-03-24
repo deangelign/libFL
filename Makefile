@@ -15,6 +15,7 @@ libFL: $(LIB)/libFL.a
 $(LIB)/libFL.a: \
 $(OBJ)/common.o \
 $(OBJ)/adjacencyRelation.o \
+$(OBJ)/kernel.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
 $(OBJ)/morphology.o \
@@ -23,6 +24,7 @@ $(OBJ)/filtering.o \
 	ar csr $(LIB)/libFL.a \
 $(OBJ)/common.o \
 $(OBJ)/adjacencyRelation.o \
+$(OBJ)/kernel.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
 $(OBJ)/morphology.o \
@@ -35,6 +37,10 @@ $(OBJ)/common.o: $(SRC)/common.cpp
 $(OBJ)/adjacencyRelation.o: $(SRC)/adjacencyRelation.cpp
 	$(CC) $(FLAGS) -c $(SRC)/adjacencyRelation.cpp -I$(INCLUDE) \
 	-o $(OBJ)/adjacencyRelation.o
+
+$(OBJ)/kernel.o: $(SRC)/kernel.cpp
+	$(CC) $(FLAGS) -c $(SRC)/kernel.cpp -I$(INCLUDE) \
+	-o $(OBJ)/kernel.o
 
 $(OBJ)/image.o: $(SRC)/image.cpp
 	$(CC) $(FLAGS) -c $(SRC)/image.cpp -I$(INCLUDE) \
