@@ -8,10 +8,12 @@
 #include "image.h"
 #include "common.h"
 #include "adjacencyRelation.h"
+#include "featureVector.h"
 
 typedef struct _histogram {
     float *val;
     int    n;
+    int binSize;
 } Histogram;
 
 
@@ -38,9 +40,11 @@ GrayImage *ProbabilityDensityFunction(GrayImage *img, double stdev);
 GrayImage *ProbabilityDensityFunction(ColorImage *img, double stdev,AdjacencyRelation *adjRel);
 GrayImage *ProbabilityDensityFunction(GrayImage *img, double stdev,AdjacencyRelation *adjRel);
 
-void WriteHistogram(Histogram *hist, char *filename);
-void DestroyHistogram(Histogram **hist);
-
+void writeHistogram(Histogram *hist, char *filename);
+void destroyHistogram(Histogram **hist);
+Histogram* createHistogram(int n);
+Histogram* computeHistogram(Image *image,float binSize,bool normalization);
+Image *ProbabilityDensityFunction(Image *image, double standardDeviation);
 
 
 

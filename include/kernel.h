@@ -4,22 +4,29 @@
 
 #include "common.h"
 #include "adjacencyRelation.h"
+#include "featureVector.h"
 
 
-/* Multiband kernel: Kernel *K; K->A->n; K->A->dx[i],
-   K->A->dy[i],K->A->dz[i]; K->weight[i]  */
+
 typedef struct _kernel {
-  AdjacencyRelation *adjacencyRelation;
-  float     *weight;
+    AdjacencyRelation *adjacencyRelation;
+    float *weight;
 } Kernel;
 
-//aloca memoria para a estrutura do kernel
+//aloca memoria para a estrutura do kernel e cria uma relacao de adjacencia e inicializa os pesos
 Kernel *createKernel(AdjacencyRelation *adjRel);
+Kernel *createKernel(FeatureVector* weights);
+
 //destroi uma estrutura de kernel
-void destroyKernel(Kernel **K);
+void destroyKernel(Kernel **kernel);
+
 
 //define os pesos do kernel
-void setKernelWeights(float* weights);
+void setKernelWeights(Kernel *kernel,float* weights, int n);
+void setKernelWeights(Kernel *kernel,FeatureVector* weights);
 
+//rotationa o kernel
+void rotateKernel2D(Kernel *kernel, float angle_rad);
+Kernel *copyKernel(Kernel* kernel);
 
 #endif

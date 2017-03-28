@@ -21,9 +21,14 @@ int main(int argc, char **argv) {
         hist = ColorHistogram(colorImage,atoi(argv[2]));
         destroyColorImage(&colorImage);
     }
+    Image* image = readImage(argv[1]);
+    Histogram *histogram = computeHistogram(image,43,true);
+    writeHistogram(histogram,"histogram.txt");
+    destroyHistogram(&histogram);
 
-    WriteHistogram(hist,argv[3]);
-    DestroyHistogram(&hist);
+
+    writeHistogram(hist,argv[3]);
+    destroyHistogram(&hist);
 
     return 0;
 }

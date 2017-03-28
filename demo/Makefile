@@ -2,7 +2,7 @@ BIN=.
 CC = g++
 
 #FLAGS= -g -O0 -Wall -Wno-unused-result -std=gnu99 -pedantic
-FLAGS= -O3  -Wall -Wno-unused-result  -pedantic -fopenmp -Wno-write-strings
+FLAGS= -O3  -Wall -Wno-unused-result  -pedantic -fopenmp -Wno-write-strings -fsanitize=address
 #-std=gnu99
 FLLIB    = -L../lib -lFL -lm
 FLFLAGS  = -I../include
@@ -22,10 +22,5 @@ clean:
 cleanImages:
 	rm *.ppm *.pgm
 
-
-
-
-
-
-
-
+cleanText:
+	rm *.txt

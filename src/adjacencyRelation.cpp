@@ -37,6 +37,7 @@ AdjacencyRelation *createCircularAdjacency(float radius)
     //int indexCerter = AdjRel->n/2;
     getAdjacentsInCircle(radius, AdjRel);
 
+
     return AdjRel;
 }
 
@@ -72,6 +73,13 @@ AdjacencyRelation *createLosangeAdjacency(int k)
                 adjRel->dx[index] = dx;
                 adjRel->dy[index] = dy;
                 index++;
+
+                if(abs(dx) > adjRel->maxDx){
+                    adjRel->maxDx = abs(dx);
+                }
+                if(abs(dy) > adjRel->maxDy){
+                    adjRel->maxDy = abs(dy);
+                }
             }
         }
     }
@@ -116,16 +124,32 @@ void getAdjacentsInCircle(float radius,AdjacencyRelation* AdjRel){
                 AdjRel->dx[i] = dx;
                 AdjRel->dy[i] = dy;
                 i++;
+                if(abs(dx) > AdjRel->maxDx){
+                    AdjRel->maxDx = abs(dx);
+                }
+                if(abs(dy) > AdjRel->maxDy){
+                    AdjRel->maxDy = abs(dy);
+                }
             }
         }
     }
 }
 
-AdjacencyRelation *createLineAdjacency(int n, int origin){
-    return NULL;
+AdjacencyRelation* copyAdjcencyRelation(AdjacencyRelation* adjacencyRelation){
+    AdjacencyRelation* adjacencyRelationCopy = createAdjacencyRelation(adjacencyRelation->n);
+    adjacencyRelationCopy->maxDx = adjacencyRelation->maxDx;
+    adjacencyRelationCopy->maxDy = adjacencyRelation->maxDy;
+    for (int i = 0; i < adjacencyRelation->n; ++i) {
+        adjacencyRelationCopy->dx[i] = adjacencyRelation->dx[i];
+        adjacencyRelationCopy->dy[i] = adjacencyRelation->dy[i];
+    }
+    return adjacencyRelationCopy;
 }
 
-
-AdjacencyRelation *copyAdjacency(AdjacencyRelation *adjacencyRelation){
-    return NULL;
+void copyAdjcencyRelationInPlace(AdjacencyRelation* adjacencyRelationSource, AdjacencyRelation** adjacencyRelationTarget){
+    if(*adjacencyRelationTarget != NULL){
+        destroyAdjacencyRelation(adjacencyRelationTarget);
+    }
+    *adjacencyRelationTarget = copyAdjcencyRelation(adjacencyRelationSource);
 }
+

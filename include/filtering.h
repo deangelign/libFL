@@ -7,10 +7,10 @@
 
 #include "common.h"
 #include "kernel.h"
-#include "image.h"
+
 
 /*
- * Material suplementar para o entendimento da correlacao
+ * Material suplementar para o entendimento de correlacao
  * http://www.cs.umd.edu/~djacobs/CMSC426/Convolution.pdf
  *
  * Paginas uteis para o desenvolvimento das funcoes
@@ -21,43 +21,27 @@
  * pg 11 definicao matematica de convolucao
  * */
 
-/*computa a correlação cruzada entre um sinal e filtro considerando que ambos são vetores/imagem finitos.
+/*computa a correlação cruzada entre X e Y considerando que ambos são vetores finitos.
+ * Se X = Y, entao temos a autocorrelacao do sinal. Se normalized é True então devemos computar
+ * a correlação normalizada.
  * */
-FeatureVector* correlation1D(FeatureVector*X1,FeatureVector*X2,bool normalization);
-FeatureVector* correlation1D(FeatureVector*X1,Kernel *kernel);
-GrayImage* correlation2D(GrayImage* image,Kernel *kernel);
-//n e o tamanho do vetor de saida
-float* correlation1D(FeatureVector*X1,Kernel kernel, int *n);
 
 
 
-/*computa a correlação cruzada entre um sinal e filtro considerando que ambos são vetores/imagem circulares.
+/*computa a correlação cruzada entre X e Y considerando que ambos são arrays circulares.
+ * Se X = Y, entao temos a autocorrelacao do sinal. Se normalized é True então devemos computar
+ * a correlação normalizada.
  * */
+float* circularCrossCorrelation1D(float *X1,float *X2,int N1,int N2,bool normalization);
 FeatureVector* circularCrossCorrelation1D(FeatureVector*X1,FeatureVector*X2,bool normalization);
-FeatureVector* circularCrossCorrelation1D(FeatureVector*X1, Kernel *kernel);
-GrayImage* circularCorrelation2D(GrayImage* image,Kernel *kernel);
-//n e o tamanho do vetor de saida
-float* circularCrossCorrelation1D(FeatureVector*X1,Kernel *kernel, int *n);
+FeatureVector* circularCrossCorrelation1D(FeatureVector* featureVector, Kernel* kernel ,bool normalization);
 
-
-
-
-
-/*computa a convlucao entre um sinal e filtro considerando que ambos são vetores/imaegem finitos.
+/*
+ * type 1 - norma l1
+ * type 2 - norma l2
  * */
-FeatureVector* covolution1D(FeatureVector*X1,FeatureVector*X2);
-FeatureVector* covolution1D(FeatureVector*X1,Kernel *kernel);
-GrayImage* covolution2D(GrayImage* image,Kernel *kernel);
-//n e o tamanho do vetor de saida
-float* covolutionn1D(FeatureVector*X1,Kernel *kernel, int n);
+FeatureVector* matchingWithCorrelation(FeatureVector*X1,FeatureVector*X2, int type);
 
-/*computa a convlucao entre um sinal e filtro considerando que ambos são vetores/imaegem circulares.
- * */
-FeatureVector* circularCovolution1D(FeatureVector*X1,FeatureVector*X2);
-FeatureVector* circularCovolution1D(FeatureVector*X1,Kernel *kernel);
-GrayImage* covolution2D(GrayImage* image,Kernel *kernel);
-//n e o tamanho do vetor de saida
-float* circularCovolution1D(FeatureVector*X1,Kernel *kernel, int n);
 
 
 #endif //LIBFL_FILTERING_H

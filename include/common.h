@@ -34,22 +34,11 @@ typedef struct _point{
 } Vector, Point;
 
 typedef struct _voxel {
-    int x, y, z;
+	int x, y, z;
 } Voxel;
 
-typedef struct _featureVector {
-	float* features;
-	int size;
-} FeatureVector;
 
-FeatureVector* createFeatureVector(int size);
-FeatureVector* createFeatureVector(float* vec,int size);
-void wirteFeatureVector(FeatureVector* vector, FILE *fp);
-void wirteFeatureVectors(FeatureVector** vectors, int nVectors, char *filename);
-void destroyFeatureVector(FeatureVector** vector);
-void printFeatureVector(FeatureVector* featureVector);
-FeatureVector* mergeFeatureVectors(FeatureVector* vector1,FeatureVector* vector2);
-float vectorDifference(FeatureVector* vector1,FeatureVector* vector2);
+
 
 /* Common definitions */
 
@@ -61,19 +50,19 @@ float vectorDifference(FeatureVector* vector1,FeatureVector* vector2);
 #define RED         0
 #define GREEN       1
 #define BLUE        2
-#define WHITE       0 
+#define WHITE       0
 #define GRAY        1
 #define BLACK       2
 #define NIL        -1
 #define INCREASING  1
 #define DECREASING  0
-#define Epsilon     1E-05  
+#define Epsilon     1E-05
 #define Y           0
 #define CG          1
-#define CO          2 
+#define CO          2
 #define AXIS_X  0
 #define AXIS_Y  1
-#define AXIS_Z  2    
+#define AXIS_Z  2
 
 /* Common operations */
 
@@ -114,5 +103,7 @@ int  NCFgets(char *s, int m, FILE *f); /* It skips # comments */
 http://www.ime.usp.br/~pf/algoritmos/aulas/random.html
  **/
 int RandomInteger (int low, int high);
+
+
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "adjacencyRelation.h"
+#include "featureVector.h"
 #include "kernel.h"
 #include "image.h"
 #include "histogram.h"

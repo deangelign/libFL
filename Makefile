@@ -6,7 +6,7 @@ BIN=./bin
 
 
 #FLAGS= -g  -O0 -Wall -D _DEBUG -Wno-unused-result -fPIC -std=gnu99 -pedantic
-FLAGS=  -O3 -Wall -Wno-unused-result -fPIC  -pedantic -Wno-write-strings -fopenmp
+FLAGS=  -O3 -Wall -Wno-unused-result -fPIC  -pedantic -Wno-write-strings -fopenmp -fsanitize=address
 #-std=gnu99
 
 libFL: $(LIB)/libFL.a
@@ -15,6 +15,7 @@ libFL: $(LIB)/libFL.a
 $(LIB)/libFL.a: \
 $(OBJ)/common.o \
 $(OBJ)/adjacencyRelation.o \
+$(OBJ)/featureVector.o \
 $(OBJ)/kernel.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
@@ -24,6 +25,7 @@ $(OBJ)/filtering.o \
 	ar csr $(LIB)/libFL.a \
 $(OBJ)/common.o \
 $(OBJ)/adjacencyRelation.o \
+$(OBJ)/featureVector.o \
 $(OBJ)/kernel.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
@@ -37,6 +39,10 @@ $(OBJ)/common.o: $(SRC)/common.cpp
 $(OBJ)/adjacencyRelation.o: $(SRC)/adjacencyRelation.cpp
 	$(CC) $(FLAGS) -c $(SRC)/adjacencyRelation.cpp -I$(INCLUDE) \
 	-o $(OBJ)/adjacencyRelation.o
+
+$(OBJ)/featureVector.o: $(SRC)/featureVector.cpp
+	$(CC) $(FLAGS) -c $(SRC)/featureVector.cpp -I$(INCLUDE) \
+	-o $(OBJ)/featureVector.o
 
 $(OBJ)/kernel.o: $(SRC)/kernel.cpp
 	$(CC) $(FLAGS) -c $(SRC)/kernel.cpp -I$(INCLUDE) \
@@ -59,10 +65,5 @@ $(OBJ)/filtering.o: $(SRC)/filtering.cpp
 	$(CC) $(FLAGS) -c $(SRC)/filtering.cpp -I$(INCLUDE) \
 	-o $(OBJ)/filtering.o
 
-clean: 
+clean:
 	rm $(LIB)/lib*.a; rm $(OBJ)/*.o;
-
-
-
-
-
