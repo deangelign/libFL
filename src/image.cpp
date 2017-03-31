@@ -999,14 +999,14 @@ Image *convertRGBtoYCbCr(Image *rgbImage)
     ycbcrImage->scalingFactor = rgbImage->scalingFactor;
     for (int k=0; k < rgbImage->numberPixels; k++){
         float lum  = (0.257*rgbImage->channel[0][k])+
-                    (0.504*rgbImage->channel[1][k])+
-                (0.098*rgbImage->channel[2][k])+a;
+                     (0.504*rgbImage->channel[1][k])+
+                     (0.098*rgbImage->channel[2][k])+a;
         float Cb = (-0.148*rgbImage->channel[0][k]) +
-                (-0.291*rgbImage->channel[1][k]) +
-                (0.439*rgbImage->channel[2][k])+b;
+                   (-0.291*rgbImage->channel[1][k]) +
+                   (0.439*rgbImage->channel[2][k])+b;
         float Cr = (0.439*rgbImage->channel[0][k]) +
-                (-0.368*rgbImage->channel[1][k]) +
-                (-0.071*rgbImage->channel[2][k]) +b;
+                   (-0.368*rgbImage->channel[1][k]) +
+                   (-0.071*rgbImage->channel[2][k]) +b;
 
         if (lum < 0)   lum = 0.0;
         if (lum > ycbcrImage->scalingFactor) lum = ycbcrImage->scalingFactor;
@@ -1039,7 +1039,7 @@ Image* convertGrayImage2Image(GrayImage* grayImage){
     }else{
         int value = 256;
         while(value-1 < maxValue){
-             value = value << 1;
+            value = value << 1;
         }
         image->scalingFactor = value-1;
     }
@@ -1161,6 +1161,25 @@ void addSaltAndPepperNoise(Image* image, double probability){
             }
         }
 
+    }
+}
+
+void addAdditiveGaussianNoise(Image* image, double mean, double variance){
+
+
+    double standardDeviation = sqrt(variance);
+    for (int y = 0; y < image->ny; ++y) {
+        for (int x = 0; x < image->nx; ++x) {
+            double value = generateGaussianNoise(0,standardDeviation);
+            value = value*image->scalingFactor;
+            imageVal(image,x,y) += value;
+            if(imageVal(image,x,y) < 0){
+                imageVal(image,x,y) = 0;
+            }
+            if(imageVal(image,x,y) > image->scalingFactor){
+                imageVal(image,x,y) = image->scalingFactor;
+            }
+        }
     }
 }
 

@@ -5,23 +5,23 @@
 
 /* Implementacoes vetoriais de uma imagem cinza 2D: inteira e double */
 
-typedef struct _grayImage { 
-  int *val; /* brilho do pixel */
-  int  ncols,nrows; /* dimensoes da imagem */
-  int *tbrow; /* tabela de linhas */
+typedef struct _grayImage {
+    int *val; /* brilho do pixel */
+    int  ncols,nrows; /* dimensoes da imagem */
+    int *tbrow; /* tabela de linhas */
 } GrayImage;
 
 
 typedef struct _cor {
-  int val[3]; /* R,G,B */
+    int val[3]; /* R,G,B */
 } Cor;
 
 typedef struct _colorimage {
-  int   nx,ny;    /* dimensoes da imagem */
-  Cor **cor;      /* matriz com a cor dos pixels */ 
-  float dx,dy;    /* tamanho do pixel em unidades de comprimento */
-  int   Imax;     /* depth (2^b-1)*/
-  char  unid[10]; /* unidade de comprimento */
+    int   nx,ny;    /* dimensoes da imagem */
+    Cor **cor;      /* matriz com a cor dos pixels */
+    float dx,dy;    /* tamanho do pixel em unidades de comprimento */
+    int   Imax;     /* depth (2^b-1)*/
+    char  unid[10]; /* unidade de comprimento */
 } ColorImage;
 
 
@@ -127,5 +127,6 @@ uint8_t* convertImage2IntergerArray8bits(Image* image);
 Image* copyImage(Image* image);
 void addUniformNoise(Image* image, float uniformValue, double probability);
 void addSaltAndPepperNoise(Image* image, double probability);
+void addAdditiveGaussianNoise(Image* image, double mean, double variance);
 
 #endif

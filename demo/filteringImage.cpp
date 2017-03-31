@@ -22,6 +22,7 @@ int main(int argc, char **argv) {
     Image *image = readImage("../data/lena.pgm");
     //addUniformNoise(image,40,0.03);
     //addSaltAndPepperNoise(image, 0.03);
+    //addAdditiveGaussianNoise(image,0,0.01);
     Image *outputImage = NULL;
     Image *diffImage = NULL;
     int type = 0;
