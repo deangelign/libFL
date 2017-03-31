@@ -77,9 +77,9 @@ EXAMPLE:
 ****************************************************************
 <h2>LIB FOLDERS</h2>
 <br>
-*include: contains the functions prototypes files (.h)
-*src: contains the functions implementation (.cpp) (most of them are written in C)
-*obj: contains the object files (.o)
-*lib: contains the static library file (.a)
-*pythonUtils: simples python scripts for general purposes (such as plotting)
-*demo: contains the demo files (.cpp)
+include: contains the functions prototypes files (.h)
+src: contains the functions implementation (.cpp) (most of them are written in C)
+obj: contains the object files (.o)
+lib: contains the static library file (.a)
+pythonUtils: simples python scripts for general purposes (such as plotting)
+demo: contains the demo files (.cpp)
