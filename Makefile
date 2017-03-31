@@ -16,6 +16,7 @@ $(LIB)/libFL.a: \
 $(OBJ)/common.o \
 $(OBJ)/adjacencyRelation.o \
 $(OBJ)/featureVector.o \
+$(OBJ)/gif.o \
 $(OBJ)/kernel.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
@@ -26,6 +27,7 @@ $(OBJ)/filtering.o \
 $(OBJ)/common.o \
 $(OBJ)/adjacencyRelation.o \
 $(OBJ)/featureVector.o \
+$(OBJ)/gif.o \
 $(OBJ)/kernel.o \
 $(OBJ)/image.o \
 $(OBJ)/histogram.o \
@@ -34,7 +36,7 @@ $(OBJ)/filtering.o \
 
 $(OBJ)/common.o: $(SRC)/common.cpp
 	$(CC) $(FLAGS) -c $(SRC)/common.cpp -I$(INCLUDE) \
-	-o $(OBJ)/common.o
+	-o $(OBJ)/common.o 
 
 $(OBJ)/adjacencyRelation.o: $(SRC)/adjacencyRelation.cpp
 	$(CC) $(FLAGS) -c $(SRC)/adjacencyRelation.cpp -I$(INCLUDE) \
@@ -44,13 +46,17 @@ $(OBJ)/featureVector.o: $(SRC)/featureVector.cpp
 	$(CC) $(FLAGS) -c $(SRC)/featureVector.cpp -I$(INCLUDE) \
 	-o $(OBJ)/featureVector.o
 
+$(OBJ)/gif.o: $(SRC)/gif.cpp
+	$(CC) $(FLAGS) -c $(SRC)/gif.cpp -I$(INCLUDE) \
+	-o $(OBJ)/gif.o
+
 $(OBJ)/kernel.o: $(SRC)/kernel.cpp
 	$(CC) $(FLAGS) -c $(SRC)/kernel.cpp -I$(INCLUDE) \
 	-o $(OBJ)/kernel.o
 
 $(OBJ)/image.o: $(SRC)/image.cpp
 	$(CC) $(FLAGS) -c $(SRC)/image.cpp -I$(INCLUDE) \
-	-o $(OBJ)/image.o
+	-o $(OBJ)/image.o 
 
 $(OBJ)/histogram.o: $(SRC)/histogram.cpp
 	$(CC) $(FLAGS) -c $(SRC)/histogram.cpp -I$(INCLUDE) \
@@ -65,5 +71,10 @@ $(OBJ)/filtering.o: $(SRC)/filtering.cpp
 	$(CC) $(FLAGS) -c $(SRC)/filtering.cpp -I$(INCLUDE) \
 	-o $(OBJ)/filtering.o
 
-clean:
+clean: 
 	rm $(LIB)/lib*.a; rm $(OBJ)/*.o;
+
+
+
+
+

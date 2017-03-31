@@ -230,9 +230,9 @@ float *applyGranulometryOnImage(GrayImage *image, float startRadius, float endRa
     radius1 = 0;
     radius2 = startRadius;
     n = 0;
-    copyImage(image,&image1);
+    copyGrayImage(image,&image1);
     adjRel = createCircularAdjacency(0);
-    copyImage(image,&image1);
+    copyGrayImage(image,&image1);
     while(radius2 < endRadius){
         n2 = countNumberAdjacentsInCircle(radius2);
         if(n2 > n1){

@@ -22,6 +22,7 @@ AdjacencyRelation * createAdjacencyRelation(int n);
 void  destroyAdjacencyRelation(AdjacencyRelation **adjRel);
 int countNumberAdjacentsInCircle(float radius);
 AdjacencyRelation *createCircularAdjacency(float radius);
+AdjacencyRelation *createRectangularAdjacency(int height,int width);
 AdjacencyRelation* copyAdjcencyRelation(AdjacencyRelation* adjacencyRelation);
 void copyAdjcencyRelationInPlace(AdjacencyRelation* adjacencyRelationSource, AdjacencyRelation** adjacencyRelationTarget);
 void getAdjacentsInCircle(float radius,AdjacencyRelation* adjRel);

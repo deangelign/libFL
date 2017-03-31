@@ -150,6 +150,24 @@ void copyAdjcencyRelationInPlace(AdjacencyRelation* adjacencyRelationSource, Adj
     if(*adjacencyRelationTarget != NULL){
         destroyAdjacencyRelation(adjacencyRelationTarget);
     }
+
     *adjacencyRelationTarget = copyAdjcencyRelation(adjacencyRelationSource);
 }
 
+
+AdjacencyRelation *createRectangularAdjacency(int height,int width){
+    AdjacencyRelation *adjacencyRelation=NULL;
+    int numberAdjacents = height*width;
+    adjacencyRelation = createAdjacencyRelation(numberAdjacents);
+    int centerY = height/2;
+    int centerX = width/2;
+    int k =0;
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            adjacencyRelation->dx[k] = x - centerX;
+            adjacencyRelation->dy[k] = y - centerY;
+            k++;
+        }
+    }
+    return adjacencyRelation;
+}

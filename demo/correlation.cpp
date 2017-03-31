@@ -11,8 +11,8 @@ int main(int argc, char **argv) {
     FeatureVector* featureVector2 = createFeatureVector(v2,3);
     Kernel *kernel = createKernel(featureVector2);
 
-    FeatureVector* output1 = circularCrossCorrelation1D(featureVector1,kernel,false);
-    FeatureVector* output2 = circularCrossCorrelation1D(featureVector1,featureVector2,false);
+    FeatureVector* output1 = circularCrossCorrelation1D(featureVector1,kernel,true);
+    FeatureVector* output2 = circularCrossCorrelation1D(featureVector1,featureVector2,true);
     FeatureVector* output3 = matchingWithCorrelation(featureVector1,featureVector2,1);
     printFeatureVector(output1);
     printFeatureVector(output2);

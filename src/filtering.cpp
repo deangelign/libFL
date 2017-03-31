@@ -216,6 +216,28 @@ FeatureVector* matchingWithCorrelation(FeatureVector*X1,FeatureVector*X2, int ty
     return output;
 }
 
+Image* convolveImagewithMeanFilter(Image* image){
+    return NULL;
+}
+
+Image* convolveImagewithGaussianFilter(Image* image){
+    return NULL;
+}
+Image* convolveImagewithMedianFilter(Image* image){
+    return NULL;
+}
+Image* convolveImagewithSobelFilter(Image* image){
+    return NULL;
+}
+Image* convolveImagewithLaplacianFilter(Image* image){
+    return NULL;
+}
+Image* convolveImagewithDOG(Image* image){
+    return NULL;
+}
+Image* convolveImagewithLOG(Image* image){
+    return NULL;
+}
 
 
 

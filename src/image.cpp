@@ -432,7 +432,7 @@ bool isImagesSameDomain(Image *image1,Image *image2){
     return false;
 }
 
-void copyImage(GrayImage *image1,GrayImage **image2){
+void copyGrayImage(GrayImage *image1,GrayImage **image2){
     if((*image2) == NULL){
         *image2 = createGrayImage(image1->ncols,image1->nrows);
     }
@@ -644,7 +644,7 @@ Image* createImage(int nx, int ny,int nchannels){
     image->numberPixels = nx*ny;
     image->dx = 0;
     image->dy = 0;
-    image->scalingFactor = 1;
+    image->scalingFactor = 255;
     image->unid[0] = 'm';
     image->unid[1] = 'm';
     image->channel = (float**)calloc(nchannels,sizeof(float*));
@@ -662,7 +662,7 @@ Image* createImage(int nx, int ny){
     image->numberPixels = nx*ny;
     image->dx = 0;
     image->dy = 0;
-    image->scalingFactor = 1;
+    image->scalingFactor = 255;
     image->unid[0] = 'm';
     image->unid[1] = 'm';
     image->channel = (float**)calloc(1,sizeof(float*));
@@ -999,14 +999,14 @@ Image *convertRGBtoYCbCr(Image *rgbImage)
     ycbcrImage->scalingFactor = rgbImage->scalingFactor;
     for (int k=0; k < rgbImage->numberPixels; k++){
         float lum  = (0.257*rgbImage->channel[0][k])+
-                     (0.504*rgbImage->channel[1][k])+
-                     (0.098*rgbImage->channel[2][k])+a;
+                    (0.504*rgbImage->channel[1][k])+
+                (0.098*rgbImage->channel[2][k])+a;
         float Cb = (-0.148*rgbImage->channel[0][k]) +
-                   (-0.291*rgbImage->channel[1][k]) +
-                   (0.439*rgbImage->channel[2][k])+b;
+                (-0.291*rgbImage->channel[1][k]) +
+                (0.439*rgbImage->channel[2][k])+b;
         float Cr = (0.439*rgbImage->channel[0][k]) +
-                   (-0.368*rgbImage->channel[1][k]) +
-                   (-0.071*rgbImage->channel[2][k]) +b;
+                (-0.368*rgbImage->channel[1][k]) +
+                (-0.071*rgbImage->channel[2][k]) +b;
 
         if (lum < 0)   lum = 0.0;
         if (lum > ycbcrImage->scalingFactor) lum = ycbcrImage->scalingFactor;
@@ -1039,7 +1039,7 @@ Image* convertGrayImage2Image(GrayImage* grayImage){
     }else{
         int value = 256;
         while(value-1 < maxValue){
-            value = value << 1;
+             value = value << 1;
         }
         image->scalingFactor = value-1;
     }
@@ -1121,4 +1121,67 @@ void printImage(Image* image){
         }
         printf("\n");
     }
+}
+
+Image* createAlphaChannel(Image* image,float alpha){
+    Image *output = createImage(image->nx,image->ny,image->nchannels+1);
+    output->scalingFactor = image->scalingFactor;
+    for (int k = 0; k < image->numberPixels; ++k) {
+        for (int c = 0; c < image->nchannels; ++c) {
+            output->channel[c][k] = image->channel[c][k];
+        }
+        output->channel[image->nchannels][k] = alpha;
+    }
+    return output;
+}
+
+void addUniformNoise(Image* image, float uniformValue, double probability){
+    for (int k = 0; k < image->numberPixels; ++k) {
+        if(randomNormalized() <=  probability){
+            for (int c = 0; c < image->nchannels; ++c) {
+                image->channel[c][k] += uniformValue;
+                if(image->channel[c][k] > image->scalingFactor){
+                    image->channel[c][k] = image->scalingFactor;
+                }
+            }
+        }
+    }
+}
+
+void addSaltAndPepperNoise(Image* image, double probability){
+    for (int k = 0; k < image->numberPixels; ++k) {
+        if(randomNormalized() <=  probability){
+            for (int c = 0; c < image->nchannels; ++c) {
+                //salt
+                if(randomNormalized() >= 0.5){
+                    image->channel[c][k] = image->scalingFactor;
+                }else{
+                    image->channel[c][k] = 0;
+                }
+            }
+        }
+
+    }
+}
+
+uint8_t* convertImage2IntergerArray8bits(Image* image){
+    uint8_t* output = (uint8_t*)calloc(image->nchannels*image->nx*image->ny ,sizeof(uint8_t));
+    long index = 0;
+    for (int k = 0; k < image->numberPixels; ++k) {
+        for (int c = 0; c < image->nchannels; ++c) {
+            output[index] = (uint8_t)image->channel[c][k];
+            index++;
+        }
+    }
+    return output;
+}
+
+Image* copyImage(Image* image){
+    Image* imageCopy = createImage(image->nx,image->ny,image->nchannels);
+    for (int k = 0; k < image->numberPixels; ++k) {
+        for (int c = 0; c < image->nchannels; ++c) {
+            imageCopy->channel[c][k] = image->channel[c][k];
+        }
+    }
+    return imageCopy;
 }

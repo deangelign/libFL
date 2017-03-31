@@ -7,6 +7,7 @@
 
 #include "common.h"
 #include "kernel.h"
+#include "image.h"
 
 
 /*
@@ -43,5 +44,14 @@ FeatureVector* circularCrossCorrelation1D(FeatureVector* featureVector, Kernel* 
 FeatureVector* matchingWithCorrelation(FeatureVector*X1,FeatureVector*X2, int type);
 
 
+
+//filtragem
+Image* convolveImagewithMeanFilter(Image* image);
+Image* convolveImagewithGaussianFilter(Image* image);
+Image* convolveImagewithMedianFilter(Image* image);
+Image* convolveImagewithSobelFilter(Image* image);
+Image* convolveImagewithLaplacianFilter(Image* image);
+Image* convolveImagewithDOG(Image* image);
+Image* convolveImagewithLOG(Image* image);
 
 #endif //LIBFL_FILTERING_H

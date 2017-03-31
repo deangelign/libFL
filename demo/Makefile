@@ -20,7 +20,7 @@ clean:
 	find . -type f -executable -exec rm '{}' \;
 
 cleanImages:
-	rm *.ppm *.pgm
+	rm *.ppm *.pgm *.gif
 
 cleanText:
 	rm *.txt

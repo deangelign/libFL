@@ -4,6 +4,7 @@
 #include "common.h"
 #include "adjacencyRelation.h"
 #include "featureVector.h"
+#include "gif.h"
 #include "kernel.h"
 #include "image.h"
 #include "histogram.h"

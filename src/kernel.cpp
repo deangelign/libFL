@@ -59,10 +59,10 @@ void setKernelWeights(Kernel *kernel,FeatureVector* weights){
 void rotateKernel2D(Kernel *kernel, float angle_rad){
     for (int i = 0; i < kernel->adjacencyRelation->n; ++i) {
         kernel->adjacencyRelation->dx[i] = round((cos(angle_rad)*kernel->adjacencyRelation->dx[i]) +
-                                                 (-sin(angle_rad)* kernel->adjacencyRelation->dy[i]));
+                (-sin(angle_rad)* kernel->adjacencyRelation->dy[i]));
 
         kernel->adjacencyRelation->dy[i] = round((sin(angle_rad)*kernel->adjacencyRelation->dx[i]) +
-                                                 (cos(angle_rad)* kernel->adjacencyRelation->dy[i]));
+                                           (cos(angle_rad)* kernel->adjacencyRelation->dy[i]));
 
         if(abs(kernel->adjacencyRelation->dx[i]) >  kernel->adjacencyRelation->maxDx){
             kernel->adjacencyRelation->maxDx = abs(kernel->adjacencyRelation->dx[i]);
@@ -83,3 +83,14 @@ Kernel *copyKernel(Kernel* kernel){
     setKernelWeights(kernelCopy,kernel->weight,kernel->adjacencyRelation->n);
     return kernelCopy;
 }
+
+//filtros
+Kernel *createMean3by3(){
+    return NULL;
+}
+
+Kernel *createMean(){
+    return NULL;
+}
+
+

@@ -63,12 +63,12 @@ void Error(char *msg,char *func){ /* It prints error message and exits
 
 void Warning(char *msg,char *func){ /* It prints warning message and
                                        leaves the routine. */
-  fprintf(stdout,"Warning:%s in %s\n",msg,func);
+ fprintf(stdout,"Warning:%s in %s\n",msg,func);
 
 }
 
 void Change(int *a, int *b){ /* It changes content between a and b */
-  int c;
+  int c;    
   c  = *a;
   *a = *b;
   *b = c;
@@ -89,10 +89,16 @@ http://www.ime.usp.br/~pf/algoritmos/aulas/random.html
 int RandomInteger (int low, int high){
   int k;
   double d;
-
+  
   d = (double) rand () / ((double) RAND_MAX + 1);
   k = d * (high - low + 1);
   return low + k;
+}
+
+double randomNormalized(){
+  double d;
+  d = (double) rand () / ((double) RAND_MAX + 1);
+  return d;
 }
 
 

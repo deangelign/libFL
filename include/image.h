@@ -5,23 +5,23 @@
 
 /* Implementacoes vetoriais de uma imagem cinza 2D: inteira e double */
 
-typedef struct _grayImage {
-    int *val; /* brilho do pixel */
-    int  ncols,nrows; /* dimensoes da imagem */
-    int *tbrow; /* tabela de linhas */
+typedef struct _grayImage { 
+  int *val; /* brilho do pixel */
+  int  ncols,nrows; /* dimensoes da imagem */
+  int *tbrow; /* tabela de linhas */
 } GrayImage;
 
 
 typedef struct _cor {
-    int val[3]; /* R,G,B */
+  int val[3]; /* R,G,B */
 } Cor;
 
 typedef struct _colorimage {
-    int   nx,ny;    /* dimensoes da imagem */
-    Cor **cor;      /* matriz com a cor dos pixels */
-    float dx,dy;    /* tamanho do pixel em unidades de comprimento */
-    int   Imax;     /* depth (2^b-1)*/
-    char  unid[10]; /* unidade de comprimento */
+  int   nx,ny;    /* dimensoes da imagem */
+  Cor **cor;      /* matriz com a cor dos pixels */ 
+  float dx,dy;    /* tamanho do pixel em unidades de comprimento */
+  int   Imax;     /* depth (2^b-1)*/
+  char  unid[10]; /* unidade de comprimento */
 } ColorImage;
 
 
@@ -47,6 +47,11 @@ typedef struct _image {
 } Image;
 
 
+//computa o indice para acessar a posicao (x,y) da imagem
+#define imageVal(image, x, y) image->channel[0][(y*image->nx) + x]
+#define imageValCh(image, x, y, c) image->channel[c][(y*image->nx) + x]
+
+
 void         *readImageByExt(char *filename);
 GrayImage    *createGrayImage(int ncols,int nrows);
 void          destroyGrayImage(GrayImage **img);
@@ -66,7 +71,7 @@ int maximumIntensityColor(ColorImage *img, int c);
 
 bool isValidPixelCoordinate(GrayImage *image,int pixelCoordinateX,int pixelCoordinateY);
 bool isImagesSameDomain(GrayImage *image1,GrayImage *image2);
-void copyImage(GrayImage *image1,GrayImage **image2);
+void copyGrayImage(GrayImage *image1,GrayImage **image2);
 /* Subtrai a imagem2 da imagem1 e guarda o resultado na imagem1.
  * O parametro saturation define se valores abaixo de zero serao armazenados na imagem1 ou nao*/
 GrayImage *imageSubtraction(GrayImage *image1, GrayImage *image2, bool saturation);
@@ -117,7 +122,10 @@ Image* convertColorImage2Image(ColorImage* colorImage);
 float sumUpAllPixelsValues(Image *image, bool normalize);
 Image* extractImageChannel(Image* image, int channel);
 void printImage(Image* image);
-
-
+Image* createAlphaChannel(Image* image,float alpha);
+uint8_t* convertImage2IntergerArray8bits(Image* image);
+Image* copyImage(Image* image);
+void addUniformNoise(Image* image, float uniformValue, double probability);
+void addSaltAndPepperNoise(Image* image, double probability);
 
 #endif
