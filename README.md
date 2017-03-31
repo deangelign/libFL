@@ -2,7 +2,7 @@
 
 *************************************************
 <h1>Portuguese</h1>
-************************************************
+
 Para compilar a biblioteca acesse, pelo o terminal, o diretorio onde esta a pasta "libfl" e acesse a pasta fazendo
 cd libfl
 
@@ -37,7 +37,7 @@ então ele ira compilar a demo.
 
 ****************************************************************
 <h1>English</h1>
-*******************************************************
+
 
 /*Compiling the lib*/
 *********************
