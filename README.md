@@ -40,10 +40,10 @@ então ele ira compilar a demo.
 <br>
 
 ****************************************************************
+
 <h2>Compiling the lib</h2>
 <br>
 
-****************************************************************
 Open terminal then, type
 "cd PATH/TO/LIBFL/FOLDER"
 
@@ -54,10 +54,12 @@ to compile the lib
 
 
 
-<h2>Compiling a demo</h2>
-<br>
+
+
 
 ****************************************************************
+<h2>Compiling a demo</h2>
+<br>
 Open terminal then, type
 "cd PATH/TO/DEMO/FOLDER"
 
@@ -70,10 +72,11 @@ EXAMPLE:
 "make rwImage"
 
 
-<h2>LIB FOLDERS</h2>
-<br>
+
 
 ****************************************************************
+<h2>LIB FOLDERS</h2>
+<br>
 *include: contains the functions prototypes files (.h)
 *src: contains the functions implementation (.cpp) (most of them are written in C)
 *obj: contains the object files (.o)
