@@ -1,6 +1,8 @@
 # README #
 
-<Portuguese>
+*************************************************
+<h1>Portuguese<\h1>
+
 Para compilar a biblioteca acesse, pelo o terminal, o diretorio onde esta a pasta "libfl" e acesse a pasta fazendo
 cd libfl
 
@@ -33,7 +35,9 @@ make rwImage
 
 então ele ira compilar a demo.
 
-<English>
+****************************************************************
+
+<h1>English<\h1>
 
 /*Compiling the lib*/
 *********************
