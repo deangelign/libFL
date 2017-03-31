@@ -45,9 +45,11 @@ então ele ira compilar a demo.
 <br>
 
 Open terminal then, type
+
 "cd PATH/TO/LIBFL/FOLDER"
 
 after that, type
+
 "make"
 
 to compile the lib
@@ -61,9 +63,11 @@ to compile the lib
 <h2>Compiling a demo</h2>
 <br>
 Open terminal then, type
+
 "cd PATH/TO/DEMO/FOLDER"
 
 after that, type
+
 "make demoFileNameWithNoExtension"
 
 to compile a demo
