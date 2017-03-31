@@ -1,5 +1,6 @@
 # README #
 
+<Portuguese>
 Para compilar a biblioteca acesse, pelo o terminal, o diretorio onde esta a pasta "libfl" e acesse a pasta fazendo
 cd libfl
 
@@ -31,3 +32,38 @@ se você quer compilar ela você acessa o diretório (via terminal) das demos e 
 make rwImage
 
 então ele ira compilar a demo.
+
+<English>
+
+/*Compiling the lib*/
+*********************
+Open terminal then, type
+"cd PATH/TO/LIBFL/FOLDER"
+
+after that, type
+"make"
+
+to compile the lib
+
+/*Compiling a demo*/
+********************
+Open terminal then, type
+"cd PATH/TO/DEMO/FOLDER"
+
+after that, type
+"make demoFileNameWithNoExtension"
+
+to compile a demo
+
+EXAMPLE:
+"make rwImage"
+
+/*LIB FOLDERS*/
+********************
+
+*include: contains the functions prototypes files (.h)
+*src: contains the functions implementation (.cpp) (most of them are written in C)
+*obj: contains the object files (.o)
+*lib: contains the static library file (.a)
+*pythonUtils: simples python scripts for general purposes (such as plotting)
+*demo: contains the demo files (.cpp)
