@@ -101,6 +101,16 @@ FeatureMatrix* createFeatureMatrix(int nFeaturesVectors){
     return featureMatrix;
 }
 
+FeatureMatrix* createFeatureMatrix(int nFeaturesVectors,int vectorSize){
+    FeatureMatrix* featureMatrix = NULL;
+    featureMatrix = (FeatureMatrix*)calloc(1,sizeof(FeatureMatrix));
+    featureMatrix->featureVector = (FeatureVector**)calloc((size_t)nFeaturesVectors,sizeof(FeatureVector*));
+    for (int i = 0; i < vectorSize; ++i) {
+        featureMatrix->featureVector[0] = createFeatureVector(vectorSize);
+    }
+    return featureMatrix;
+}
+
 void destroyFeatureMatrix(FeatureMatrix** featureMatrix){
     if(*featureMatrix == NULL){
         return ;
@@ -126,3 +136,14 @@ void wirteFeatureMatrix(FeatureMatrix* featureMatrix, char *filename){
         fprintf(fp,"\n");
     }
 }
+
+
+//void sortAt(FeatureVector featureVector, int lastIndex){
+//
+//    for (int i = lastIndex-1; i >= 0 ; --i) {
+//        if(featureVector.features[lastIndex] > featureVector.features[i]){
+//            break;
+//        }
+//    }
+//    //featureVector
+//}

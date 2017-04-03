@@ -5,30 +5,30 @@
 
 /* Implementacoes vetoriais de uma imagem cinza 2D: inteira e double */
 
-typedef struct _grayImage {
-    int *val; /* brilho do pixel */
-    int  ncols,nrows; /* dimensoes da imagem */
-    int *tbrow; /* tabela de linhas */
+typedef struct _grayImage { 
+  int *val; /* brilho do pixel */
+  int  ncols,nrows; /* dimensoes da imagem */
+  int *tbrow; /* tabela de linhas */
 } GrayImage;
 
 
 typedef struct _cor {
-    int val[3]; /* R,G,B */
+  int val[3]; /* R,G,B */
 } Cor;
 
 typedef struct _colorimage {
-    int   nx,ny;    /* dimensoes da imagem */
-    Cor **cor;      /* matriz com a cor dos pixels */
-    float dx,dy;    /* tamanho do pixel em unidades de comprimento */
-    int   Imax;     /* depth (2^b-1)*/
-    char  unid[10]; /* unidade de comprimento */
+  int   nx,ny;    /* dimensoes da imagem */
+  Cor **cor;      /* matriz com a cor dos pixels */ 
+  float dx,dy;    /* tamanho do pixel em unidades de comprimento */
+  int   Imax;     /* depth (2^b-1)*/
+  char  unid[10]; /* unidade de comprimento */
 } ColorImage;
 
 
 /*
  * ColorImage e GrayImage sao estruturas obseltas, elas estao sendo mantidos por questoes de retrocompatibilidade.
  * Tente usar a estrurua Image que pode ser usada para imagens coloridas e cinzas. Nessa Estrutura cada canal da imagem
- * e representado por um vetor de floats. Entao em uma imagem RGB o estrutura imagem tera 3 canais e para acessar a
+ * e representado por um vetor de floats. Entao em uma imagem RGB, a estrutura tera 3 canais e para acessar a
  * coordenada X=30 e y=16 de uma imagem por exemplo, voce tera que fazer o calculo index = y*(image->nx) + x
  * para poder obter o indice do vetor que corresponde a essa posicao da imagem.
  *
@@ -36,20 +36,45 @@ typedef struct _colorimage {
  * portanto as intensidades de luminosidade variam entre 0 a 255. Neste Caso o Scaling factor é 255, pois se eu quiser
  * deixar todos os valores de uma imagem entre 0 e 1 eu preciso dividir por 255.
  * */
+
+
+enum ColorSpace {
+    UNKNOWN = 0,
+    GRAYSCALE = 1,
+    RGB = 2,
+    RGBA = 4,
+    yCbCr = 8,
+    yCbCrA = 16,
+    HSV = 32,
+    HSVA = 64
+};
+
+enum DataType {
+    FLOAT,
+    DOUBLE
+};
+
+
+
+
 typedef struct _image {
-    int   nx,ny;    /* dimensoes da imagem */
+    int   nx,ny,nz;    /* dimensoes da imagem */
+    float dx,dy, dz;    /* tamanho do pixel em unidades de comprimento */
     int numberPixels;
     float **channel; /*might be RGB, or Ycbcr*/
-    float dx,dy;    /* tamanho do pixel em unidades de comprimento */
     int scalingFactor;
     char  unid[10]; /* unidade de comprimento */
     int nchannels;
+    ColorSpace colorSpace;
+    DataType dataTypeId;
 } Image;
 
 
-//computa o indice para acessar a posicao (x,y) da imagem
+//macro para facil acesso aos pixels da imagem. a macro computa o indice para acessar a posicao (x,y) da imagem
 #define imageVal(image, x, y) image->channel[0][(y*image->nx) + x]
 #define imageValCh(image, x, y, c) image->channel[c][(y*image->nx) + x]
+#define imageVolume(image, x, y,z) image->channel[0][(z*image->ny*image->nx) + (y*image->nx) + x]
+#define imageVolumeCh(image, x, y, z,c) image->channel[c][(z*image->ny*image->nx) + (y*image->nx) + x]
 
 
 void         *readImageByExt(char *filename);
@@ -99,6 +124,7 @@ GrayImage* extractColorChannelAsGrayImage(ColorImage* colorImage,int channel);
 
 /*funcoes que utilizam a nova estrutura de imagem*/
 Image* createImage(int nx, int ny,int nchannels);
+Image* createImage(int nx, int ny,int nz, int nchannels);
 Image* createImage(int nx, int ny);
 void destroyImage(Image**image );
 Image *readImagePGM(char *filename);
@@ -123,7 +149,10 @@ float sumUpAllPixelsValues(Image *image, bool normalize);
 Image* extractImageChannel(Image* image, int channel);
 void printImage(Image* image);
 Image* createAlphaChannel(Image* image,float alpha);
-uint8_t* convertImage2IntergerArray8bits(Image* image);
+
+
+uint8_t* convertImage2IntergerArray8bits(Image* imageRGBA);
+
 Image* copyImage(Image* image);
 void addUniformNoise(Image* image, float uniformValue, double probability);
 void addSaltAndPepperNoise(Image* image, double probability);

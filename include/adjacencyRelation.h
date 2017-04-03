@@ -29,5 +29,6 @@ void getAdjacentsInCircle(float radius,AdjacencyRelation* adjRel);
 void resizeCircularAdjacency(AdjacencyRelation **adjRel, float radius);
 AdjacencyRelation *createLosangeAdjacency(int k);
 void resizeLosangeAdjacency(AdjacencyRelation **adjRel,int k);
+void printAdjacencyRelation(AdjacencyRelation* adjacencyRelation);
 
 #endif //LIBFL_ADJACENCYRELATION_H

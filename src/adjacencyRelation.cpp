@@ -171,3 +171,12 @@ AdjacencyRelation *createRectangularAdjacency(int height,int width){
     }
     return adjacencyRelation;
 }
+
+void printAdjacencyRelation(AdjacencyRelation* adjacencyRelation){
+    for (int i = 0; i < adjacencyRelation->n; ++i) {
+        printf("dx: %d  dy: %d\n",adjacencyRelation->dx[i],adjacencyRelation->dy[i]);
+    }
+}
+
+
+

@@ -85,12 +85,145 @@ Kernel *copyKernel(Kernel* kernel){
 }
 
 //filtros
-Kernel *createMean3by3(){
-    return NULL;
+Kernel* createMeanKernel(AdjacencyRelation* adjacencyRelation){
+    Kernel *kernel = createKernel(adjacencyRelation);
+    float factor = 1.0f/(adjacencyRelation->n);
+    for (int i = 0; i < adjacencyRelation->n; ++i) {
+        kernel->weight[i] = factor;
+    }
+    return kernel;
 }
 
-Kernel *createMean(){
-    return NULL;
+Kernel* createGaussianKernel(AdjacencyRelation* adjacencyRelation,double variance){
+    Kernel *kernel = createKernel(adjacencyRelation);
+    double arg;
+    double amplitude = 1.0/(2.0*M_PI*variance);
+    float normalizingFactor = 0;
+    for (int i = 0; i < adjacencyRelation->n; ++i) {
+        //numerator
+        arg = (adjacencyRelation->dx[i]*adjacencyRelation->dx[i]) + (adjacencyRelation->dy[i]*adjacencyRelation->dy[i]);
+        arg /= (2*variance);
+        kernel->weight[i] = (float)(exp(-arg)*amplitude);
+        normalizingFactor += kernel->weight[i];
+    }
+
+    //normalizing Kernel
+    for (int i = 0; i < adjacencyRelation->n; ++i) {
+        kernel->weight[i] /= normalizingFactor;
+    }
+
+    return kernel;
 }
+
+Kernel* createGaussianKernel(AdjacencyRelation* adjacencyRelation,double varianceX,double varianceY){
+    Kernel *kernel = createKernel(adjacencyRelation);
+    double arg;
+    double crossVariance = sqrt(varianceX*varianceY);
+    double amplitude = 1.0/(2.0*M_PI*crossVariance);
+    float normalizingFactor = 0;
+    for (int i = 0; i < adjacencyRelation->n; ++i) {
+
+        arg = (adjacencyRelation->dx[i]*adjacencyRelation->dx[i])/(2*varianceX);
+        arg += (adjacencyRelation->dy[i]*adjacencyRelation->dy[i])/(2*varianceY);
+        kernel->weight[i] = (float)(exp(-arg)*amplitude);
+        normalizingFactor += kernel->weight[i];
+    }
+
+    //normalizing Kernel
+    for (int i = 0; i < adjacencyRelation->n; ++i) {
+        kernel->weight[i] /= normalizingFactor;
+    }
+
+    return kernel;
+}
+
+Kernel* createSobelHorizontalGradientKernel(int height,int width){
+    AdjacencyRelation *adjacencyRelation = createRectangularAdjacency(height,width);
+    Kernel* kernel = createKernel(adjacencyRelation);
+    int increment = 1;
+    int startValue = width/2;
+    int currentValue;
+    for (int dx = 0; dx < width; ++dx) {
+        currentValue = startValue;
+
+        if(dx == width/2){
+            startValue -= 1;
+            continue;
+        }
+        if(dx >= width/2){
+            increment = -1;
+        }else{
+            increment = 1;
+        }
+        for (int dy = 0; dy < height; ++dy) {
+            int index = (dy*width) + dx;
+            kernel->weight[index] = currentValue;
+            if(dy == height/2){
+                increment *= -1;
+            }
+            currentValue += increment;
+        }
+        startValue -= 1;
+    }
+
+    return kernel;
+}
+
+Kernel* createSobelHorizontalGradientKernel(AdjacencyRelation* adjacencyRelation){
+    //assuming rectangular symmetric kernel
+    int height = (adjacencyRelation->maxDy*2)+1;
+    int width =  (adjacencyRelation->maxDx*2)+1;
+    return createSobelHorizontalGradientKernel(height,width);
+}
+
+Kernel* createSobelVerticalGradientKernel(int height,int width){
+    AdjacencyRelation *adjacencyRelation = createRectangularAdjacency(height,width);
+    Kernel* kernel = createKernel(adjacencyRelation);
+    int increment = 1;
+    int startValue = height/2;
+    int currentValue;
+    for (int dy = 0; dy < height; ++dy) {
+        currentValue = startValue;
+
+        if(dy == height/2){
+            startValue -= 1;
+            continue;
+        }
+        if(dy >= height/2){
+            increment = -1;
+        }else{
+            increment = 1;
+        }
+        for (int dx = 0; dx < height; ++dx) {
+            int index = (dy*width) + dx;
+            kernel->weight[index] = currentValue;
+            if(dx == width/2){
+                increment *= -1;
+            }
+            currentValue += increment;
+        }
+        startValue -= 1;
+    }
+
+    return kernel;
+}
+
+Kernel* createSobelVerticalGradientKernel(AdjacencyRelation* adjacencyRelation){
+    //assuming rectangular symmetric kernel
+    int height = (adjacencyRelation->maxDy*2)+1;
+    int width =  (adjacencyRelation->maxDx*2)+1;
+    return createSobelVerticalGradientKernel(height,width);
+}
+
+void printKernel(Kernel* kernel){
+    if(kernel == NULL){
+        return;
+    }
+    for (int i = 0; i < kernel->adjacencyRelation->n; ++i) {
+        printf("dx: %d  dy: %d w: %f\n",kernel->adjacencyRelation->dx[i],kernel->adjacencyRelation->dy[i],kernel->weight[i]);
+    }
+    printf("\n");
+}
+
 
 

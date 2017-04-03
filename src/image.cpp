@@ -464,25 +464,7 @@ GrayImage *imageSubtraction(GrayImage *image1, GrayImage *image2, bool saturatio
     return outputImage;
 }
 
-Image *imageSubtraction(Image *image1, Image *image2, bool saturation){
-    Image *outputImage = NULL;
-    if(isImagesSameDomain(image1,image2)){
-        outputImage = createImage(image1->nx,image1->ny,image1->nchannels);
-        int n = image1->nx*image1->ny;
-        int result;
-        for (int i = 0; i < n; ++i) {
-            for(int c=0; c<image1->nchannels; c++){
-                result = image1->channel[c][i] - image2->channel[c][i];
-                if(saturation){
-                    result = (result<0)?0:result;
-                }
-                outputImage->channel[c][i] = result;
-            }
 
-        }
-    }
-    return outputImage;
-}
 
 int sumUpAllPixelsValues(GrayImage *image){
     int sum = 0;
@@ -641,19 +623,51 @@ Image* createImage(int nx, int ny,int nchannels){
     Image* image = (Image*)calloc(1,sizeof(Image));
     image->nx = nx;
     image->ny = ny;
-    image->numberPixels = nx*ny;
+    image->nz = 1;
+    image->numberPixels = image->nx*image->ny*image->nz;
     image->dx = 0;
     image->dy = 0;
+    image->dz = 0;
     image->scalingFactor = 255;
     image->unid[0] = 'm';
     image->unid[1] = 'm';
     image->channel = (float**)calloc(nchannels,sizeof(float*));
     image->nchannels = nchannels;
+    image->colorSpace = UNKNOWN;
+    image->dataTypeId = FLOAT;
     for (int i = 0; i < image->nchannels; ++i) {
-        image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float*));
+        image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float));
+        //image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float*));
+        //image->channel->floatChannel[i] = (float*)calloc(image->numberPixels,sizeof(float));
     }
     return image;
 }
+
+Image* createImage(int nx, int ny,int nz, int nchannels){
+    Image* image = (Image*)calloc(1,sizeof(Image));
+    image->nx = nx;
+    image->ny = ny;
+    image->nz = nz;
+    image->numberPixels = image->nx*image->ny*image->nz;
+    image->dx = 0;
+    image->dy = 0;
+    image->dz = 0;
+    image->scalingFactor = 255;
+    image->unid[0] = 'm';
+    image->unid[1] = 'm';
+    image->channel = (float**)calloc(nchannels,sizeof(float*));
+    image->nchannels = nchannels;
+    image->colorSpace = UNKNOWN;
+    image->dataTypeId = FLOAT;
+    for (int i = 0; i < image->nchannels; ++i) {
+        image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float));
+        //image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float*));
+        //image->channel->floatChannel[i] = (float*)calloc(image->numberPixels,sizeof(float));
+    }
+    return image;
+}
+
+
 
 Image* createImage(int nx, int ny){
     Image* image = (Image*)calloc(1,sizeof(Image));
@@ -667,6 +681,8 @@ Image* createImage(int nx, int ny){
     image->unid[1] = 'm';
     image->channel = (float**)calloc(1,sizeof(float*));
     image->nchannels = 1;
+    image->colorSpace = UNKNOWN;
+    image->dataTypeId = FLOAT;
     for (int i = 0; i < image->nchannels; ++i) {
         image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float*));
     }
@@ -739,6 +755,7 @@ Image *readImagePGM(char *filename)
         fclose(fp);
         img = createImage(ncols,nrows,1);
         img->scalingFactor = maxValue;
+        img->colorSpace = GRAYSCALE;
         for (int i=0; i < n; i++)
             img->channel[0][i]=(float)value[i];
         free(value);
@@ -756,6 +773,7 @@ Image *readImagePGM(char *filename)
             sscanf(z,"%d\n",&maxValue);
             img = createImage(ncols,nrows,1);
             img->scalingFactor = maxValue;
+            img->colorSpace = GRAYSCALE;
 
             for (int i=0; i < n; i++)
                 fscanf(fp,"%f",&img->channel[0][i]);
@@ -802,15 +820,16 @@ Image *readImagePPM(char *filename){
             }
 
             I->scalingFactor = Imax;
+            I->colorSpace = RGB;
             while (fgetc(fp) != '\n');
 
             if (Imax <= 255){
                 int iter = 0;
                 for (y=0; y < ny; y++) {
                     for (x = 0; x < nx; x++) {
-                        I->channel[0][iter] =  fgetc(fp);//red
-                        I->channel[1][iter] =  fgetc(fp);//green
-                        I->channel[2][iter] =  fgetc(fp);//blue
+                        I->channel[0][iter] =  (float)fgetc(fp);//red
+                        I->channel[1][iter] =  (float)fgetc(fp);//green
+                        I->channel[2][iter] =  (float)fgetc(fp);//blue
                         iter++;
                     }
                 }
@@ -825,9 +844,9 @@ Image *readImagePPM(char *filename){
                 for (y=0; y < ny; y++) {
                     for (x=0; x < nx; x++){
                         if (fread(rgb16, 2, 3, fp) == 3) {
-                            I->channel[0][iter]=((rgb16[0] & 0xff) << 8) | ((ushort) rgb16[0] >> 8);
-                            I->channel[1][iter]=((rgb16[1] & 0xff) << 8) | ((ushort) rgb16[1] >> 8);
-                            I->channel[2][iter]=((rgb16[2] & 0xff) << 8) | ((ushort) rgb16[2] >> 8);
+                            I->channel[0][iter]=(((rgb16[0] & 0xff) << 8) | ((ushort) rgb16[0] >> 8));
+                            I->channel[1][iter]=(((rgb16[1] & 0xff) << 8) | ((ushort) rgb16[1] >> 8));
+                            I->channel[2][iter]=(((rgb16[2] & 0xff) << 8) | ((ushort) rgb16[2] >> 8));
                         } else{
                             Error("Reading 16-bit error","ReadColorImage");
                         }
@@ -848,6 +867,7 @@ Image *readImagePPM(char *filename){
             }
 
             I = createImage(nx,ny,3);
+            I->colorSpace = RGB;
 
             if (fscanf(fp, "%d", &Imax) != 1) {
                 fprintf(stderr, "Invalid rgb component (error loading '%s')\n",
@@ -912,13 +932,18 @@ void writeImageP2(Image *image,char *filename){
     FILE *fp = fopen(filename, "w");
     (void) fprintf(fp, "P2\n%d %d\n%d\n", image->nx,image->ny, image->scalingFactor);
     int k = 0;
+
+
+    float* channel0 = image->channel[0];
     for (i = 0; i < image->ny; i++){
         for (j = 0; j < image->nx; j++){
-            (void) fprintf(fp,"%d ",(int)image->channel[0][k]);
+            (void) fprintf(fp,"%d ",(int)channel0[k]);
             k++;
         }
         (void) fprintf(fp,"\n");
     }
+
+
     (void) fclose(fp);
 }
 
@@ -927,29 +952,50 @@ void writeImageP3(Image *image,char *filename){
     FILE *fp = fopen(filename, "w");
     (void) fprintf(fp, "P3\n%d %d\n%d\n", image->nx,image->ny, image->scalingFactor);
     int k=0;
-    for (i = 0; i < image->ny; i++){
-        for (j = 0; j < image->nx; j++){
-            (void) fprintf(fp,"%d %d %d ",(int)image->channel[0][k],(int)image->channel[1][k],(int)image->channel[2][k]);
-            k++;
+
+    if(image->dataTypeId == FLOAT){
+        float* channel0 = (float*)image->channel[0];
+        float* channel1 = (float*)image->channel[1];
+        float* channel2 = (float*)image->channel[2];
+        for (i = 0; i < image->ny; i++){
+            for (j = 0; j < image->nx; j++){
+                (void) fprintf(fp,"%d %d %d ", (int)(channel0[k]),(int)channel1[k],(int)channel2[k]);
+                k++;
+            }
+            (void) fprintf(fp,"\n");
         }
-        (void) fprintf(fp,"\n");
+    }
+    if(image->dataTypeId == DOUBLE){
+        double* channel0 = (double*)image->channel[0];
+        double* channel1 = (double*)image->channel[1];
+        double* channel2 = (double*)image->channel[2];
+        for (i = 0; i < image->ny; i++){
+            for (j = 0; j < image->nx; j++){
+                (void) fprintf(fp,"%d %d %d ", (int)(channel0[k]),(int)channel1[k],(int)channel2[k]);
+                k++;
+            }
+            (void) fprintf(fp,"\n");
+        }
     }
     (void) fclose(fp);
+
 }
 
 void writeImageP5(Image *image,char *filename){
     FILE *fp = fopen(filename, "wb");
     (void) fprintf(fp, "P5\n%d %d\n%d\n", image->nx,image->ny, image->scalingFactor);
     int k = 0;
+
+    float* channel0 = image->channel[0];
     for (int i = 0; i < image->ny; i++){
         for (int j = 0; j < image->nx; j++){
             static unsigned char gray[1];
-            gray[0] = (int)image->channel[0][k];
+            gray[0] = (int)channel0[k];
             (void) fwrite(gray, 1, 1, fp);
             k++;
         }
-        //(void) fprintf(fp,"\n");
     }
+
     (void) fclose(fp);
 }
 
@@ -959,17 +1005,21 @@ void writeImageP6(Image *image,char *filename){
     FILE *fp = fopen(filename, "wb");
     (void) fprintf(fp, "P6\n%d %d\n%d\n", image->nx,image->ny, image->scalingFactor);
     int k=0;
+
+    float* channel0 = image->channel[0];
+    float* channel1 = image->channel[1];
+    float* channel2 = image->channel[2];
     for (i = 0; i < image->ny; i++){
         for (j = 0; j < image->nx; j++){
             static unsigned char color[3];
-            color[0] = image->channel[0][k];
-            color[1] = image->channel[1][k];
-            color[2] = image->channel[2][k];
+            color[0] = channel0[k];
+            color[1] = channel1[k];
+            color[2] = channel2[k];
             (void) fwrite(color, 1, 3, fp);
             k++;
         }
-        //(void) fprintf(fp,"\n");
     }
+
     (void) fclose(fp);
 }
 
@@ -987,6 +1037,7 @@ void writeImage(Image* image,char *filename){
         printf("unsuported format\n");
     }
 }
+
 
 
 Image *convertRGBtoYCbCr(Image *rgbImage)
@@ -1183,24 +1234,55 @@ void addAdditiveGaussianNoise(Image* image, double mean, double variance){
     }
 }
 
-uint8_t* convertImage2IntergerArray8bits(Image* image){
-    uint8_t* output = (uint8_t*)calloc(image->nchannels*image->nx*image->ny ,sizeof(uint8_t));
+uint8_t* convertImage2IntergerArray8bits(Image* imageRGBA){
+    uint8_t* output = (uint8_t*)calloc(imageRGBA->nchannels*imageRGBA->nx*imageRGBA->ny ,sizeof(uint8_t));
     long index = 0;
-    for (int k = 0; k < image->numberPixels; ++k) {
-        for (int c = 0; c < image->nchannels; ++c) {
-            output[index] = (uint8_t)image->channel[c][k];
+    for (int k = 0; k < imageRGBA->numberPixels; ++k) {
+        for (int c = 0; c < imageRGBA->nchannels; ++c) {
+            output[index] = (uint8_t)imageRGBA->channel[c][k];
             index++;
         }
     }
     return output;
 }
 
-Image* copyImage(Image* image){
-    Image* imageCopy = createImage(image->nx,image->ny,image->nchannels);
-    for (int k = 0; k < image->numberPixels; ++k) {
-        for (int c = 0; c < image->nchannels; ++c) {
-            imageCopy->channel[c][k] = image->channel[c][k];
+Image* copyImage(Image* image, bool copyChannels){
+    Image* imageCopy = createImage(image->nx,image->ny,image->nz,image->nchannels);
+    imageCopy->colorSpace = image->colorSpace;
+    imageCopy->dx = image->dx;
+    imageCopy->dy = image->dy;
+    imageCopy->dz = image->dz;
+    imageCopy->dataTypeId = image->dataTypeId;
+    imageCopy->scalingFactor = image->scalingFactor;
+    for (int i = 0; i < 10; ++i) {
+        imageCopy->unid[i] = image->unid[i];
+    }
+    if(copyChannels) {
+        for (int k = 0; k < image->numberPixels; ++k) {
+            for (int c = 0; c < image->nchannels; ++c) {
+                imageCopy->channel[c][k] = image->channel[c][k];
+            }
         }
     }
     return imageCopy;
+}
+
+Image *imageSubtraction(Image *image1, Image *image2, bool saturation){
+    Image *outputImage = NULL;
+    if(isImagesSameDomain(image1,image2)){
+        outputImage = createImage(image1->nx,image1->ny,image1->nchannels);
+        int n = image1->nx*image1->ny;
+        int result;
+        for (int i = 0; i < n; ++i) {
+            for(int c=0; c<image1->nchannels; c++){
+                result = image1->channel[c][i] - image2->channel[c][i];
+                if(saturation){
+                    result = (result<0)?0:result;
+                }
+                outputImage->channel[c][i] = result;
+            }
+
+        }
+    }
+    return outputImage;
 }

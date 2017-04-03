@@ -10,6 +10,8 @@
 #include <time.h>
 #include <stdint.h>  // for integer typedefs
 #include <float.h>
+#include <ctype.h>
+#include <stddef.h>
 
 /* Error messages */
 
@@ -35,7 +37,7 @@ typedef struct _point{
 } Vector, Point;
 
 typedef struct _voxel {
-	int x, y, z;
+    int x, y, z;
 } Voxel;
 
 
@@ -51,19 +53,19 @@ typedef struct _voxel {
 #define RED         0
 #define GREEN       1
 #define BLUE        2
-#define WHITE       0
+#define WHITE       0 
 #define GRAY        1
 #define BLACK       2
 #define NIL        -1
 #define INCREASING  1
 #define DECREASING  0
-#define Epsilon     1E-05
+#define Epsilon     1E-05  
 #define Y           0
 #define CG          1
-#define CO          2
+#define CO          2 
 #define AXIS_X  0
 #define AXIS_Y  1
-#define AXIS_Z  2
+#define AXIS_Z  2    
 
 /* Common operations */
 

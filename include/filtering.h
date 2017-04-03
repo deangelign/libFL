@@ -46,12 +46,15 @@ FeatureVector* matchingWithCorrelation(FeatureVector*X1,FeatureVector*X2, int ty
 
 
 //filtragem
-Image* convolveImagewithMeanFilter(Image* image);
-Image* convolveImagewithGaussianFilter(Image* image);
-Image* convolveImagewithMedianFilter(Image* image);
-Image* convolveImagewithSobelFilter(Image* image);
-Image* convolveImagewithLaplacianFilter(Image* image);
-Image* convolveImagewithDOG(Image* image);
-Image* convolveImagewithLOG(Image* image);
+Image* convolveImageWithKernel(Image* image,Kernel* kernel,bool MultiBandFiltering, bool saturateValue);
+Image* convolveMultiBandImageWithKernel(Image* image,Kernel* kernel,bool saturateValue);
+Image* convolveMonoBandImageWithKernel(Image* image, Kernel* kernel,bool saturateValue);
+
+
+
+Image* convolveImageWithMedianFilter(Image* image,AdjacencyRelation* adjacencyRelation,bool filterMultiBand);
+Image* convolveMonoBandImageWithMedianFilter(Image* image,AdjacencyRelation* adjacencyRelation);
+Image* convolveMultiBandImageWithMedianFilter(Image* image,AdjacencyRelation* adjacencyRelation);
+
 
 #endif //LIBFL_FILTERING_H

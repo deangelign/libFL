@@ -27,13 +27,18 @@ void setKernelWeights(Kernel *kernel,FeatureVector* weights);
 //rotationa o kernel
 void rotateKernel2D(Kernel *kernel, float angle_rad);
 Kernel *copyKernel(Kernel* kernel);
+void printKernel(Kernel* kernel);
 
 
 //filtros
-Kernel *createMean3by3();
-Kernel *createMeanFilter();
-Kernel *createGaussian3x3();
-Kernel *createMeanFilter();
+Kernel* createMeanKernel(AdjacencyRelation* adjacencyRelation);
+Kernel* createGaussianKernel(AdjacencyRelation* adjacencyRelation,double variance);
+Kernel* createGaussianKernel(AdjacencyRelation* adjacencyRelation,double varianceX,double varianceY);
+Kernel* createSobelHorizontalGradientKernel(int height,int width);
+Kernel* createSobelHorizontalGradientKernel(AdjacencyRelation* adjacencyRelation);
+Kernel* createSobelVerticalGradientKernel(int height,int width);
+Kernel* createSobelVerticalGradientKernel(AdjacencyRelation* adjacencyRelation);
+
 
 
 

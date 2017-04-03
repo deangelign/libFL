@@ -40,6 +40,12 @@ FeatureVector* copyFeatureVector(FeatureVector* featureVector);
  * escreve uma arquivo txt onde caada linha no arquivo e um feature vector
  * */
 FeatureMatrix* createFeatureMatrix(int nFeaturesVectors);
+FeatureMatrix* createFeatureMatrix(int nFeaturesVectors,int vectorSize);
 void wirteFeatureMatrix(FeatureMatrix* featureMatrix, char *filename);
+void destroyFeatureMatrix(FeatureMatrix** featureMatrix);
+
+
+
+void sortAt(FeatureVector featureVector, int lastIndex);
 
 #endif //LIBFL_FEATUREVECTOR_H

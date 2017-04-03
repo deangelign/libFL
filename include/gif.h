@@ -2,7 +2,7 @@
 // Created by deangeli on 3/29/17.
 //
 
-#ifndef LIBFL_GIF_H_H
+#ifndef LIBFL_GIF_H_
 #define LIBFL_GIF_H_H
 
 

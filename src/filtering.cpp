@@ -216,28 +216,171 @@ FeatureVector* matchingWithCorrelation(FeatureVector*X1,FeatureVector*X2, int ty
     return output;
 }
 
-Image* convolveImagewithMeanFilter(Image* image){
-    return NULL;
+//filtragem
+Image* convolveImageWithKernel(Image* image,Kernel* kernel,bool MultiBandFiltering, bool saturateValue){
+    Image* outputImage = NULL;
+    if(MultiBandFiltering){
+        outputImage = convolveMultiBandImageWithKernel(image,kernel,saturateValue);
+    }else{
+        outputImage = convolveMonoBandImageWithKernel(image,kernel,saturateValue);
+    }
+    return outputImage;
 }
 
-Image* convolveImagewithGaussianFilter(Image* image){
-    return NULL;
+Image* convolveMultiBandImageWithKernel(Image* image,Kernel* kernel,bool saturateValue){
+    Image* outputImage = createImage(image->nx,image->ny,image->nchannels);
+    outputImage->scalingFactor = image->scalingFactor;
+#pragma omp parallel for
+    for (int y = 0; y < image->ny; ++y) {
+        for (int x = 0; x < image->nx; ++x) {
+            for (int k = 0; k < kernel->adjacencyRelation->n; ++k) {
+                int coordenateX = x + kernel->adjacencyRelation->dx[k];
+                int coordenateY = y + kernel->adjacencyRelation->dy[k];
+                if(isValidPixelCoordinate(image,coordenateX,coordenateY)){
+                    for (int c = 0; c < image->nchannels; ++c) {
+                        imageValCh(outputImage,x,y,c) += imageValCh(image,coordenateX,coordenateY,c)*kernel->weight[k];
+                        if(saturateValue){
+                            if(imageValCh(outputImage,x,y,c)>outputImage->scalingFactor){
+                                imageValCh(outputImage,x,y,c) = outputImage->scalingFactor;
+                            }
+                            if(imageValCh(outputImage,x,y,c)<0){
+                                imageValCh(outputImage,x,y,c) = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return outputImage;
 }
-Image* convolveImagewithMedianFilter(Image* image){
-    return NULL;
+
+Image* convolveMonoBandImageWithKernel(Image* image,Kernel* kernel,bool saturateValue){
+    Image* outputImage = createImage(image->nx,image->ny,image->nchannels);
+    outputImage->scalingFactor = image->scalingFactor;
+#pragma omp parallel for
+    for (int y = 0; y < image->ny; ++y) {
+        for (int x = 0; x < image->nx; ++x) {
+            for (int k = 0; k < kernel->adjacencyRelation->n; ++k) {
+                int coordenateX = x + kernel->adjacencyRelation->dx[k];
+                int coordenateY = y + kernel->adjacencyRelation->dy[k];
+                if(isValidPixelCoordinate(image,coordenateX,coordenateY)){
+                    imageVal(outputImage,x,y) += imageVal(image,coordenateX,coordenateY)*kernel->weight[k];
+                    if(saturateValue){
+                        if(imageVal(outputImage,x,y)>outputImage->scalingFactor){
+                            imageVal(outputImage,x,y) = outputImage->scalingFactor;
+                        }
+                        if(imageVal(outputImage,x,y)<0){
+                            imageVal(outputImage,x,y) = 0;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    return outputImage;
 }
-Image* convolveImagewithSobelFilter(Image* image){
-    return NULL;
+
+
+int comp (const void * elem1, const void * elem2)
+{
+    const float f = *((const float*)elem1);
+    const float s = *((const float*)elem2);
+    if (f > s) return  1;
+    if (f < s) return -1;
+    return 0;
 }
-Image* convolveImagewithLaplacianFilter(Image* image){
-    return NULL;
+
+Image* convolveMultiBandImageWithMedianFilter(Image* image,AdjacencyRelation* adjacencyRelation){
+    Image* outputImage = createImage(image->nx,image->ny,image->nchannels);
+    outputImage->scalingFactor= image->scalingFactor;
+    FeatureMatrix *featureMatrix = createFeatureMatrix(image->nchannels,adjacencyRelation->n);
+    bool isEvenSize = (adjacencyRelation->n%2 == 0);
+    float median=0;
+    int vecHalfSize = adjacencyRelation->n/2;
+#pragma omp parallel for
+    for (int y = 0; y < image->ny; ++y) {
+        for (int x = 0; x < image->nx; ++x) {
+            for (int k = 0; k < adjacencyRelation->n; ++k) {
+                int coordenateX = x + adjacencyRelation->dx[k];
+                int coordenateY = y + adjacencyRelation->dy[k];
+                if(isValidPixelCoordinate(image,coordenateX,coordenateY)){
+                    for (int c = 0; c < image->nchannels; ++c) {
+                        featureMatrix->featureVector[c]->features[k] = imageValCh(image,coordenateX,coordenateY,c);
+                    }
+                }else{
+                    for (int c = 0; c < image->nchannels; ++c) {
+                        featureMatrix->featureVector[c]->features[k] = 0;
+                    }
+                }
+            }
+
+            for (int c = 0; c < image->nchannels; ++c) {
+                qsort(featureMatrix->featureVector[c]->features,featureMatrix->featureVector[c]->size, sizeof(float ), comp);
+                median = (isEvenSize)
+                         ? (featureMatrix->featureVector[c]->features[vecHalfSize] + featureMatrix->featureVector[c]->features[vecHalfSize-1])*0.5f
+                         : featureMatrix->featureVector[c]->features[vecHalfSize]
+                        ;
+                imageValCh(outputImage,x,y,c) = median;
+            }
+
+        }
+    }
+
+    destroyFeatureMatrix(&featureMatrix);
+    return outputImage;
+
 }
-Image* convolveImagewithDOG(Image* image){
-    return NULL;
+
+Image* convolveMonoBandImageWithMedianFilter(Image* image,AdjacencyRelation* adjacencyRelation){
+    Image* outputImage = createImage(image->nx,image->ny,image->nchannels);
+    outputImage->scalingFactor= image->scalingFactor;
+    FeatureVector *featureVector = createFeatureVector(adjacencyRelation->n);
+    bool isEvenSize = (adjacencyRelation->n%2 == 0);
+    float median=0;
+    int vecHalfSize = adjacencyRelation->n/2;
+#pragma omp parallel for
+    for (int y = 0; y < image->ny; ++y) {
+        for (int x = 0; x < image->nx; ++x) {
+            for (int k = 0; k < adjacencyRelation->n; ++k) {
+                int coordenateX = x + adjacencyRelation->dx[k];
+                int coordenateY = y + adjacencyRelation->dy[k];
+                if(isValidPixelCoordinate(image,coordenateX,coordenateY)){
+                    featureVector->features[k] = imageVal(image,coordenateX,coordenateY);
+                }else{
+                    featureVector->features[k] = 0;
+                }
+            }
+
+            qsort(featureVector->features,featureVector->size, sizeof(float ), comp);
+            if(isEvenSize){
+                median = (featureVector->features[vecHalfSize] + featureVector->features[vecHalfSize-1])*0.5f;
+            }else{
+                median = featureVector->features[vecHalfSize];
+            }
+
+            imageVal(outputImage,x,y) = median;
+        }
+    }
+    destroyFeatureVector(&featureVector);
+    return outputImage;
 }
-Image* convolveImagewithLOG(Image* image){
-    return NULL;
+
+
+Image* convolveImageWithMedianFilter(Image* image,AdjacencyRelation* adjacencyRelation,bool filterMultiBand){
+
+    Image* outputImage = NULL;
+
+    if(filterMultiBand){
+        outputImage = convolveMultiBandImageWithMedianFilter(image,adjacencyRelation);
+    }else{
+        outputImage =convolveMonoBandImageWithMedianFilter(image,adjacencyRelation);
+    }
+
+    return outputImage;
 }
+
 
 
 
