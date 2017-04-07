@@ -2,6 +2,7 @@
 #define _IMAGE_H_
 
 #include "common.h"
+#include "file.h"
 
 /* Implementacoes vetoriais de uma imagem cinza 2D: inteira e double */
 
@@ -76,6 +77,7 @@ typedef struct _image {
 #define imageVolume(image, x, y,z) image->channel[0][(z*image->ny*image->nx) + (y*image->nx) + x]
 #define imageVolumeCh(image, x, y, z,c) image->channel[c][(z*image->ny*image->nx) + (y*image->nx) + x]
 
+#define numericDerivate(f,x,index,step) f(x)
 
 void         *readImageByExt(char *filename);
 GrayImage    *createGrayImage(int ncols,int nrows);
@@ -149,11 +151,15 @@ float sumUpAllPixelsValues(Image *image, bool normalize);
 Image* extractImageChannel(Image* image, int channel);
 void printImage(Image* image);
 Image* createAlphaChannel(Image* image,float alpha);
+Image* convertGrayImage2RGBImage(Image* image_ppm);
+Image* mergeImages(Image* image1, Image* image2);
+Image* getSlice(Image* image, int sliceIndex);
+Image* readImagesFromDirectory(DirectoryManager* directoryManager);
+Image* extractSubImage(Image*image, int xCoord,int yCoord, int xsize, int ysize);
 
 
 uint8_t* convertImage2IntergerArray8bits(Image* imageRGBA);
-
-Image* copyImage(Image* image);
+Image* copyImage(Image* image, bool copyChannels);
 void addUniformNoise(Image* image, float uniformValue, double probability);
 void addSaltAndPepperNoise(Image* image, double probability);
 void addAdditiveGaussianNoise(Image* image, double mean, double variance);

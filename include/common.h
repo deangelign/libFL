@@ -12,6 +12,7 @@
 #include <float.h>
 #include <ctype.h>
 #include <stddef.h>
+#include <dirent.h>
 
 /* Error messages */
 
@@ -109,5 +110,7 @@ int RandomInteger (int low, int high);
 double randomNormalized();
 double generateGaussianNoise(double mean, double standardDeviation);
 
+char *copyString(const char *str);
+char *splitStringAt(const char *phrase, const char *delimiter, long position);
 
 #endif

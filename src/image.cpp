@@ -1286,3 +1286,97 @@ Image *imageSubtraction(Image *image1, Image *image2, bool saturation){
     }
     return outputImage;
 }
+
+Image* readImagesFromDirectory(DirectoryManager* directoryManager){
+    Image* imagePack = NULL;
+    Image* currentImage = NULL;
+    Image* merged = NULL;
+    for (int i = 0; i < (int)directoryManager->nfiles; ++i) {
+        currentImage = readImage(directoryManager->files[i]->path);
+        merged = mergeImages(imagePack,currentImage);
+        destroyImage(&currentImage);
+        destroyImage(&imagePack);
+        imagePack = copyImage(merged,true);
+        destroyImage(&merged);
+    }
+    return imagePack;
+}
+
+Image* convertGrayImage2RGBImage(Image* image_ppm){ 
+    Image* image_rgb = createImage(image_ppm->nx,image_ppm->ny,3);
+    for (int k = 0; k < image_rgb->numberPixels; ++k) {
+        image_rgb->channel[0][k] = image_ppm->channel[0][k];
+        image_rgb->channel[1][k] = image_ppm->channel[0][k];
+        image_rgb->channel[2][k] = image_ppm->channel[0][k];
+    }
+    return image_rgb;
+}
+
+Image* mergeImages(Image* image1, Image* image2){
+    Image* imageMerged = NULL;
+    if(image1 == NULL && image2 == NULL){
+        printf("NULL images\n");
+        return NULL;
+    }
+    if(image1 == NULL){
+        imageMerged = copyImage(image2,true);
+        return imageMerged;
+    }
+    if(image2 == NULL){
+        imageMerged = copyImage(image1,true);
+        return imageMerged;
+    }
+
+    if(image1->nx != image2->nx || image1->ny != image2->ny){
+        printf("images dimensions mismatch\n");
+        return NULL;
+    }
+    if(image1->nchannels != image2->nchannels){
+        printf("number of channels mismatch\n");
+        return NULL;
+    }
+    int totalSlices = image1->nz+image2->nz;
+    imageMerged = createImage(image1->nx,image1->ny,totalSlices,image1->nchannels);
+
+#pragma omp parallel for
+    for (int k = 0; k < image1->numberPixels; ++k) {
+        for (int c = 0; c < image1->nchannels; ++c) {
+            imageMerged->channel[c][k] = image1->channel[c][k];
+        }
+    }
+
+    for (int k = 0,kShift = image1->numberPixels; k < image2->numberPixels; ++k,++kShift) {
+        for (int c = 0; c < image2->nchannels; ++c) {
+            imageMerged->channel[c][kShift] = image2->channel[c][k];
+        }
+    }
+    return imageMerged;
+}
+
+Image* getSlice(Image* image, int sliceIndex){
+    if(sliceIndex >= image->nz || sliceIndex < 0){
+        printf("invalid sliceIndex (z-coordinate) value\n");
+        return NULL;
+    }
+    Image* slice = createImage(image->nx,image->ny,image->nchannels);
+    for (int y = 0; y < image->ny; ++y) {
+        for (int x = 0; x < image->nx; ++x) {
+            for (int c = 0; c < image->nchannels; ++c) {
+                imageValCh(slice,x,y,c) = imageVolumeCh(image,x,y,sliceIndex,c);
+            }
+        }
+    }
+    return slice;
+}
+
+Image* extractSubImage(Image*image, int xCoord,int yCoord, int xsize, int ysize){
+    Image *subImage = createImage(xsize,ysize,image->nchannels);
+    for (int y = 0; y < ysize; ++y) {
+        for (int x = 0; x < xsize; ++x) {
+            for (int c = 0; c < image->nchannels; ++c) {
+                imageValCh(subImage,x,y,c) = imageValCh(subImage,xCoord+x,yCoord+y,c);
+            }
+        }
+    }
+    return subImage;
+}

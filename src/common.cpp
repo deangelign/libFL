@@ -128,5 +128,13 @@ double generateGaussianNoise(double mean, double standardDeviation)
     return z0 * sigma + mean;
 }
 
+char *copyString(const char *str) {
+    char *copy = NULL;
 
+    if (str != NULL) {
+        copy = (char*)calloc(strlen(str)+1,sizeof(char));
+        strcpy(copy, str);
+    }
 
+    return copy;
+}

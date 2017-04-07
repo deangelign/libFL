@@ -14,6 +14,7 @@ libFL: $(LIB)/libFL.a
 
 $(LIB)/libFL.a: \
 $(OBJ)/common.o \
+$(OBJ)/file.o \
 $(OBJ)/adjacencyRelation.o \
 $(OBJ)/featureVector.o \
 $(OBJ)/gif.o \
@@ -22,9 +23,11 @@ $(OBJ)/image.o \
 $(OBJ)/histogram.o \
 $(OBJ)/morphology.o \
 $(OBJ)/filtering.o \
+$(OBJ)/bagOfVisualWords.o \
 
 	ar csr $(LIB)/libFL.a \
 $(OBJ)/common.o \
+$(OBJ)/file.o \
 $(OBJ)/adjacencyRelation.o \
 $(OBJ)/featureVector.o \
 $(OBJ)/gif.o \
@@ -33,10 +36,15 @@ $(OBJ)/image.o \
 $(OBJ)/histogram.o \
 $(OBJ)/morphology.o \
 $(OBJ)/filtering.o \
+$(OBJ)/bagOfVisualWords.o \
 
 $(OBJ)/common.o: $(SRC)/common.cpp
 	$(CC) $(FLAGS) -c $(SRC)/common.cpp -I$(INCLUDE) \
-	-o $(OBJ)/common.o 
+	-o $(OBJ)/common.o
+
+$(OBJ)/file.o: $(SRC)/file.cpp
+	$(CC) $(FLAGS) -c $(SRC)/file.cpp -I$(INCLUDE) \
+	-o $(OBJ)/file.o
 
 $(OBJ)/adjacencyRelation.o: $(SRC)/adjacencyRelation.cpp
 	$(CC) $(FLAGS) -c $(SRC)/adjacencyRelation.cpp -I$(INCLUDE) \
@@ -56,7 +64,7 @@ $(OBJ)/kernel.o: $(SRC)/kernel.cpp
 
 $(OBJ)/image.o: $(SRC)/image.cpp
 	$(CC) $(FLAGS) -c $(SRC)/image.cpp -I$(INCLUDE) \
-	-o $(OBJ)/image.o 
+	-o $(OBJ)/image.o
 
 $(OBJ)/histogram.o: $(SRC)/histogram.cpp
 	$(CC) $(FLAGS) -c $(SRC)/histogram.cpp -I$(INCLUDE) \
@@ -71,10 +79,9 @@ $(OBJ)/filtering.o: $(SRC)/filtering.cpp
 	$(CC) $(FLAGS) -c $(SRC)/filtering.cpp -I$(INCLUDE) \
 	-o $(OBJ)/filtering.o
 
-clean: 
+$(OBJ)/bagOfVisualWords.o: $(SRC)/bagOfVisualWords.cpp
+	$(CC) $(FLAGS) -c $(SRC)/bagOfVisualWords.cpp -I$(INCLUDE) \
+	-o $(OBJ)/bagOfVisualWords.o
+
+clean:
 	rm $(LIB)/lib*.a; rm $(OBJ)/*.o;
-
-
-
-
-
