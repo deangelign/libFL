@@ -286,6 +286,34 @@ Histogram* computeHistogram(Image *image,float binSize, bool normalization){
     return histogram;
 }
 
+FeatureVector* computeHistogramForFeatureVector(Image *image,float binSize, bool normalization){
+
+    int numberBinsPerChannel = ceil((image->scalingFactor+1)/binSize) ;
+    int totalNumberBins = pow(numberBinsPerChannel,image->nchannels);
+    FeatureVector *histogram = createFeatureVector(totalNumberBins);
+#pragma omp parallel for
+    for (int yp=0; yp < image->ny; yp++){
+        for (int xp=0; xp < image->nx; xp++) {
+            int index = (yp*image->nx) + xp;
+            int binIndex = 0;
+            int w = 1;
+            for (int cp=0; cp < image->nchannels; cp++) {
+                int binIndexOnChannel = image->channel[cp][index]/binSize;
+                binIndex += (binIndexOnChannel)*w;
+                w *= numberBinsPerChannel;
+            }
+            histogram->features[binIndex] += 1.0f;
+        }
+    }
+    if(normalization){
+        int numberPixels = image->nx*image->ny;
+        for (int i = 0; i < histogram->size; ++i) {
+            histogram->features[i] /= numberPixels;
+        }
+    }
+    return histogram;
+}
+
 Image *ProbabilityDensityFunction(Image *image, double standardDeviation)
 {
     Image *pdf = createImage(image->nx, image->ny,1);

@@ -3,9 +3,12 @@
 int main(int argc, char **argv) {
 
 
+    /*
+     * To clear all images in demo folder, just type "make cleanImages"
+     * */
 
     DirectoryManager* directoryManager = loadFilesFromDirBySuffix("../data/object6/", "ppm");
-    Image* images = readImagesFromDirectory(directoryManager);
+    Image* images = packImagesFromDirectory(directoryManager);
     //printf("%d %d")
     char number[15];
     char filename[80];

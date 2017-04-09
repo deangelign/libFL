@@ -28,6 +28,7 @@ Histogram* computeHistogram(GrayImage* grayImage, int numberBins);
 Histogram* computeHistogram(ColorImage* colorImage, int numberBins);
 void DestroyHistogram(Histogram **hist);
 FeatureVector* createFeatureVector(Histogram *histogram);
+FeatureVector* computeHistogramForFeatureVector(Image *image,float binSize, bool normalization);
 /*
  * computa a densidade de probabilidade para cada pixel da imagem baseado em todos os outros pixels
  * */

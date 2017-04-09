@@ -1287,7 +1287,7 @@ Image *imageSubtraction(Image *image1, Image *image2, bool saturation){
     return outputImage;
 }
 
-Image* readImagesFromDirectory(DirectoryManager* directoryManager){
+Image* packImagesFromDirectory(DirectoryManager* directoryManager){
     Image* imagePack = NULL;
     Image* currentImage = NULL;
     Image* merged = NULL;
@@ -1369,12 +1369,46 @@ Image* getSlice(Image* image, int sliceIndex){
     return slice;
 }
 
-Image* extractSubImage(Image*image, int xCoord,int yCoord, int xsize, int ysize){
-    Image *subImage = createImage(xsize,ysize,image->nchannels);
-    for (int y = 0; y < ysize; ++y) {
-        for (int x = 0; x < xsize; ++x) {
-            for (int c = 0; c < image->nchannels; ++c) {
-                imageValCh(subImage,x,y,c) = imageValCh(subImage,xCoord+x,yCoord+y,c);
+Image* extractSubImage(Image*image, int xCoord,int yCoord, int xsize, int ysize, bool zeroPadding){
+    Image *subImage = NULL;
+    int imageX = xCoord+xsize;
+    int imageY = yCoord+ysize;
+    int subImageSizeX = 0;
+    int subImageSizeY = 0;
+
+    subImageSizeX = xsize;
+    subImageSizeY = ysize;
+
+    if(image->nx <= xCoord && image->ny <= yCoord){
+        printf("Warning: xCoord and yCoord are outbound.\n");
+    }
+
+    if(image->nx < imageX){
+        if(!zeroPadding){
+            subImageSizeX = image->nx-xCoord;
+            if(subImageSizeX <= 0){
+                printf("Impossible create a patch without zero padding\n");
+                return NULL;
+            }
+        }
+    }
+    if(image->ny < imageY){
+        if(!zeroPadding){
+            subImageSizeY = image->ny-yCoord;
+            if(subImageSizeY <= 0){
+                printf("Impossible create a patch without zero padding\n");
+                return NULL;
+            }
+        }
+    }
+
+    subImage = createImage(subImageSizeX,subImageSizeY,image->nchannels);
+    for (int y = 0; y < subImage->ny; ++y) {
+        for (int x = 0; x < subImage->nx; ++x) {
+            for (int c = 0; c < subImage->nchannels; ++c) {
+                if(isValidPixelCoordinate(image,xCoord+x,yCoord+y)){
+                    imageValCh(subImage,x,y,c) = imageValCh(image,(xCoord+x),(yCoord+y),c);
+                }
             }
         }
     }

@@ -23,6 +23,7 @@ typedef struct _featureMatrix {
 
 FeatureVector* createFeatureVector(int size);
 FeatureVector* createFeatureVector(float* vec,int size);
+FeatureVector* createRandomNormalizedFeatureVector(int size);
 
 /*
  * escreve uma arquivo txt onde caada linha no arquivo e um feature vector
@@ -37,10 +38,13 @@ FeatureVector* copyFeatureVector(FeatureVector* featureVector);
 
 
 /*
- * escreve uma arquivo txt onde caada linha no arquivo e um feature vector
+ * escreve uma arquivo txt onde cada linha no arquivo e um feature vector
  * */
+FeatureMatrix* createFeatureMatrix();
 FeatureMatrix* createFeatureMatrix(int nFeaturesVectors);
 FeatureMatrix* createFeatureMatrix(int nFeaturesVectors,int vectorSize);
+void addNewLines(FeatureMatrix** featureMatrix, int numberNewLines);
+void printFeatureMatrix(FeatureMatrix* featureMatrix);
 void wirteFeatureMatrix(FeatureMatrix* featureMatrix, char *filename);
 void destroyFeatureMatrix(FeatureMatrix** featureMatrix);
 

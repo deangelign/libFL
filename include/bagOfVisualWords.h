@@ -9,6 +9,7 @@
 #include "featureVector.h"
 #include "file.h"
 #include "image.h"
+#include "histogram.h"
 
 
 typedef struct _bagOfVisualWords {

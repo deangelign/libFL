@@ -3,6 +3,8 @@
 //
 #include "featureVector.h"
 
+
+
 FeatureVector* createFeatureVector(int size){
     FeatureVector* featureVector = (FeatureVector*)calloc(1,sizeof(FeatureVector));
     featureVector->size = size;
@@ -15,7 +17,21 @@ void destroyFeatureVector(FeatureVector** featureVector){
     (*featureVector) = NULL;
 }
 
+FeatureVector* createRandomNormalizedFeatureVector(int size){
+    FeatureVector* featureVector = (FeatureVector*)calloc(1,sizeof(FeatureVector));
+    featureVector->size = size;
+    featureVector->features = (float*)calloc((size_t)size, sizeof(float));
+    for (int i = 0; i < size; ++i) {
+        featureVector->features[i] = randomNormalized();
+    }
+    return featureVector;
+}
+
 void printFeatureVector(FeatureVector* featureVector){
+    if(featureVector == NULL){
+        printf("FeatureVector pointer is NULL\n");
+        return;
+    }
     for (int i = 0; i < featureVector->size; ++i) {
         printf("%f ",featureVector->features[i]);
     }
@@ -94,9 +110,18 @@ FeatureVector* copyFeatureVector(FeatureVector* featureVector){
 
 
 
+FeatureMatrix* createFeatureMatrix(){
+    FeatureMatrix* featureMatrix = NULL;
+    featureMatrix = (FeatureMatrix*)calloc(1,sizeof(FeatureMatrix));
+    featureMatrix->nFeaturesVectors = 0;
+    featureMatrix->featureVector = NULL;
+    return featureMatrix;
+}
+
 FeatureMatrix* createFeatureMatrix(int nFeaturesVectors){
     FeatureMatrix* featureMatrix = NULL;
     featureMatrix = (FeatureMatrix*)calloc(1,sizeof(FeatureMatrix));
+    featureMatrix->nFeaturesVectors = nFeaturesVectors;
     featureMatrix->featureVector = (FeatureVector**)calloc((size_t)nFeaturesVectors,sizeof(FeatureVector*));
     return featureMatrix;
 }
@@ -104,6 +129,7 @@ FeatureMatrix* createFeatureMatrix(int nFeaturesVectors){
 FeatureMatrix* createFeatureMatrix(int nFeaturesVectors,int vectorSize){
     FeatureMatrix* featureMatrix = NULL;
     featureMatrix = (FeatureMatrix*)calloc(1,sizeof(FeatureMatrix));
+    featureMatrix->nFeaturesVectors = nFeaturesVectors;
     featureMatrix->featureVector = (FeatureVector**)calloc((size_t)nFeaturesVectors,sizeof(FeatureVector*));
     for (int i = 0; i < vectorSize; ++i) {
         featureMatrix->featureVector[0] = createFeatureVector(vectorSize);
@@ -135,6 +161,24 @@ void wirteFeatureMatrix(FeatureMatrix* featureMatrix, char *filename){
         }
         fprintf(fp,"\n");
     }
+}
+
+void addNewLines(FeatureMatrix** featureMatrix, int numberNewLines){
+    FeatureMatrix* aux = *featureMatrix;
+    int numberLines = aux->nFeaturesVectors+numberNewLines;
+    aux->featureVector = (FeatureVector**)realloc(aux->featureVector,(numberLines)*sizeof(FeatureVector*));
+    aux->nFeaturesVectors = numberLines;
+}
+
+void printFeatureMatrix(FeatureMatrix* featureMatrix){
+    if(featureMatrix == NULL){
+        printf("FeatureMatrix pointer is NULL\n");
+        return;
+    }
+    for (int i = 0; i < featureMatrix->nFeaturesVectors; ++i) {
+        printFeatureVector(featureMatrix->featureVector[i]);
+    }
+    printf("\n");
 }
 
 

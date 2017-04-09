@@ -3,12 +3,12 @@
 int main(int argc, char **argv) {
 
 
-    if (argc != 2){
-        printf("Usage: <directory path [such as ../data/]> \n");
-        exit(-1);
-    }
+//    if (argc != 2){
+//        printf("Usage: <directory path [such as ../data/]> \n");
+//        exit(-1);
+//    }
     //list all files in directory
-    DirectoryManager* directoryManager = loadDirectory(argv[1], 1);
+    DirectoryManager* directoryManager = loadDirectory("../data/", 1);
     printf("reading:\n");
     for (int i = 0; i < (int)directoryManager->nfiles; ++i) {
         printf("%s\n",directoryManager->files[i]->path);

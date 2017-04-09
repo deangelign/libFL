@@ -154,8 +154,8 @@ Image* createAlphaChannel(Image* image,float alpha);
 Image* convertGrayImage2RGBImage(Image* image_ppm);
 Image* mergeImages(Image* image1, Image* image2);
 Image* getSlice(Image* image, int sliceIndex);
-Image* readImagesFromDirectory(DirectoryManager* directoryManager);
-Image* extractSubImage(Image*image, int xCoord,int yCoord, int xsize, int ysize);
+Image* packImagesFromDirectory(DirectoryManager* directoryManager);
+Image* extractSubImage(Image*image, int xCoord,int yCoord, int xsize, int ysize, bool zeroPadding);
 
 
 uint8_t* convertImage2IntergerArray8bits(Image* imageRGBA);
