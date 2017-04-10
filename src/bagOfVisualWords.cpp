@@ -4,31 +4,32 @@
 
 #include "bagOfVisualWords.h"
 
-/*
- * Nesta abordagem nao e necessario computar quantas linhas (patchs) a matrix vai ter, pois eu estou usando a funcao
- * "addNewLines" para adicionar uma nova linha na matrix toda vez que um novo FeatureVector e computado.
- * */
+
 FeatureMatrix* computeFeatureVectors(DirectoryManager* directoryManager, int patchSize){
 
-    Image* currentImage;
-    Image* patch;
-    Histogram* histogram;
-    FeatureVector* patchVector;
+    //Image* currentImage;
+//    Image* patch;
+//    FeatureVector* patchVector;
     int binSize = 64;
-
-    FeatureMatrix* featureMatrix = createFeatureMatrix();
+    Image* firstImage = readImage(directoryManager->files[0]->path);
+    int patchX_axis = firstImage->nx/patchSize;
+    int patchY_axis = firstImage->ny/patchSize;
+    int numberPatchsPerImage = patchX_axis*patchY_axis;
+    int numberPatchs = numberPatchsPerImage*directoryManager->nfiles;
+    //FeatureMatrix* featureMatrix = createFeatureMatrix();
+    FeatureMatrix* featureMatrix = createFeatureMatrix(numberPatchs);
+    destroyImage(&firstImage);
     int k=0;
+
+//#pragma omp parallel for
     for (size_t fileIndex = 0; fileIndex < directoryManager->nfiles; ++fileIndex) {
-        currentImage = readImage(directoryManager->files[fileIndex]->path);
+        Image* currentImage = readImage(directoryManager->files[fileIndex]->path);
+
         for (int y = 0; y <= currentImage->ny-patchSize; y +=patchSize) {
             for (int x = 0; x <= currentImage->nx-patchSize; x += patchSize) {
-                patch = extractSubImage(currentImage,x,y,patchSize,patchSize,true);
-                histogram = computeHistogram(patch,binSize,true);
-                patchVector = createFeatureVector(histogram);
-                addNewLines(&featureMatrix,1);
-                featureMatrix->featureVector[k] = patchVector;
+                Image* patch = extractSubImage(currentImage,x,y,patchSize,patchSize,true);
+                featureMatrix->featureVector[k] = computeHistogramForFeatureVector(patch,binSize,true);
                 k++;
-                destroyHistogram(&histogram);
                 destroyImage(&patch);
             }
         }
