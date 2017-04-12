@@ -13,6 +13,7 @@
 #include "common.h"
 #include "file.h"
 #include "png.h"
+#include "jpeglib.h"
 /* Implementacoes vetoriais de uma imagem cinza 2D: inteira e double */
 
 typedef struct _grayImage { 
