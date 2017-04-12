@@ -4,14 +4,14 @@ CC = g++
 #FLAGS= -g -O0 -Wall -Wno-unused-result -std=gnu99 -pedantic
 FLAGS= -O3  -Wall -Wno-unused-result  -pedantic -fopenmp -Wno-write-strings -fsanitize=address
 #-std=gnu99
-FLLIB    = -L../lib -lFL -lm
+FLLIB    = -L../lib -lFL -lm -L./libpng/lib -lpng
 FLFLAGS  = -I../include
 
-libift:
+libFL:
 	cd ../; $(MAKE) ; cd -\
 
 
-$@.cpp: libft $@.cpp
+$@.cpp: libFL $@.cpp
 	make
 	$(CC) $(FLAGS) $@.cpp -o $(BIN)/$@ $(FLFLAGS) $(FLLIB) ; \
 
@@ -20,7 +20,7 @@ clean:
 	find . -type f -executable -exec rm '{}' \;
 
 cleanImages:
-	rm *.ppm *.pgm *.gif
+	rm *.ppm *.pgm *.gif *.png
 
 cleanText:
 	rm *.txt

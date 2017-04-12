@@ -1,9 +1,18 @@
+/*
+ *Created by Deangeli Gomes Neves
+ *
+ * This software may be freely redistributed under the terms
+ * of the MIT license.
+ *
+ */
+
+
 #ifndef _IMAGE_H_
 #define _IMAGE_H_
 
 #include "common.h"
 #include "file.h"
-
+#include "png.h"
 /* Implementacoes vetoriais de uma imagem cinza 2D: inteira e double */
 
 typedef struct _grayImage { 
@@ -42,10 +51,11 @@ typedef struct _colorimage {
 enum ColorSpace {
     UNKNOWN = 0,
     GRAYSCALE = 1,
-    RGB = 2,
-    RGBA = 4,
-    yCbCr = 8,
-    yCbCrA = 16,
+    GRAYSCALE_ALPHA = 2,
+    RGB = 4,
+    RGBA = 8,
+    yCbCr = 16,
+    yCbCrA = 32,
     HSV = 32,
     HSVA = 64
 };
@@ -56,11 +66,10 @@ enum DataType {
 };
 
 
-
-
 typedef struct _image {
     int   nx,ny,nz;    /* dimensoes da imagem */
     float dx,dy, dz;    /* tamanho do pixel em unidades de comprimento */
+    unsigned  char channelDepth;
     int numberPixels;
     float **channel; /*might be RGB, or Ycbcr*/
     int scalingFactor;
@@ -131,6 +140,7 @@ Image* createImage(int nx, int ny);
 void destroyImage(Image**image );
 Image *readImagePGM(char *filename);
 Image *readImagePPM(char *filename);
+Image *readImagePNG(char *filename);
 Image* readImage(char *filename);
 void writeImageP2(Image *image,char *filename);
 void writeImageP3(Image *image, char *filename);
@@ -138,6 +148,7 @@ void writeImageP5(Image *image, char *filename);
 void writeImageP6(Image *image, char *filename);
 void writeImagePGM(Image* image, char *filename,  char* magicNumber);
 void writeImagePPM(Image* image, char *filename,  char* magicNumber);
+void writeImagePNG(Image *image,char *filename);
 void writeImage(Image* image, char *filename);
 bool isValidPixelCoordinate(Image *image,int pixelCoordinateX,int pixelCoordinateY);
 Image *imageSubtraction(Image *image1, Image *image2, bool saturation);

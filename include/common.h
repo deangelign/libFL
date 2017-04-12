@@ -1,3 +1,11 @@
+/*
+ *Created by Deangeli Gomes Neves
+ *
+ * This software may be freely redistributed under the terms
+ * of the MIT license.
+ *
+ */
+
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
@@ -13,6 +21,7 @@
 #include <ctype.h>
 #include <stddef.h>
 #include <dirent.h>
+
 
 /* Error messages */
 

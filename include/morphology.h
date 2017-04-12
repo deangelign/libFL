@@ -1,6 +1,11 @@
-//
-// Created by deangeli on 3/15/17.
-//
+/*
+ *Created by Deangeli Gomes Neves
+ *
+ * This software may be freely redistributed under the terms
+ * of the MIT license.
+ *
+ */
+
 #include "image.h"
 #include "adjacencyRelation.h"
 

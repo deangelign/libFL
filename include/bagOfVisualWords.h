@@ -1,6 +1,10 @@
-//
-// Created by deangeli on 4/7/17.
-//
+/*
+ *Created by Deangeli Gomes Neves
+ *
+ * This software may be freely redistributed under the terms
+ * of the MIT license.
+ *
+ */
 
 #ifndef _BAGOFVISUALWORDS_H_
 #define _BAGOFVISUALWORDS_H_

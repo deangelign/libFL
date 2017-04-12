@@ -1,6 +1,10 @@
-//
-// Created by deangeli on 3/13/17.
-//
+/*
+ *Created by Deangeli Gomes Neves
+ *
+ * This software may be freely redistributed under the terms
+ * of the MIT license.
+ *
+ */
 
 #ifndef _HISTOGRAM_H_
 #define _HISTOGRAM_H_

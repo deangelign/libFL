@@ -1,6 +1,10 @@
-//
-// Created by deangeli on 3/27/17.
-//
+/*
+ *Created by Deangeli Gomes Neves
+ *
+ * This software may be freely redistributed under the terms
+ * of the MIT license.
+ *
+ */
 
 #ifndef _FEATUREVECTOR_H_
 #define _FEATUREVECTOR_H_

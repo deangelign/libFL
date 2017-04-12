@@ -3,10 +3,12 @@ INCLUDE=./include
 SRC=./src
 OBJ=./obj
 BIN=./bin
-
+FLLIBPNG = -L./externals/libpng/lib/ -lMpng -lm
+FLLIBPNGINCLUDES = externals/libpng/include
 
 #FLAGS= -g  -O0 -Wall -D _DEBUG -Wno-unused-result -fPIC -std=gnu99 -pedantic
 FLAGS=  -O3 -Wall -Wno-unused-result -fPIC  -pedantic -Wno-write-strings -fopenmp -fsanitize=address
+FLAGSIM = -I$(FLLIBPNGINCLUDES) $(FLAGS)
 #-std=gnu99
 
 libFL: $(LIB)/libFL.a
@@ -38,7 +40,7 @@ $(OBJ)/morphology.o \
 $(OBJ)/filtering.o \
 $(OBJ)/bagOfVisualWords.o \
 
-$(OBJ)/common.o: $(SRC)/common.cpp
+$(OBJ)/common.o: lpng  $(SRC)/common.cpp
 	$(CC) $(FLAGS) -c $(SRC)/common.cpp -I$(INCLUDE) \
 	-o $(OBJ)/common.o
 
@@ -63,7 +65,7 @@ $(OBJ)/kernel.o: $(SRC)/kernel.cpp
 	-o $(OBJ)/kernel.o
 
 $(OBJ)/image.o: $(SRC)/image.cpp
-	$(CC) $(FLAGS) -c $(SRC)/image.cpp -I$(INCLUDE) \
+	$(CC) $(FLAGSIM) -c $(SRC)/image.cpp -I$(INCLUDE) \
 	-o $(OBJ)/image.o
 
 $(OBJ)/histogram.o: $(SRC)/histogram.cpp
@@ -83,5 +85,11 @@ $(OBJ)/bagOfVisualWords.o: $(SRC)/bagOfVisualWords.cpp
 	$(CC) $(FLAGS) -c $(SRC)/bagOfVisualWords.cpp -I$(INCLUDE) \
 	-o $(OBJ)/bagOfVisualWords.o
 
+lpng:
+	cd externals/libpng; $(MAKE) ; cd -\
+
 clean:
-	rm $(LIB)/lib*.a; rm $(OBJ)/*.o;
+	rm $(LIB)/lib*.a; rm $(OBJ)/*.o
+
+cleanAll:
+	rm $(LIB)/lib*.a; rm $(OBJ)/*.o;cd externals/libpng; $(MAKE) clean; cd ..;cd zlib; $(MAKE) clean; cd -\

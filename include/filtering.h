@@ -1,6 +1,10 @@
-//
-// Created by deangeli on 3/22/17.
-//
+/*
+ *Created by Deangeli Gomes Neves
+ *
+ * This software may be freely redistributed under the terms
+ * of the MIT license.
+ *
+ */
 
 #ifndef _FILTERING_H_
 #define _FILTERING_H_

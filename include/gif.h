@@ -1,12 +1,4 @@
 //
-// Created by deangeli on 3/29/17.
-//
-
-#ifndef LIBFL_GIF_H_
-#define LIBFL_GIF_H_H
-
-
-//
 // gif.h
 // by Charlie Tangora
 // Public domain.
@@ -29,6 +21,10 @@
 // Pass subsequent frames to GifWriteFrame().
 // Finally, call GifEnd() to close the file handle and free memory.
 //
+
+
+#ifndef LIBFL_GIF_H_
+#define LIBFL_GIF_H_H
 
 #ifndef gif_h
 #define gif_h

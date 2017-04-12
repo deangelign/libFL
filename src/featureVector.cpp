@@ -142,6 +142,7 @@ void destroyFeatureMatrix(FeatureMatrix** featureMatrix){
         return ;
     }
     for (int i = 0; i < (*featureMatrix)->nFeaturesVectors; ++i) {
+        printf("miaus %d\n",i);
         destroyFeatureVector( &((*featureMatrix)->featureVector[i]) );
     }
     free((*featureMatrix)->featureVector);
@@ -165,8 +166,20 @@ void wirteFeatureMatrix(FeatureMatrix* featureMatrix, char *filename){
 
 void addNewLines(FeatureMatrix** featureMatrix, int numberNewLines){
     FeatureMatrix* aux = *featureMatrix;
+
+//    int numberLines = aux->nFeaturesVectors+numberNewLines;
+//    FeatureVector** copy = (FeatureVector**)calloc(numberLines,sizeof(FeatureVector*));
+//    for (int i = 0; i < aux->nFeaturesVectors; ++i) {
+//        copy[i] = aux->featureVector[i];
+//    }
+//    free(aux->featureVector);
+//    aux->featureVector = copy;
+//    aux->nFeaturesVectors = numberLines;
+
     int numberLines = aux->nFeaturesVectors+numberNewLines;
-    aux->featureVector = (FeatureVector**)realloc(aux->featureVector,(numberLines)*sizeof(FeatureVector*));
+    FeatureVector** newRows = (FeatureVector**)realloc(aux->featureVector,(numberLines)*sizeof(FeatureVector*));
+    aux->featureVector = newRows;
+    //aux->featureVector = (FeatureVector**)realloc(aux->featureVector,(numberLines)*sizeof(FeatureVector*));
     aux->nFeaturesVectors = numberLines;
 }
 

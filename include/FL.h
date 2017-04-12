@@ -14,4 +14,5 @@
 #include "bagOfVisualWords.h"
 
 
+
 #endif

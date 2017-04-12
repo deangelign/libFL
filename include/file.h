@@ -1,6 +1,10 @@
-//
-// Created by deangeli on 4/6/17.
-//
+/*
+ *Created by Deangeli Gomes Neves
+ *
+ * This software may be freely redistributed under the terms
+ * of the MIT license.
+ *
+ */
 
 #ifndef _FILE_H_
 #define _FILE_H_
