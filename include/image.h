@@ -53,12 +53,13 @@ enum ColorSpace {
     UNKNOWN = 0,
     GRAYSCALE = 1,
     GRAYSCALE_ALPHA = 2,
-    RGB = 4,
-    RGBA = 8,
-    yCbCr = 16,
-    yCbCrA = 32,
-    HSV = 32,
-    HSVA = 64
+    RGB = 3,
+    RGBA = 4,
+    YCbCr = 5,
+    YCbCrK = 6,
+    HSV = 7,
+    HSVA = 8,
+    CMYK = 9
 };
 
 enum DataType {
@@ -142,6 +143,7 @@ void destroyImage(Image**image );
 Image *readImagePGM(char *filename);
 Image *readImagePPM(char *filename);
 Image *readImagePNG(char *filename);
+Image *readImageJPEG(char *filename);
 Image* readImage(char *filename);
 void writeImageP2(Image *image,char *filename);
 void writeImageP3(Image *image, char *filename);
@@ -150,6 +152,7 @@ void writeImageP6(Image *image, char *filename);
 void writeImagePGM(Image* image, char *filename,  char* magicNumber);
 void writeImagePPM(Image* image, char *filename,  char* magicNumber);
 void writeImagePNG(Image *image,char *filename);
+void writeImageJPEG(Image *image,char *filename);
 void writeImage(Image* image, char *filename);
 bool isValidPixelCoordinate(Image *image,int pixelCoordinateX,int pixelCoordinateY);
 Image *imageSubtraction(Image *image1, Image *image2, bool saturation);

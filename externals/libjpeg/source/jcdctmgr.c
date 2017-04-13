@@ -16,6 +16,7 @@
 #include "jinclude.h"
 #include "jpeglib.h"
 #include "jdct.h"		/* Private declarations for DCT subsystem */
+#include "../include/jdct.h" /* Private declarations for DCT subsystem */
 
 
 /* Private subobject for this module */

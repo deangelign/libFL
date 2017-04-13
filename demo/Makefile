@@ -28,7 +28,7 @@ clean:
 	find . -type f -executable -exec rm '{}' \;
 
 cleanImages:
-	rm *.ppm *.pgm *.gif *.png
+	rm *.ppm *.pgm *.gif *.png *.jpg *.jpeg
 
 cleanText:
 	rm *.txt

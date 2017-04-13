@@ -34,7 +34,7 @@ $(OBJ)/jchuff.o \
 $(OBJ)/jcdctmgr.o \
 $(OBJ)/jfdctfst.o \
 $(OBJ)/jfdctflt.o \
-$(OBJ)/jfdctflt.o \
+$(OBJ)/jfdctint.o \
 $(OBJ)/jdapimin.o \
 $(OBJ)/jdapistd.o \
 $(OBJ)/jdarith.o \
@@ -83,7 +83,7 @@ $(OBJ)/jchuff.o \
 $(OBJ)/jcdctmgr.o \
 $(OBJ)/jfdctfst.o \
 $(OBJ)/jfdctflt.o \
-$(OBJ)/jfdctflt.o \
+$(OBJ)/jfdctint.o \
 $(OBJ)/jdapimin.o \
 $(OBJ)/jdapistd.o \
 $(OBJ)/jdarith.o \
