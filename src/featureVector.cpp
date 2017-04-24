@@ -142,7 +142,6 @@ void destroyFeatureMatrix(FeatureMatrix** featureMatrix){
         return ;
     }
     for (int i = 0; i < (*featureMatrix)->nFeaturesVectors; ++i) {
-        printf("miaus %d\n",i);
         destroyFeatureVector( &((*featureMatrix)->featureVector[i]) );
     }
     free((*featureMatrix)->featureVector);
