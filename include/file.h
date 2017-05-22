@@ -11,6 +11,7 @@
 
 #include "common.h"
 #include <sys/stat.h>
+#include "vector.h"
 
 #define SEP_C "/"
 
@@ -74,5 +75,10 @@ void destroyDirectoryManager(DirectoryManager **directoryManager);
 void destroyFileManager(FileManager **fileManager);
 void destroyFileSet(FileSet **farr);
 
+void findTrueLabelInCurrentDirectory(DirectoryManager *directoryManager);
+int findTrueLabelInName(char *pathname);
+
+
+GVector* splitsLinesInTextFile(const char* filename);
 
 #endif //LIBFL_FILE_H

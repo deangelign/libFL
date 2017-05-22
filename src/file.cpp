@@ -29,6 +29,47 @@ DirectoryManager *loadDirectory(const char *dir_pathname, size_t hier_levels) {
     return dir;
 }
 
+int findTrueLabelInName(char *pathname){
+    char *posLastSlash = NULL;
+    char *posLastUnderScore = NULL;
+    //char *posLastPoint = NULL;
+    char labelNumber[10];
+    int k = 0;
+    size_t nChars;
+    posLastSlash = strrchr(pathname,'/') +1;
+    posLastUnderScore = strrchr(pathname,'_');
+
+    if(posLastSlash == NULL && posLastUnderScore == NULL){
+        return -1;
+    }if(posLastSlash == NULL){
+        nChars = posLastUnderScore-pathname;
+        for (size_t i = 0; i < nChars; ++i) {
+            labelNumber[i] = pathname[i];
+            k++;
+        }
+        labelNumber[k] = '\0';
+        int label = atoi(labelNumber);
+        return label;
+    }
+
+    nChars = posLastUnderScore - posLastSlash;
+    for (size_t i = 0; i < nChars; ++i) {
+        labelNumber[i] = posLastSlash[i];
+        k++;
+    }
+    labelNumber[k] = '\0';
+    int label = atoi(labelNumber);
+    return label;
+}
+
+void findTrueLabelInCurrentDirectory(DirectoryManager *directoryManager){
+
+    for (size_t j = 0; j < directoryManager->nfiles; ++j) {
+        directoryManager->files[j]->label = findTrueLabelInName(directoryManager->files[j]->path);
+        printf("%d\n",directoryManager->files[j]->label);
+    }
+}
+
 bool pathnameExists(const char *pathname) {
     struct stat buffer;
     return (stat (pathname, &buffer) == 0);
@@ -341,7 +382,7 @@ void destroyFileManager(FileManager **fileManager) {
 }
 
 void destroyDirectoryManager(DirectoryManager **directoryManager) {
-    if (destroyDirectoryManager != NULL) {
+    if (*directoryManager != NULL) {
         DirectoryManager *dir_aux = *directoryManager;
 
         if (dir_aux != NULL) {
@@ -427,3 +468,35 @@ void destroyFileSet(FileSet **farr) {
 //
 //    return base;
 //}
+
+void destroyCharPointer(void* data){
+    char* aux = *((char**) data);
+    if(aux == NULL){
+        return;
+    }
+    free(aux);
+    data = NULL;
+    aux = NULL;
+}
+
+GVector* splitsLinesInTextFile(const char* filename){
+    size_t initalSize = 10;
+    GVector* vector = createVector(initalSize,sizeof(char*));
+    vector->freeFunction = destroyCharPointer;
+    FILE* file = fopen(filename, "r");
+    char line[256];
+    int index;
+    while (fgets(line, sizeof(line), file)) {
+        char* path = (char*)calloc(sizeof(line)+1,sizeof(char));
+        index = 0;
+        while(line[index] != '\n'){
+            path[index] = line[index];
+            index++;
+        }
+        path[index] = '\0';
+        VECTOR_PUSH_BACK(char*,vector,path);
+    }
+    shrinkToFit(vector);
+    return vector;
+}
+
