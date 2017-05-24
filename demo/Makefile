@@ -1,4 +1,5 @@
 COMPILER = $(CXX)
+#COMPILER = clang++
 
 #FLAGS= -g -O0 -Wall -Wno-unused-result -std=gnu99 -pedantic
 FLAGS=   -Wall -Wno-unused-result  -pedantic -Wno-write-strings -fsanitize=address -g -fopenmp
@@ -19,8 +20,8 @@ FLAGSIM =  $(FLLIBPNGINCLUDES) $(FLLIBJPEGINCLUDES) $(FLLIBSVMINCLUDES) -I../inc
 libFL:
 	cd ../; $(MAKE) ; cd demo\
 
-
 $@.cpp: libFL $@.cpp
+	make
 	$(COMPILER) $(FLAGSIM) $@.cpp -o $@.bin  $(LINKER); \
 
 #Removing everything without an extension

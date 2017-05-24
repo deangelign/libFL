@@ -43,7 +43,10 @@ static void print_string_stdout(const char *s)
 	fputs(s,stdout);
 	fflush(stdout);
 }
-static void (*svm_print_string) (const char *) = &print_string_stdout;
+void print_null(const char *s) {};
+
+static void (*svm_print_string) (const char *) = &print_null;
+//static void (*svm_print_string) (const char *) = &print_string_stdout;
 #if 1
 static void info(const char *fmt,...)
 {

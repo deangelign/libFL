@@ -3,6 +3,7 @@
 int main(int argc, char **argv) {
     size_t numberOfVisualWords = 500;
 
+
     //Caminhos onde esta o arquivo txt gerado pelo o script python "selec_samples2.py"
     //os caminhos vao mudar para cada pessoa
     char const* const fileName_createDict = "/home/deangeli/databases/train_paths.txt";
@@ -54,8 +55,8 @@ int main(int argc, char **argv) {
     //Note que o cabecalho geral para a funcao de sammpling e
     //GVector* minhaFuncaoDeSampling(Image* image, BagOfVisualWordsManager* bagOfVisualWordsManager);
     ArgumentList* gridSamplingArguments = createArgumentList();
-    ARGLIST_PUSH_BACK_AS(size_t,gridSamplingArguments,32); //patch size X
-    ARGLIST_PUSH_BACK_AS(size_t,gridSamplingArguments,32); //patch size Y
+    ARGLIST_PUSH_BACK_AS(size_t,gridSamplingArguments,64); //patch size X
+    ARGLIST_PUSH_BACK_AS(size_t,gridSamplingArguments,64); //patch size Y
     bowManager->argumentListOfSampler = gridSamplingArguments;//passando a lista de argumentos para o bow manager
     //////////////////////////////////////////////////////////
 
@@ -81,8 +82,9 @@ int main(int argc, char **argv) {
     //Note que o cabecalho geral para a funcao do extrator e
     //Matrix* MinhaFuncaoFeatureExtractor(GVector* outputSampler, BagOfVisualWordsManager* bagOfVisualWordsManager);
     ArgumentList* colorFeatureExtractorArguments = createArgumentList();
-    ARGLIST_PUSH_BACK_AS(size_t,colorFeatureExtractorArguments,7); //nBins per channel
-    ARGLIST_PUSH_BACK_AS(size_t,colorFeatureExtractorArguments,7*7*7); //total number of channels
+    size_t nbins = 7;
+    ARGLIST_PUSH_BACK_AS(size_t,colorFeatureExtractorArguments,nbins); //nBins per channel
+    ARGLIST_PUSH_BACK_AS(size_t,colorFeatureExtractorArguments,nbins*nbins*nbins); //total number of channels
     bowManager->argumentListOfFeatureExtractor = colorFeatureExtractorArguments; //passando a lista de argumentos do feature extractor para o bow manager
     ///////////////////////////////////////
 
@@ -132,15 +134,15 @@ int main(int argc, char **argv) {
     //podera ser usado internamente dentro do bow manager.
 
     //knn
-    Knn_Classifier* classifierknn = createKnnClassifier();
-    classifierknn->k = 1;
-    classifierknn->nlabels = 100;
-    bowManager->classifier = (void*)classifierknn;
-    bowManager->fitFunction = knn_Classifier_fit;
-    bowManager->storeTrainData = false;
-    bowManager->predictFunction = knn_Classifier_predict;
-    bowManager->storePredictedData = false;
-    bowManager->freeFunctionClassifier = destroyKnnClassifierForVoidPointer;
+//    Knn_Classifier* classifierknn = createKnnClassifier();
+//    classifierknn->k = 1;
+//    classifierknn->nlabels = 100;
+//    bowManager->classifier = (void*)classifierknn;
+//    bowManager->fitFunction = knn_Classifier_fit;
+//    bowManager->storeTrainData = false;
+//    bowManager->predictFunction = knn_Classifier_predict;
+//    bowManager->storePredictedData = false;
+//    bowManager->freeFunctionClassifier = destroyKnnClassifierForVoidPointer;
 
 
     //"kmeans classifier"
@@ -152,6 +154,18 @@ int main(int argc, char **argv) {
 //    bowManager->predictFunction = kmeans_Classifier_predict;
 //    bowManager->storePredictedData = false;
 //    bowManager->freeFunctionClassifier = destroyKmeansClassifierForVoidPointer;
+
+
+    //SVM Classifier
+    SVM_Classifier* classifiersvm = createSVMClassifier();
+    classifiersvm->param.kernel_type = RBF;
+    classifiersvm->param.gamma = 3.5;
+    bowManager->classifier = (void*)classifiersvm;
+    bowManager->fitFunction = svm_Classifier_fit;
+    bowManager->storeTrainData = false;
+    bowManager->predictFunction = svm_Classifier_predict;
+    bowManager->storePredictedData = false;
+    bowManager->freeFunctionClassifier = destroySVMClassifierForVoidPointer;
     //////////////////////////////////////
 
     ///////
@@ -170,23 +184,26 @@ int main(int argc, char **argv) {
     //computa uma simples acuracia (numero de amostras rotuladas corretamente / numero de amostras do conjunto)
     GVector* trueLabels = createNullVector(bowManager->pathsToImages_test->size,sizeof(int));
     int hit = 0;
-    printf("file | predicted true\n");
+    printf("file | predicted true\t\tcorrect\n");
+    char symbol;
     for (size_t index = 0; index < bowManager->pathsToImages_test->size; ++index) {
+        symbol = 'X';
         char * path = VECTOR_GET_ELEMENT_AS(char*,bowManager->pathsToImages_test,index);
         VECTOR_GET_ELEMENT_AS(int,trueLabels,index) = findTrueLabelInName(path);
         if(VECTOR_GET_ELEMENT_AS(int,trueLabels,index) == VECTOR_GET_ELEMENT_AS(int,labelsPredicted,index)){
             hit++;
+            symbol = 'O';
         }
-        printf("%s | %d %d\n",
+        printf("%s | %d %d\t\t%c\n",
                path,
                VECTOR_GET_ELEMENT_AS(int,labelsPredicted,index),
-               VECTOR_GET_ELEMENT_AS(int,trueLabels,index)
+               VECTOR_GET_ELEMENT_AS(int,trueLabels,index),symbol
         );
     }
     double acuracia = ((double)hit)/bowManager->pathsToImages_test->size;
     printf("acuracia: %f\n",acuracia);
     /////////////////////////////////////
-
+//
     destroyBagOfVisualWordsManager(&bowManager);
     destroyVector(&trueLabels);
     destroyVector(&labelsPredicted);

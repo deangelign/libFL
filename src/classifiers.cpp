@@ -197,43 +197,47 @@ void setSVMDefaultParameters(SVM_Classifier* svmClassifier){
     svmClassifier->param.nr_weight = 0;
     svmClassifier->param.weight_label = NULL;
     svmClassifier->param.weight = NULL;
-    svmClassifier->cross_validation = 0;
+    svmClassifier->crossValidation = false;
+    svmClassifier->nfolds_crossValidation = 2;
     svmClassifier->useSparseDataRepresentation = false;
     svmClassifier->isClassification = true;
     svmClassifier->predict_probability = false;
 }
 
 int convertOriginalDataFormat2SvmFormatTrain(double* X,
-                                         size_t nrows,size_t ncols, double* Y,
-                                         struct svm_problem prob,
-                                         struct svm_node *x_space){
+                                             size_t nrows,size_t ncols, double* Y,
+                                             struct svm_problem* prob,
+                                             struct svm_node **x_data){
     size_t nElements = 0;
     size_t k;
     nElements = nrows*ncols;
-    prob.y = (double*)calloc(prob.l,sizeof(double));
-    prob.x = (struct svm_node **)calloc(prob.l,sizeof(struct svm_node *));
+    prob->l = nrows;
+    prob->y = (double*)calloc(prob->l,sizeof(double));
+    prob->x = (struct svm_node **)calloc(prob->l,sizeof(struct svm_node *));
     //every line must include -1 for this reason it is added prob.l
-    x_space = (struct svm_node*)calloc(nElements+prob.l,sizeof(struct svm_node));
+    (*x_data) = (struct svm_node*)calloc(nElements+prob->l,sizeof(struct svm_node));
     int j = 0;
     k = 0;
     int inst_max_index = 0;
     int max_index = 0;
     for (size_t row = 0; row < nrows; ++row) {
-        prob.x[row] = &x_space[j];
-        prob.y[row] = Y[row];
+        prob->x[row] = &(*x_data)[j];
+        prob->y[row] = Y[row];
         for (size_t col = 0; col < ncols; ++col) {
-            x_space[j].index = (int) col;
-            inst_max_index = (int) col;
-            x_space[j].value = (double) X[k];
+            (*x_data)[j].index = col+1;
+            inst_max_index =  col+1;
+            (*x_data)[j].value = (double) X[k];
+            //printf("%d %f %f\n",k,X[k],(*x_data)[j].value);
             j++;
             k++;
         }
         if(inst_max_index > max_index){
             max_index = inst_max_index;
         }
-        x_space[j].index = -1;
+        (*x_data)[j].index = -1;
         j++;
     }
+
     return max_index;
 }
 
@@ -241,47 +245,54 @@ int convertOriginalDataFormat2SvmFormatTrain(double* X,
 
 
 int convertOriginalDataFormat2SvmFormatTrain_usingSparseRepresentation(double* X,
-                                                                   size_t nrows,size_t ncols, double* Y,
-                                                                   struct svm_problem prob,
-                                                                   struct svm_node *x_space){
-    int max_index = 0;
-    size_t nElements = nrows*ncols;
-    size_t nzeros = 0;
-    size_t k;
-    for (k = 0; k < nrows*ncols; ++k) {
-        if( isAlmostZero(X[k]) ){
-            nzeros++;
-        }
-    }
-    nElements -= nzeros;
-    prob.y = (double*)calloc(prob.l,sizeof(double));
-    prob.x = (struct svm_node **)calloc(prob.l,sizeof(struct svm_node *));
-    //every line must include -1 for this reason it is added prob.l
-    x_space = (struct svm_node*)calloc(nElements+prob.l,sizeof(struct svm_node));
-    int j = 0;
-    k = 0;
-    int inst_max_index = 0;
-
-    for (size_t row = 0; row < nrows; ++row) {
-        prob.x[row] = &x_space[j];
-        prob.y[row] = Y[row];
-        for (size_t col = 0; col < ncols; ++col) {
-            if( isAlmostZero(X[k]) ){
-                continue;
-            }
-            x_space[j].index = (int) col;
-            inst_max_index = (int) col;
-            x_space[j].value = (double) X[k];
-            j++;
-            k++;
-        }
-        if(inst_max_index > max_index){
-            max_index = inst_max_index;
-        }
-        x_space[j].index = -1;
-        j++;
-    }
-    return max_index;
+                                                                       size_t nrows,size_t ncols, double* Y,
+                                                                       struct svm_problem* prob,
+                                                                       struct svm_node **x_data){
+//    int max_index = 0;
+//    size_t nElements = nrows*ncols;
+//    size_t nzeros = 0;
+//    size_t k;
+//    for (k = 0; k < nrows*ncols; ++k) {
+//        if( isAlmostZero(X[k]) ){
+//            nzeros++;
+//        }
+//    }
+//    prob->l = nrows;
+//    nElements -= nzeros;
+//    prob->y = (double*)calloc(prob->l,sizeof(double));
+//    prob->x = (struct svm_node **)calloc(prob->l,sizeof(struct svm_node *));
+//    //every line must include -1 for this reason it is added prob.l
+//    (*x_data) = (struct svm_node*)calloc(nElements+prob->l,sizeof(struct svm_node));
+//    int j = 0;
+//    k = 0;
+//    int inst_max_index = 0;
+//
+//    for (size_t row = 0; row < nrows; ++row) {
+//        prob->x[row] = &((*x_data)[j]);
+//        prob->y[row] = Y[row];
+//        for (size_t col = 0; col < ncols; ++col) {
+//            if( isAlmostZero(X[k]) ){
+//                k++;
+//                continue;
+//            }
+//            printf("%lu:%f\n",col+1,X[k]);
+//            (*x_data)[j].index = col+1;
+//            inst_max_index = col+1;
+//            (*x_data)[j].value = X[k];
+//            printf("%f %f %lu:%f\n",(*x_data)[j].index,(*x_data)[j].value,col+1,X[k]);
+//            j++;
+//            k++;
+//        }
+//        if(inst_max_index > max_index){
+//            max_index = inst_max_index;
+//        }
+//        (*x_data)[j].index = -1;
+//        j++;
+//    }
+//
+//
+//    return max_index;
+    return 0;
 }
 
 //based on svm-train.c
@@ -289,155 +300,343 @@ void svmClassifierFit(SVM_Classifier* svmClassifier,double* X, size_t nrows,size
                       double* Y){
 
     /////////////// read in a problem (in svmlight format)
-//    struct svm_problem prob;		// set by read_problem
-//    struct svm_node *x_space;
-//    int max_index = 0;
-//    prob.l = nrows;
-//    size_t nElements = 0;
-//    if(svmClassifier->useSparseDataRepresentation){
-//        max_index = convertOriginalDataFormat2SvmFormatTrain_usingSparseRepresentation(X,nrows,ncols,Y, prob,x_space);
-//    }else{
-//        max_index = convertOriginalDataFormat2SvmFormatTrain(X,nrows,ncols,Y, prob,x_space);
-//    }
-//    if(svmClassifier->param.gamma == 0 && max_index > 0){
-//        svmClassifier->param.gamma = 1.0/max_index;
-//    }
-//
-//    if(svmClassifier->param.kernel_type == PRECOMPUTED){
-//        for(int i=0;i<prob.l;i++)
-//        {
-//            if (prob.x[i][0].index != 0)
-//            {
-//                fprintf(stderr,"Wrong input format: first column must be 0:sample_serial_number\n");
-//                exit(1);
-//            }
-//            if ((int)prob.x[i][0].value <= 0 || (int)prob.x[i][0].value > max_index)
-//            {
-//                fprintf(stderr,"Wrong input format: sample_serial_number out of range\n");
-//                exit(1);
-//            }
-//        }
-//    }
-//    /////////////// end read in a problem (in svmlight format)
-//
-//    if(svmClassifier->cross_validation){
-//        doCrossValidationOnSVM2FindParameters(svmClassifier);
-//    }else{
-//        if(svmClassifier->model){
-//            svm_free_and_destroy_model(&svmClassifier->model);
-//        }
-//        svmClassifier->model = svm_train(&(prob),&(svmClassifier->param));
-//        //svm_destroy_param(&svmClassifier->param);
-//        free(prob.y);
-//        free(prob.x);
-//        free(x_space);
-//    }
+    int max_index = 0;
+    int inst_max_index=0;
+    int nElements;
+    int k = 0;
+    int j = 0;
+    if(svmClassifier->x_space){
+        free(svmClassifier->x_space);
+    }
+
+    if(svmClassifier->useSparseDataRepresentation){
+        nElements = nrows*ncols;
+        int nzeros=0;
+        for (int element = 0; element < nElements; ++element) {
+            if(isAlmostZero(X[element])){
+                nzeros++;
+            }
+        }
+        svmClassifier->prob.l = nrows;
+        svmClassifier->prob.y = (double*)calloc(nrows,sizeof(double));
+        svmClassifier->prob.x = (struct svm_node **)calloc(nrows,sizeof(struct svm_node *));
+        svmClassifier->x_space = (struct svm_node*)calloc(nElements+nrows,sizeof(struct svm_node));
+        k=0;
+        j=0;
+        for (size_t row = 0; row < nrows; ++row) {
+            inst_max_index = -1;
+            svmClassifier->prob.x[row] = &(svmClassifier->x_space[j]);
+            svmClassifier->prob.y[row] = Y[row];
+            for (size_t col = 0; col < ncols; ++col) {
+                if(isAlmostZero(X[k])){
+                    k++;
+                    continue;
+                }
+                svmClassifier->x_space[j].index = col+1;
+                svmClassifier->x_space[j].value = X[k];
+                inst_max_index = col+1;
+                k++;
+                j++;
+            }
+            if(inst_max_index > max_index){
+                max_index = inst_max_index;
+            }
+            svmClassifier->x_space[j].index = -1;
+            svmClassifier->x_space[j].value = 0.0;
+            j++;
+        }
+
+    }else{
+        nElements = nrows*ncols;
+        svmClassifier->prob.l = nrows;
+        svmClassifier->prob.y = (double*)calloc(nrows,sizeof(double));
+        svmClassifier->prob.x = (struct svm_node **)calloc(nrows,sizeof(struct svm_node *));
+        svmClassifier->x_space = (struct svm_node*)calloc(nElements+nrows,sizeof(struct svm_node));
+        k=0;
+        j=0;
+        for (size_t row = 0; row < nrows; ++row) {
+            inst_max_index = -1;
+            svmClassifier->prob.x[row] = &(svmClassifier->x_space[j]);
+            svmClassifier->prob.y[row] = Y[row];
+            for (size_t col = 0; col < ncols; ++col) {
+                svmClassifier->x_space[j].index = col+1;
+                svmClassifier->x_space[j].value = X[k];
+                k++;
+                j++;
+            }
+            svmClassifier->x_space[j].index = -1;
+            svmClassifier->x_space[j].value = 0.0;
+            j++;
+        }
+
+        max_index = ncols+1;
+    }
+    if(svmClassifier->param.gamma == 0 && max_index > 0){
+        svmClassifier->param.gamma = 1.0/max_index;
+    }
+
+    if(svmClassifier->param.kernel_type == PRECOMPUTED){
+        for(size_t i=0;i<nrows;i++)
+        {
+            if (svmClassifier->prob.x[i][0].index != 0)
+            {
+                fprintf(stderr,"Wrong input format: first column must be 0:sample_serial_number\n");
+                exit(1);
+            }
+            if ((int)svmClassifier->prob.x[i][0].value <= 0 || (int)svmClassifier->prob.x[i][0].value > max_index)
+            {
+                fprintf(stderr,"Wrong input format: sample_serial_number out of range\n");
+                exit(1);
+            }
+        }
+    }
+    /////////////// end read in a problem (in svmlight format)
+    if(svmClassifier->crossValidation){
+        do_cross_validation_SVM(svmClassifier);
+    }
+
+
+    svmClassifier->model = svm_train(&svmClassifier->prob,&svmClassifier->param);
+    free(svmClassifier->prob.y);
+    free(svmClassifier->prob.x);
+    //free(svmClassifier->x_space);
+
 
 }
 
-void convertOriginalDataFormat2SvmFormatPredict(double* X, size_t nrows,size_t ncols,
-                                                struct svm_node *x_space){
-    size_t nElements = 0;
+double* predictLabelsLineByLine_SVM(SVM_Classifier* svmClassifier,
+                                    double* X, size_t nrows,size_t ncols){
+    double* prob_estimates = NULL;
+    int svm_type=svm_get_svm_type(svmClassifier->model);
+    int nr_class=svm_get_nr_class(svmClassifier->model);
+    double *predictedLabels = (double*)calloc(nrows,sizeof(double));
+    if(svmClassifier->predict_probability)
+    {
+        if (svm_type==NU_SVR || svm_type==EPSILON_SVR){
+            printf("[svmClassifierPredict] Prob. model for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=%g\n",svm_get_svr_probability(svmClassifier->model));
+        }
+        else
+        {
+            //int *labels=(int *) malloc(nr_class*sizeof(int));
+            //svm_get_labels(svmClassifier->model,labels);
+            prob_estimates = (double *) malloc(nr_class*sizeof(double));
+            //free(labels);
+        }
+    }
+    struct svm_node *x_dataRow;
     size_t k;
-    nElements = nrows*ncols;
-    //every line must include -1 for this reason it is added nrows
-    x_space = (struct svm_node*)calloc(nElements+nrows,sizeof(struct svm_node));
+    double predict_label;
+    //the last node should be -1 for this reason it is added a column
+    x_dataRow = (struct svm_node*)calloc(ncols+1,sizeof(struct svm_node));
     int j = 0;
     k = 0;
     for (size_t row = 0; row < nrows; ++row) {
+        j = 0;
+        //insert row information to node
         for (size_t col = 0; col < ncols; ++col) {
-            x_space[j].index = (int) col;
-            x_space[j].value = (double) X[k];
+            x_dataRow[j].index = col+1;
+            x_dataRow[j].value = (double) X[k];
             j++;
             k++;
         }
-        x_space[j].index = -1;
-        j++;
+        x_dataRow[j].index = -1;
+        if (svmClassifier->predict_probability && (svm_type == C_SVC || svm_type == NU_SVC)){
+            predict_label = svm_predict_probability(svmClassifier->model,x_dataRow,prob_estimates);
+            predictedLabels[row] = predict_label;
+        }else{
+            predict_label = svm_predict(svmClassifier->model,x_dataRow);
+            predictedLabels[row] = predict_label;
+        }
     }
+    if(svmClassifier->predict_probability){
+        free(prob_estimates);
+    }
+    free(x_dataRow);
+    return predictedLabels;
+}
+
+double* predictLabelsLineByLineUsingSparseRepresentation_SVM(SVM_Classifier* svmClassifier,
+                                                             double* X, size_t nrows,size_t ncols){
+    double* prob_estimates = NULL;
+    int svm_type=svm_get_svm_type(svmClassifier->model);
+    int nr_class=svm_get_nr_class(svmClassifier->model);
+    double *predictedLabels = (double*)calloc(nrows,sizeof(double));
+    if(svmClassifier->predict_probability)
+    {
+        if (svm_type==NU_SVR || svm_type==EPSILON_SVR){
+            printf("[svmClassifierPredict] Prob. model for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=%g\n",svm_get_svr_probability(svmClassifier->model));
+        }
+        else
+        {
+            //int *labels=(int *) malloc(nr_class*sizeof(int));
+            //svm_get_labels(svmClassifier->model,labels);
+            prob_estimates = (double *) malloc(nr_class*sizeof(double));
+            //free(labels);
+        }
+    }
+    struct svm_node *x_dataRow;
+    size_t k;
+    double predict_label;
+    //the last node should be -1 for this reason it is added a column
+    x_dataRow = (struct svm_node*)calloc(ncols+1,sizeof(struct svm_node));
+    int j = 0;
+    k = 0;
+    for (size_t row = 0; row < nrows; ++row) {
+        j = 0;
+        //insert row information to node
+        for (size_t col = 0; col < ncols; ++col) {
+            if(isAlmostZero(X[k])){
+                k++;
+                continue;
+            }
+            x_dataRow[j].index = col+1;
+            x_dataRow[j].value = (double) X[k];
+            j++;
+            k++;
+        }
+        x_dataRow[j].index = -1;
+
+        if (svmClassifier->predict_probability && (svm_type == C_SVC || svm_type == NU_SVC)){
+            predict_label = svm_predict_probability(svmClassifier->model,x_dataRow,prob_estimates);
+            predictedLabels[row] = predict_label;
+        }else{
+            predict_label = svm_predict(svmClassifier->model,x_dataRow);
+            predictedLabels[row] = predict_label;
+        }
+    }
+    if(svmClassifier->predict_probability){
+        free(prob_estimates);
+    }
+    free(x_dataRow);
+    return predictedLabels;
+
 }
 
 //based on svm-predict.c
-void svmClassifierPredict(SVM_Classifier* svmClassifier,double* X, size_t nrows,size_t ncols){
-//    struct svm_node *x;
-
-//    if(svmClassifier->predict_probability)
-//    {
-//        if(svm_check_probability_model(svmClassifier->model)==0)
-//        {
-//            printf("[svmClassifierPredict] Model does not support probabiliy estimates\n");
-//            return;
-//        }
-//    }
-//    else
-//    {
-//        if(svm_check_probability_model(svmClassifier->model)!=0)
-//            printf("[svmClassifierPredict] Model supports probability estimates, but disabled in prediction.\n");
-//    }
-//    int svm_type=svm_get_svm_type(svmClassifier->model);
-//    int nr_class=svm_get_nr_class(svmClassifier->model);
-//    double *prob_estimates=NULL;
-//    int j;
-//    if(svmClassifier->predict_probability)
-//    {
-//        if (svm_type==NU_SVR || svm_type==EPSILON_SVR){
-//            printf("[svmClassifierPredict] Prob. model for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma=%g\n",svm_get_svr_probability(svmClassifier->model));
-//        }
-//        else
-//        {
-//            int *labels=(int *) malloc(nr_class*sizeof(int));
-//            svm_get_labels(svmClassifier->model,labels);
-//            prob_estimates = (double *) malloc(nr_class*sizeof(double));
-//            free(labels);
-//        }
-//    }
+double* svmClassifierPredict(SVM_Classifier* svmClassifier,double* X, size_t nrows,size_t ncols){
 
 
-
+    if(svmClassifier->predict_probability)
+    {
+        if(svm_check_probability_model(svmClassifier->model)==0)
+        {
+            printf("[svmClassifierPredict] Model does not support probabiliy estimates\n");
+            return NULL;
+        }
+    }
+    else
+    {
+        if(svm_check_probability_model(svmClassifier->model)!=0) {
+            printf("[svmClassifierPredict] Model supports probability estimates, but disabled in prediction.\n");
+        }
+    }
+    double* predictedData = NULL;
+    if(svmClassifier->useSparseDataRepresentation){
+        predictedData = predictLabelsLineByLineUsingSparseRepresentation_SVM(svmClassifier,X,nrows,ncols);
+    }else{
+        predictedData = predictLabelsLineByLine_SVM(svmClassifier,X,nrows,ncols);
+    }
+    return predictedData;
 }
 
-//based on svm-train.c
-void doCrossValidationOnSVM2FindParameters(SVM_Classifier* svmClassifier){
-    printf("[doCrossValidationOnSVM2FindParameters] the methos is not working yet\n");
-//    int total_correct = 0;
-//    double total_error = 0;
-//    double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
-//    double *target = (double*)calloc(prob.l,sizeof(double));
-//    svm_cross_validation(&prob,&svmClassifier->param,svmClassifier->nr_fold,target);
-//    if(svmClassifier->param.svm_type == EPSILON_SVR ||
-//            svmClassifier->param.svm_type == NU_SVR)
-//    {
-//        for(i=0;i<prob.l;i++)
-//        {
-//            double y = prob.y[i];
-//            double v = target[i];
-//            total_error += (v-y)*(v-y);
-//            sumv += v;
-//            sumy += y;
-//            sumvv += v*v;
-//            sumyy += y*y;
-//            sumvy += v*y;
-//        }
-//        printf("Cross Validation Mean squared error = %g\n",total_error/prob.l);
-//        printf("Cross Validation Squared correlation coefficient = %g\n",
-//               ((prob.l*sumvy-sumv*sumy)*(prob.l*sumvy-sumv*sumy))/
-//               ((prob.l*sumvv-sumv*sumv)*(prob.l*sumyy-sumy*sumy))
-//        );
-//    }
-//    else
-//    {
-//        for(i=0;i<prob.l;i++)
-//            if(target[i] == prob.y[i])
-//                ++total_correct;
-//        printf("Cross Validation Accuracy = %g%%\n",100.0*total_correct/prob.l);
-//    }
-//        free(target);
-
+void destroySVMClassifier(SVM_Classifier** svmClassifier){
+    if( (*svmClassifier)->model ){
+        svm_free_and_destroy_model(&(*svmClassifier)->model);
+    }
+    if( (*svmClassifier)->param.weight  ||  (*svmClassifier)->param.weight_label){
+        svm_destroy_param(&(*svmClassifier)->param);
+    }
+    if( (*svmClassifier)->x_space){
+        free((*svmClassifier)->x_space);
+    }
+    free((*svmClassifier));
+    (*svmClassifier) = NULL;
 }
 
+void destroySVMClassifierForVoidPointer(void* psvmClassifier){
+    SVM_Classifier* aux = ((SVM_Classifier*)psvmClassifier);
+    destroySVMClassifier(&aux);
+    psvmClassifier = NULL;
+}
 
+void svm_Classifier_fit(Matrix* matrix, GVector* vector,void* svmClassifier){
+    SVM_Classifier* classifier = (SVM_Classifier*)svmClassifier;
+    double* data = (double*)calloc(matrix->numberElements,sizeof(double));
+    double* labels = (double*)calloc(matrix->numberRows,sizeof(double));
+    int k = 0;
+    for (size_t row = 0; row < matrix->numberRows; ++row) {
+        labels[row] = VECTOR_GET_ELEMENT_AS(int,vector,row);
+        for (size_t col = 0; col < matrix->numberColumns; ++col) {
+            data[k] = MATRIX_GET_ELEMENT_PO_AS(float,matrix,row,col);
+            k++;
+        }
+    }
 
+    svmClassifierFit(classifier,data,matrix->numberRows,matrix->numberColumns,labels);
+    free(data);
+    free(labels);
+}
 
+GVector* svm_Classifier_predict(Matrix* matrix,void* svmClassifier){
+    SVM_Classifier* classifier = (SVM_Classifier*)svmClassifier;
+    double* data = (double*)calloc(matrix->numberElements,sizeof(double));
+    for (size_t k = 0; k < matrix->numberElements; ++k) {
+        data[k] = (double)MATRIX_GET_ELEMENT_BI_AS(float,matrix,k);
+    }
 
+    double* predictedLabels = svmClassifierPredict(classifier,data,matrix->numberRows,matrix->numberColumns);
+    GVector* predictedLabels_int = NULL;
+    if(predictedLabels){
+        predictedLabels_int = createNullVector(matrix->numberRows,sizeof(int));
+        for (size_t row = 0; row < matrix->numberRows; ++row) {
+            VECTOR_GET_ELEMENT_AS(int,predictedLabels_int,row) = (predictedLabels[row]+0.1);
+        }
+
+    }
+    free(data);
+    free(predictedLabels);
+    return predictedLabels_int;
+}
+
+void do_cross_validation_SVM(SVM_Classifier* svmClassifier)
+{
+    int i;
+    int total_correct = 0;
+    double total_error = 0;
+    double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
+    double *target = Malloc(double,svmClassifier->prob.l);
+
+    svm_cross_validation(&svmClassifier->prob,&svmClassifier->param,
+                         svmClassifier->nfolds_crossValidation,target);
+    if(svmClassifier->param.svm_type == EPSILON_SVR ||
+            svmClassifier->param.svm_type == NU_SVR)
+    {
+        for(i=0;i<svmClassifier->prob.l;i++)
+        {
+            double y = svmClassifier->prob.y[i];
+            double v = target[i];
+            total_error += (v-y)*(v-y);
+            sumv += v;
+            sumy += y;
+            sumvv += v*v;
+            sumyy += y*y;
+            sumvy += v*y;
+        }
+        printf("Cross Validation Mean squared error = %g\n",total_error/svmClassifier->prob.l);
+        printf("Cross Validation Squared correlation coefficient = %g\n",
+               ((svmClassifier->prob.l*sumvy-sumv*sumy)*(svmClassifier->prob.l*sumvy-sumv*sumy))/
+               ((svmClassifier->prob.l*sumvv-sumv*sumv)*(svmClassifier->prob.l*sumyy-sumy*sumy))
+        );
+    }
+    else
+    {
+        for(i=0;i<svmClassifier->prob.l;i++)
+            if(target[i] == svmClassifier->prob.y[i])
+                ++total_correct;
+        printf("Cross Validation Accuracy = %g%%\n",100.0*total_correct/svmClassifier->prob.l);
+    }
+    free(target);
+}
 
 
 
