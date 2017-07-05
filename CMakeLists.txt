@@ -32,7 +32,7 @@ option (USE_OPENMP "Use OpenMP for multithreading" ON)
  
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
  
-include_directories(include src .)
+include_directories(include src externals/*/*/* .)
 message(Compiler: "${CMAKE_CXX_COMPILER_ID}")
 
 message(Compiler: "${CMAKE_C_COMPILER_ID}")
@@ -40,7 +40,7 @@ message(Compiler: "${CMAKE_C_COMPILER_ID}")
 aux_source_directory(${libFL_SOURCE_DIR}/src LIBFL_SRC)
  
 file(GLOB LIBFL_INCLUDE
-    ${libfl_SOURCE_DIR}/include/*.h)
+    ${libfl_SOURCE_DIR}/include/*.h {libfl_SOURCE_DIR}/externals/libpng/include/*.h {libfl_SOURCE_DIR}/externals/libjpeg/include/*.h {libfl_SOURCE_DIR}/externals/libtiff/include/*.h)
  
 
 message(STATUS "LIBFL library")

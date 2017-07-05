@@ -74,6 +74,15 @@ inline double computeNormalizedL2Norm(float* vector1,float* vector2, size_t  num
     return computeNormalizedL2Norm(vector1,vector2,numberElements);
 }
 
+typedef double (*InverseDistanceFunction)(double distance);
+
+inline double computeInverseDistanceUsingExponential(double distance){
+    return exp(-distance);
+}
+
+inline double computeInverseDistanceUsingInverseX(double distance){
+    return 1.0/(distance + 0.00000001);
+}
 
 
 #endif //LIBFL_DISTANCEFUNCTIONS_H

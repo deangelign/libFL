@@ -43,7 +43,9 @@ int main(int argc, char **argv) {
     }
     printf("\n");
 
-    stackVerticallyMatrices(&matrix1,matrix2);
+    Matrix* matrixAux = stackVerticallyMatrices(matrix1,matrix2);
+    destroyMatrix(&matrix1);
+    matrix1 = matrixAux;
 
     for (size_t i = 0; i < matrix1->numberRows ; ++i) {
         for (size_t j = 0; j < matrix1->numberColumns; ++j) {
@@ -62,8 +64,23 @@ int main(int argc, char **argv) {
         }
         printf("\n");
     }
-
     printf("\n");
+
+    swapMatrixRows(matrix1,0,matrix1->numberRows-1);
+    MATRIX_PRINT_AS(float,"%f ",matrix1);
+    printf("%lu %lu\n",matrix1->numberRows, matrix1->numberColumns);
+    printf("\n");
+    removeMatrixRow(matrix1, 2);
+    MATRIX_PRINT_AS(float,"%f ",matrix1);
+    printf("%lu %lu\n",matrix1->numberRows, matrix1->numberColumns);
+
+    Matrix* matrix4 = getMatrixRows(matrix1,2,6);
+    MATRIX_PRINT_AS(float,"%f ",matrix4);
+
+    destroyMatrix(&matrix1);
+    destroyMatrix(&matrix2);
+    destroyMatrix(&matrix3);
+    destroyMatrix(&matrix4);
 
     return 0;
 }

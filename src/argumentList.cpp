@@ -47,7 +47,7 @@ ArgumentListNode* createRawArgumentNode(size_t dataSize){
 void destroyArgumentList(ArgumentList **list){
     ArgumentList* aux = *list;
     ArgumentListNode *currentNode = NULL;
-    if(aux == NULL){
+    if(*list == NULL || list == NULL){
         return;
     }
 

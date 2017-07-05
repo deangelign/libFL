@@ -480,10 +480,14 @@ void destroyCharPointer(void* data){
 }
 
 GVector* splitsLinesInTextFile(const char* filename){
-    size_t initalSize = 10;
+    FILE* file = fopen(filename, "r");
+    if(file == NULL){
+        printf("[splitsLinesInTextFile] file %s not found\n",filename);
+        return NULL;
+    }
+    size_t initalSize = 1;
     GVector* vector = createVector(initalSize,sizeof(char*));
     vector->freeFunction = destroyCharPointer;
-    FILE* file = fopen(filename, "r");
     char line[256];
     int index;
     while (fgets(line, sizeof(line), file)) {
@@ -496,7 +500,10 @@ GVector* splitsLinesInTextFile(const char* filename){
         path[index] = '\0';
         VECTOR_PUSH_BACK(char*,vector,path);
     }
-    shrinkToFit(vector);
+    if(vector->size > 0){
+        shrinkToFit(vector);
+    }
+
     return vector;
 }
 

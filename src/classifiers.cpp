@@ -307,6 +307,8 @@ void svmClassifierFit(SVM_Classifier* svmClassifier,double* X, size_t nrows,size
     int j = 0;
     if(svmClassifier->x_space){
         free(svmClassifier->x_space);
+        svmClassifier->x_space = NULL;
+        svm_free_and_destroy_model(&svmClassifier->model);
     }
 
     if(svmClassifier->useSparseDataRepresentation){
@@ -371,6 +373,7 @@ void svmClassifierFit(SVM_Classifier* svmClassifier,double* X, size_t nrows,size
 
         max_index = ncols+1;
     }
+
     if(svmClassifier->param.gamma == 0 && max_index > 0){
         svmClassifier->param.gamma = 1.0/max_index;
     }
@@ -398,7 +401,12 @@ void svmClassifierFit(SVM_Classifier* svmClassifier,double* X, size_t nrows,size
 
     svmClassifier->model = svm_train(&svmClassifier->prob,&svmClassifier->param);
     free(svmClassifier->prob.y);
+    svmClassifier->prob.y = NULL;
     free(svmClassifier->prob.x);
+    svmClassifier->prob.x = NULL;
+    //free(svmClassifier->x_space);
+    //svmClassifier->x_space = NULL;
+
     //free(svmClassifier->x_space);
 
 
@@ -635,6 +643,7 @@ void do_cross_validation_SVM(SVM_Classifier* svmClassifier)
                 ++total_correct;
         printf("Cross Validation Accuracy = %g%%\n",100.0*total_correct/svmClassifier->prob.l);
     }
+    svmClassifier->accuracy_crossValidation = 100.0*total_correct/svmClassifier->prob.l;
     free(target);
 }
 

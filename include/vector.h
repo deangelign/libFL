@@ -49,7 +49,6 @@ GVector* copyVector(GVector *vector);
 #define IS_INDEX_OUT_BOUNDS_INSERT(vector,i) (i > vector->size)
 #define SHOULD_GROW(vector) (vector->size >= vector->capacity)
 
-#define VECTOR_SET_CAPACITY(vector, newCapacity) \
 
 
 //private
@@ -62,7 +61,6 @@ void shrinkToFit(GVector* vector);
 /*Element access*/
 #define VECTOR_GET_ELEMENT_AS(type, vectorPointer, index) ((type*)vectorPointer->data)[index]
 #define VECTOR_GET_FRONT_ELEMENT_AS(type, vectorPointer, index) ((type*)vectorPointer->data)[vectorPointer->size]
-#define VECTOR_GET_BACK_ELEMENT_AS(type, vectorPointer, index) ((type*)vectorPointer->data)[0]
 
 inline void*  getElementInVectorAt(const GVector* vector, size_t index){
     if(IS_INDEX_OUT_BOUNDS(vector,index)){
@@ -167,7 +165,8 @@ size_t getIteratorIndexInVector(GVector* vector, VectorIterator* iterator);
 #define VECTOR_PRINT_AS(type, symbol, vector) \
     for(size_t currentIndexVector = 0; currentIndexVector < vector->size; currentIndexVector++){\
         printf(symbol,  VECTOR_GET_ELEMENT_AS(type,vector,currentIndexVector) ); \
-    }
+    }\
+    printf("\n");
 
 /*******************************************/
 

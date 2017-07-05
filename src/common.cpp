@@ -5,8 +5,11 @@ char *AllocCharArray(int n)
 {
     char *v=NULL;
     v = (char *) calloc(n,sizeof(char));
-    if (v == NULL)
-        Error(MSG1,"AllocCharArray");
+    if (v == NULL){
+        //Error(MSG1,"AllocCharArray");
+        return NULL;
+    }
+
     return(v);
 }
 
@@ -14,8 +17,10 @@ uchar *AllocUCharArray(int n)
 {
     uchar *v=NULL;
     v = (uchar *) calloc(n,sizeof(uchar));
-    if (v == NULL)
-        Error(MSG1,"AllocUCharArray");
+    if (v == NULL){
+        //Error(MSG1,"AllocUCharArray");
+        return NULL;
+    }
     return(v);
 }
 
@@ -23,8 +28,11 @@ ushort *AllocUShortArray(int n)
 {
     ushort *v=NULL;
     v = (ushort *) calloc(n,sizeof(ushort));
-    if (v == NULL)
-        Error(MSG1,"AllocUShortArray");
+    if (v == NULL){
+        //Error(MSG1,"AllocUShortArray");
+        return NULL;
+    }
+
     return(v);
 }
 
@@ -32,8 +40,11 @@ int *AllocIntArray(int n)
 {
     int *v=NULL;
     v = (int *) calloc(n,sizeof(int));
-    if (v == NULL)
-        Error(MSG1,"AllocIntArray");
+    if (v == NULL){
+        //Error(MSG1,"AllocIntArray");
+        return NULL;
+    }
+
     return(v);
 }
 
@@ -41,8 +52,11 @@ float *AllocFloatArray(int n)
 {
     float *v=NULL;
     v = (float *) calloc(n,sizeof(float));
-    if (v == NULL)
-        Error(MSG1,(char*)"AllocFloatArray");
+    if (v == NULL){
+        //Error(MSG1,(char*)"AllocFloatArray");
+        return NULL;
+    }
+
     return(v);
 }
 
@@ -50,8 +64,11 @@ double *AllocDoubleArray(int n)
 {
     double *v=NULL;
     v = (double *) calloc(n,sizeof(double));
-    if (v == NULL)
-        Error(MSG1,(char*)"AllocDoubleArray");
+    if (v == NULL){
+        //Error(MSG1,(char*)"AllocDoubleArray");
+        return NULL;
+    }
+
     return(v);
 }
 
@@ -86,7 +103,7 @@ int NCFgets(char *s, int m, FILE *f) {
 http://www.ime.usp.br/~pf/algoritmos/aulas/random.html
  **/
 
-int RandomInteger (int low, int high){
+int randomInteger(int low, int high){
     int k;
     double d;
 

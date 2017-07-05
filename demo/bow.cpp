@@ -1,14 +1,15 @@
 #include "FL.h"
 
 int main(int argc, char **argv) {
-    size_t numberOfVisualWords = 500;
+
+    size_t nclasses = 100;
 
 
     //Caminhos onde esta o arquivo txt gerado pelo o script python "selec_samples2.py"
     //os caminhos vao mudar para cada pessoa
-    char const* const fileName_createDict = "/home/deangeli/databases/train_paths.txt";
-    char const* const fileName_createTrain = "/home/deangeli/databases/train_paths.txt";
-    char const* const fileName_createTest = "/home/deangeli/databases/test_paths.txt";
+    const char *  fileName_createDict = "/home/deangeli/databases/train_paths.txt";
+    const char *  fileName_createTrain = "/home/deangeli/databases/train_paths.txt";
+    const char *  fileName_createTest = "/home/deangeli/databases/test_paths.txt";
 
     //cada posicao do vetor tem uma string para o caminho de uma imagem
     GVector* vectorSamplesUsed2CreateDict =  splitsLinesInTextFile(fileName_createDict);
@@ -17,20 +18,36 @@ int main(int argc, char **argv) {
 
     //apenas checkando se o vetor vazio. Caso o vetor esteja vazio, talvez seu caminho ate o arquivo
     //txt nao esteja correto
+    if(vectorSamplesUsed2CreateDict == NULL){
+        printf("error\n");
+        return -1;
+    }
     if(vectorSamplesUsed2CreateDict->size == 0){
-        printf("no path found");
+        printf("error\n");
+        return -1;
+    }
+
+    if(vectorSamplesUsed2TrainClassifier == NULL){
+        printf("error\n");
         return -1;
     }
 
     if(vectorSamplesUsed2TrainClassifier->size == 0){
-        printf("no path found");
+        printf("error\n");
+        return -1;
+    }
+
+    if(vectorSamplesUsed2TestClassifier == NULL){
+        printf("error\n");
         return -1;
     }
 
     if(vectorSamplesUsed2TestClassifier->size == 0){
-        printf("no path found");
+        printf("error\n");
         return -1;
     }
+    int patchSizeX = 32;
+    int patchSizeY = 32;
 
     //pipeline para a construncao do dicionario. Para mais detalhes olhe a imagem que esta
     //em data/bowArquiteturaImplementada.png
@@ -40,7 +57,7 @@ int main(int argc, char **argv) {
 
     ////////////////////////////////////////////////////////////////////////
     //Passando os vetores que contem os caminhos das imagens para...
-    bowManager->pathsToImages_dictionery = vectorSamplesUsed2CreateDict;//criar o dicionario
+    bowManager->pathsToImages_dictionary = vectorSamplesUsed2CreateDict;//criar o dicionario
     bowManager->pathsToImages_train = vectorSamplesUsed2TrainClassifier;//treinar o classificador
     bowManager->pathsToImages_test = vectorSamplesUsed2TestClassifier;//testar o classificador
     //////////////////////////////////////////////////////////////////////
@@ -55,8 +72,8 @@ int main(int argc, char **argv) {
     //Note que o cabecalho geral para a funcao de sammpling e
     //GVector* minhaFuncaoDeSampling(Image* image, BagOfVisualWordsManager* bagOfVisualWordsManager);
     ArgumentList* gridSamplingArguments = createArgumentList();
-    ARGLIST_PUSH_BACK_AS(size_t,gridSamplingArguments,64); //patch size X
-    ARGLIST_PUSH_BACK_AS(size_t,gridSamplingArguments,64); //patch size Y
+    ARGLIST_PUSH_BACK_AS(size_t,gridSamplingArguments,patchSizeX); //patch size X
+    ARGLIST_PUSH_BACK_AS(size_t,gridSamplingArguments,patchSizeY); //patch size Y
     bowManager->argumentListOfSampler = gridSamplingArguments;//passando a lista de argumentos para o bow manager
     //////////////////////////////////////////////////////////
 
@@ -67,20 +84,11 @@ int main(int argc, char **argv) {
     //voce pode passar NULL, porém fique consciente que vai ter um pouco de memory leak.
     //Ao final do programa seu sistema operional vai limpar toda a sujeira.
     bowManager->freeFunction2SamplerOutput = destroyImageVoidPointer;
-    //bowManager->freeFunction2SamplerOutput = NULL;
     /////////////////////////////////////////////////
 
     /////////////////////////////////////////////////////////////////
     //Neste exemplo eu irei usar o descritor de cores aprendindo em aula.
     bowManager->featureExtractorFunction = computeColorHistogramBow;//ponteiro da funcao para a extracao de features
-
-    //o meu metodo para fazer o histograma de cores recebe 2 parametros (exlcuindo vetor de entrada)
-    //0 - vetor com as imagens dos patchs (esse argumento n'ao conta)
-    //1 - numeros de bins por canal
-    //2 - numero total de bins (bins por canal * numero de canais). Portanto, eu vou
-    //criar uma argumentList e colocar dois parametros nela.
-    //Note que o cabecalho geral para a funcao do extrator e
-    //Matrix* MinhaFuncaoFeatureExtractor(GVector* outputSampler, BagOfVisualWordsManager* bagOfVisualWordsManager);
     ArgumentList* colorFeatureExtractorArguments = createArgumentList();
     size_t nbins = 7;
     ARGLIST_PUSH_BACK_AS(size_t,colorFeatureExtractorArguments,nbins); //nBins per channel
@@ -104,26 +112,43 @@ int main(int argc, char **argv) {
     //desta forma eu preciso criar uma ArgumentList com 6 parametros.
     //Note que o cabecalho geral para a funcao de clustering e
     //typedef Matrix* minhaFuncaoDeClustering(Matrix* outputFeatureExtractor_allSamples, BagOfVisualWordsManager* bagOfVisualWordsManager);
+    //bowManager->clusteringFunction = kmeansClusteringBow;
+    //ArgumentList* clusteringMethodArguments = createArgumentList();
+//    ARGLIST_PUSH_BACK_AS(size_t,clusteringMethodArguments,numberOfVisualWords); //number of words
+//    ARGLIST_PUSH_BACK_AS(size_t,clusteringMethodArguments,100); //maximum number of iterations
+//    ARGLIST_PUSH_BACK_AS(double,clusteringMethodArguments,0.0001); //tolerance
+//    ARGLIST_PUSH_BACK_AS(int,clusteringMethodArguments,0); //seed
+//    ARGLIST_PUSH_BACK_AS(DistanceFunction,clusteringMethodArguments,computeNormalizedL1Norm); //seed
+//    ARGLIST_PUSH_BACK_AS(ArgumentList*,clusteringMethodArguments,NULL); //seed
+    //bowManager->argumentListOfClustering = clusteringMethodArguments;
+
+
     bowManager->clusteringFunction = kmeansClusteringBow;
+    //bowManager->clusteringFunction = clusteringGetAllSampleBow;
+    //bowManager->clusteringFunction = clusteringSupervisedBow;
+    bowManager->storeVisualWordsData = true;
+    size_t numberOfVisualWords = 2000;
     ArgumentList* clusteringMethodArguments = createArgumentList();
-    ARGLIST_PUSH_BACK_AS(size_t,clusteringMethodArguments,numberOfVisualWords); //number of words
-    ARGLIST_PUSH_BACK_AS(size_t,clusteringMethodArguments,100); //maximum number of iterations
-    ARGLIST_PUSH_BACK_AS(double,clusteringMethodArguments,0.0001); //tolerance
-    ARGLIST_PUSH_BACK_AS(int,clusteringMethodArguments,0); //seed
-    ARGLIST_PUSH_BACK_AS(DistanceFunction,clusteringMethodArguments,computeNormalizedL1Norm); //seed
-    ARGLIST_PUSH_BACK_AS(ArgumentList*,clusteringMethodArguments,NULL); //seed
+    ARGLIST_PUSH_BACK_AS(size_t,clusteringMethodArguments,numberOfVisualWords);
+    ARGLIST_PUSH_BACK_AS(DistanceFunction ,clusteringMethodArguments,computeNormalizedL1Norm);
+    ARGLIST_PUSH_BACK_AS(ArgumentList* ,clusteringMethodArguments,NULL);
     bowManager->argumentListOfClustering = clusteringMethodArguments;
     ///////////////////////////////////////////////////////////////
 
     ////////////
     //computa o dicionario
-    computeDictionery(bowManager);
+    computeDictionary(bowManager);
     /////////////
 
     //////////////////////
     //define a funcao para montar o histograma
-    bowManager->mountHistogramFunction = computeCountHistogram_bow;
-    bowManager->argumentListOfHistogramMounter = NULL;
+    bowManager->mountHistogramFunction = computeHardAssignmentHistogram_bow;
+    ArgumentList* histogramMouterArguments = createArgumentList();
+    ARGLIST_PUSH_BACK_AS(int,histogramMouterArguments,0);
+    ARGLIST_PUSH_BACK_AS(DistanceFunction,histogramMouterArguments,computeL1Norm);
+    ARGLIST_PUSH_BACK_AS(ArgumentList*,histogramMouterArguments,NULL);
+    bowManager->argumentListOfHistogramMounter = histogramMouterArguments;
+    //bowManager->argumentListOfHistogramMounter = NULL;
     ///////////////////////
 
 
@@ -136,7 +161,7 @@ int main(int argc, char **argv) {
     //knn
 //    Knn_Classifier* classifierknn = createKnnClassifier();
 //    classifierknn->k = 1;
-//    classifierknn->nlabels = 100;
+//    classifierknn->nlabels = nclasses;
 //    bowManager->classifier = (void*)classifierknn;
 //    bowManager->fitFunction = knn_Classifier_fit;
 //    bowManager->storeTrainData = false;
@@ -147,7 +172,7 @@ int main(int argc, char **argv) {
 
     //"kmeans classifier"
 //    Kmeans_Classifier* classifierkmeans = createKmeansClassifier();
-//    classifierkmeans->nlabels = 100;
+//    classifierkmeans->nlabels = nclasses;
 //    bowManager->classifier = (void*)classifierkmeans;
 //    bowManager->fitFunction = kmeans_Classifier_fit;
 //    bowManager->storeTrainData = false;
@@ -158,11 +183,12 @@ int main(int argc, char **argv) {
 
     //SVM Classifier
     SVM_Classifier* classifiersvm = createSVMClassifier();
-    classifiersvm->param.kernel_type = RBF;
-    classifiersvm->param.gamma = 3.5;
+    classifiersvm->param.kernel_type = LINEAR;
+    classifiersvm->param.gamma = 2;
+    classifiersvm->crossValidation = false;
     bowManager->classifier = (void*)classifiersvm;
-    bowManager->fitFunction = svm_Classifier_fit;
     bowManager->storeTrainData = false;
+    bowManager->fitFunction = svm_Classifier_fit;
     bowManager->predictFunction = svm_Classifier_predict;
     bowManager->storePredictedData = false;
     bowManager->freeFunctionClassifier = destroySVMClassifierForVoidPointer;
@@ -183,23 +209,48 @@ int main(int argc, char **argv) {
     //Le os true labels das imagens e checa com os labels predizidos pelo o classificador.
     //computa uma simples acuracia (numero de amostras rotuladas corretamente / numero de amostras do conjunto)
     GVector* trueLabels = createNullVector(bowManager->pathsToImages_test->size,sizeof(int));
+    Matrix* confusionMAtrix = createMatrix(nclasses,nclasses,sizeof(float));
+    GVector* hitPerClass = createNullVector(nclasses,sizeof(float));
+    GVector* count = createNullVector(nclasses,sizeof(int));
     int hit = 0;
-    printf("file | predicted true\t\tcorrect\n");
-    char symbol;
+    printf("file | predicted true\n");
+    //MATRIX_GET_ELEMENT_PO_AS(float,confusionMAtrix,0,predictedLabel-1) += 0;
     for (size_t index = 0; index < bowManager->pathsToImages_test->size; ++index) {
-        symbol = 'X';
         char * path = VECTOR_GET_ELEMENT_AS(char*,bowManager->pathsToImages_test,index);
         VECTOR_GET_ELEMENT_AS(int,trueLabels,index) = findTrueLabelInName(path);
-        if(VECTOR_GET_ELEMENT_AS(int,trueLabels,index) == VECTOR_GET_ELEMENT_AS(int,labelsPredicted,index)){
+
+        int truelabel = VECTOR_GET_ELEMENT_AS(int,trueLabels,index);
+        int predictedLabel = VECTOR_GET_ELEMENT_AS(int,labelsPredicted,index);
+        //printf("%d %d %lu\n",(truelabel-1),predictedLabel-1,nclasses);
+        MATRIX_GET_ELEMENT_PO_AS(float,confusionMAtrix,(truelabel-1),(predictedLabel-1)) += 1;
+        VECTOR_GET_ELEMENT_AS(float,count, (truelabel-1)) += 1;
+        if(truelabel == predictedLabel){
+            VECTOR_GET_ELEMENT_AS(float,hitPerClass,(truelabel-1)) += 1;
             hit++;
-            symbol = 'O';
         }
-        printf("%s | %d %d\t\t%c\n",
-               path,
-               VECTOR_GET_ELEMENT_AS(int,labelsPredicted,index),
-               VECTOR_GET_ELEMENT_AS(int,trueLabels,index),symbol
-        );
+//        printf("%s | %d %d\n",
+//               path,
+//               VECTOR_GET_ELEMENT_AS(int,labelsPredicted,index),
+//               VECTOR_GET_ELEMENT_AS(int,trueLabels,index)
+//        );
     }
+
+    for (size_t i = 0; i < nclasses; ++i) {
+        for (size_t j = 0; j < nclasses; ++j) {
+            MATRIX_GET_ELEMENT_PO_AS(float,confusionMAtrix,i,j) /= VECTOR_GET_ELEMENT_AS(float,count,i);
+        }
+        VECTOR_GET_ELEMENT_AS(float,hitPerClass,i) /= VECTOR_GET_ELEMENT_AS(float,count,i);
+    }
+
+    printf("\n");
+//    printf("confusion matrix:\n");
+//    MATRIX_PRINT_AS(float,"%f ",confusionMAtrix);
+    printf("\n");
+    printf("accuracia por classe:\n");
+    for (size_t k = 1; k <= nclasses; ++k) {
+        printf("%lu: %f\n",k,VECTOR_GET_ELEMENT_AS(float,hitPerClass,(k-1)));
+    }
+
     double acuracia = ((double)hit)/bowManager->pathsToImages_test->size;
     printf("acuracia: %f\n",acuracia);
     /////////////////////////////////////
@@ -207,6 +258,9 @@ int main(int argc, char **argv) {
     destroyBagOfVisualWordsManager(&bowManager);
     destroyVector(&trueLabels);
     destroyVector(&labelsPredicted);
+    destroyVector(&hitPerClass);
+    destroyVector(&count);
+    destroyMatrix(&confusionMAtrix);
     return 0;
 
 }

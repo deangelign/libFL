@@ -253,6 +253,7 @@ void clearVector(GVector *vector){
     free(vector->data);
     vector->data = NULL;
     vector->size = 0;
+    vector->capacity = 0;
 
 }
 

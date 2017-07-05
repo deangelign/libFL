@@ -72,6 +72,7 @@ typedef struct _svm_Classifier{
     struct svm_node *x_space;
     bool crossValidation;
     int nfolds_crossValidation;
+    float accuracy_crossValidation;
     bool useSparseDataRepresentation;
     bool isClassification;
     bool predict_probability;

@@ -169,6 +169,8 @@ AdjacencyRelation *createRectangularAdjacency(int height,int width){
             k++;
         }
     }
+    adjacencyRelation->maxDx = centerX;
+    adjacencyRelation->maxDy = centerY;
     return adjacencyRelation;
 }
 

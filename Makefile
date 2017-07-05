@@ -1,4 +1,5 @@
-COMPILER = $(CXX)
+#COMPILER = $(CXX)
+COMPILER = g++
 LIB=./lib
 INCLUDE=./include
 SRC=./src
@@ -12,10 +13,22 @@ FLLIBSVMINCLUDES = -I./externals/libsvm/include
 
 INCLUDEALL = $(FLLIBPNGINCLUDES) $(FLLIBJPEGINCLUDES) $(FLLIBSVMINCLUDES) -I$(INCLUDE)
 
-#FLAGS= -g  -O0 -Wall -D _DEBUG -Wno-unused-result -fPIC -std=gnu99 -pedantic
 FLAGS=  -O3 -Wall -Wno-unused-result -pedantic -Wno-write-strings  -fsanitize=address -fopenmp
-FLAGSIM =   $(FLAGS)
-#-std=gnu99
+
+
+#######################ift things
+FLLIBIFTINCLUDES = -I./externals/libift/include
+LIBCBLAS_LD  = -llapack -lblas -lcblas
+LIBIFT_LD    = -L ./externals/libift/lib -lift
+#######################
+
+USE_IFT=0
+ifeq ($(USE_IFT), 1)
+	export FLAGS += -DUSE_IFT=1
+    INCLUDEALL += $(FLLIBIFTINCLUDES)
+    LINKER += $(LIBIFT_LD) $(LIBCBLAS_LD)
+endif
+
 
 libFL:  lpng ljpeg libsvm $(LIB)/libFL.a
 	echo "libFL.a built..."
@@ -50,7 +63,7 @@ $(OBJ)/bagOfVisualWords.o
 
 # generic src compilation
 $(OBJ)/%.o: $(SRC)/%.cpp $(INCLUDE)/%.h
-	$(COMPILER) $(FLAGS) -c $< $(INCLUDEALL) -o $@
+	$(COMPILER) $(INCLUDEALL) $(FLAGS)  -c $<  -o $@
 
 
 lpng: ./externals/libpng/source/ ./externals/libpng/include

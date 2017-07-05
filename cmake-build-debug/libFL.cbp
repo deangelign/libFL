@@ -1,0 +1,1384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="libFL"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gifTest">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/gifTest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 gifTest"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="gifTest/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/gifTest" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 gifTest/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="genericList2">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/genericList2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 genericList2"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="genericList2/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/genericList2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 genericList2/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="readingDirectory">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/readingDirectory" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 readingDirectory"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="readingDirectory/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/readingDirectory" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 readingDirectory/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="testList">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/testList" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 testList"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="testList/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/testList" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 testList/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="genericList">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/genericList" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 genericList"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="genericList/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/genericList" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 genericList/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="correlation">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/correlation" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 correlation"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="correlation/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/correlation" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 correlation/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="visualizationAdjRelation">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/visualizationAdjRelation" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 visualizationAdjRelation"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="visualizationAdjRelation/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/visualizationAdjRelation" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 visualizationAdjRelation/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="testVector">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/testVector" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 testVector"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="testVector/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/testVector" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 testVector/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageHistogram">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageHistogram" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageHistogram"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageHistogram/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageHistogram" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageHistogram/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="filteringImage">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/filteringImage" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 filteringImage"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="filteringImage/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/filteringImage" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 filteringImage/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageGrid">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageGrid" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageGrid"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageGrid/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageGrid" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageGrid/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="packingImages">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/packingImages" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 packingImages"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="packingImages/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/packingImages" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 packingImages/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rwImage">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/rwImage" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 rwImage"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rwImage/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/rwImage" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 rwImage/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="addingLines">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/addingLines" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 addingLines"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="addingLines/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/addingLines" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 addingLines/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libfl">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/liblibfl.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 libfl"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libfl/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/liblibfl.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 libfl/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageJPEG">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageJPEG" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageJPEG"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageJPEG/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageJPEG" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageJPEG/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageMorphology">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageMorphology" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageMorphology"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageMorphology/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageMorphology" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageMorphology/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bow">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/bow" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 bow"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bow/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/bow" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 bow/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imagePNG">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imagePNG" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imagePNG"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imagePNG/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imagePNG" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imagePNG/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="objectSimilarity">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/objectSimilarity" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 objectSimilarity"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="objectSimilarity/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/objectSimilarity" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 objectSimilarity/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageTIFF">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageTIFF" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageTIFF"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="imageTIFF/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/imageTIFF" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 imageTIFF/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="testVector2">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/testVector2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 testVector2"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="testVector2/fast">
+				<Option output="/home/deangeli/bitbucket/mc815/libfl/bin/testVector2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/deangeli/bitbucket/mc815/libfl/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/include"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/src"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/externals/*/*/*"/>
+					<Add directory="/home/deangeli/bitbucket/mc815/libfl/."/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 testVector2/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/deangeli/bitbucket/mc815/libfl/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/addingLines.cpp">
+			<Option target="addingLines"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/bow.cpp">
+			<Option target="bow"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/correlation.cpp">
+			<Option target="correlation"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/filteringImage.cpp">
+			<Option target="filteringImage"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/genericList.cpp">
+			<Option target="genericList"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/genericList2.cpp">
+			<Option target="genericList2"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/gifTest.cpp">
+			<Option target="gifTest"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/imageGrid.cpp">
+			<Option target="imageGrid"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/imageHistogram.cpp">
+			<Option target="imageHistogram"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/imageJPEG.cpp">
+			<Option target="imageJPEG"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/imageMorphology.cpp">
+			<Option target="imageMorphology"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/imagePNG.cpp">
+			<Option target="imagePNG"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/imageTIFF.cpp">
+			<Option target="imageTIFF"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/objectSimilarity.cpp">
+			<Option target="objectSimilarity"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/packingImages.cpp">
+			<Option target="packingImages"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/readingDirectory.cpp">
+			<Option target="readingDirectory"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/rwImage.cpp">
+			<Option target="rwImage"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/testList.cpp">
+			<Option target="testList"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/testVector.cpp">
+			<Option target="testVector"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/testVector2.cpp">
+			<Option target="testVector2"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/demo/visualizationAdjRelation.cpp">
+			<Option target="visualizationAdjRelation"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/adjacencyRelation.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/bagOfVisualWords.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/common.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/featureVector.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/file.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/filtering.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/gif.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/histogram.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/image.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/imageReader.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/kernel.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/linkedlist.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/morphology.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/src/vector.cpp">
+			<Option target="libfl"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/cmake/FindCBLAS.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/home/deangeli/bitbucket/mc815/libfl/cmake/FindLAPACK.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

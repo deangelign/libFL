@@ -83,17 +83,10 @@ EXAMPLE:
 <br>
 
  <ul>
-  <li>include: contains the functions prototypes files (.h)</li>
+  <li>include: contains the functions prototype files (.h)</li>
   <li>src: contains the functions implementation (.cpp) (most of them are written in C)</li>
   <li>obj: contains the object files (.o)</li>
   <li>lib: contains the static library file (.a)</li>
-  <li>pythonUtils: simples python scripts (.py) for general purposes (such as plotting)</li>
+  <li>pythonUtils: simple python scripts (.py) for general purposes (such as plotting)</li>
   <li>demo: contains the demo files (.cpp)</li>
 </ul>
-
-
-
-
-
-
-

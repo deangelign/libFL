@@ -20,22 +20,32 @@
 
 
 enum ColorSpace {
-    UNKNOWN = 0,
-    GRAYSCALE = 1,
-    GRAYSCALE_ALPHA = 2,
-    RGB = 3,
-    RGBA = 4,
-    YCbCr = 5,
-    YCbCrK = 6,
-    HSV = 7,
-    HSVA = 8,
-    CMYK = 9
+    COLORSPACE_UNKNOWN = 0,
+    COLORSPACE_GRAYSCALE = 1,
+    COLORSPACE_GRAYSCALE_ALPHA = 2,
+    COLORSPACE_RGB = 3,
+    COLORSPACE_RGBA = 4,
+    COLORSPACE_YCbCr = 5,
+    COLORSPACE_YCbCrK = 6,
+    COLORSPACE_HSV = 7,
+    COLORSPACE_HSVA = 8,
+    COLORSPACE_CMYK = 9
 };
 
 enum DataType {
     FLOAT,
     DOUBLE
 };
+
+
+typedef struct _RegionOfInterest {
+    float coordinateX;
+    float coordinateY;
+    float coordinateZ;
+    float size_x;
+    float size_y;
+    float size_z;
+}RegionOfInterest;
 
 
 typedef struct _image {
@@ -49,7 +59,11 @@ typedef struct _image {
     int nchannels;
     ColorSpace colorSpace;
     DataType dataTypeId;
+    char path[100];
+    RegionOfInterest imageROI;
 } Image;
+
+
 
 
 //macro para facil acesso aos pixels da imagem. a macro computa o indice para acessar a posicao (x,y) da imagem
@@ -58,6 +72,7 @@ typedef struct _image {
 #define imageVolume(image, x, y,z) image->channel[0][(z*image->ny*image->nx) + (y*image->nx) + x]
 #define imageVolumeCh(image, x, y, z,c) image->channel[c][(z*image->ny*image->nx) + (y*image->nx) + x]
 
+#define areImagesSameDimension(image1, image2) ( (image1->nx == image2->nx) && (image1->ny == image2->ny) && (image1->nz == image2->nz) )
 
 Image* createImage(int nx, int ny,int nchannels);
 Image* createImage(int nx, int ny,int nz, int nchannels);
@@ -82,12 +97,16 @@ void writeImageJPEG(Image *image,char *filename);
 void writeImageTIFF(Image *image,char *filename);
 void writeImage(Image* image, char *filename);
 bool isValidPixelCoordinate(Image *image,int pixelCoordinateX,int pixelCoordinateY);
+
+
 Image *imageSubtraction(Image *image1, Image *image2, bool saturation);
 bool isImagesSameDomain(Image *image1,Image *image2);
 Image *convertRGBtoYCbCr(Image *rgbImage);
 float sumUpAllPixelsValues(Image *image, bool normalize);
 Image* extractImageChannel(Image* image, int channel);
 void printImage(Image* image);
+void printImageInfo(Image* image);
+void printImageRegionOfInterest(RegionOfInterest* regionOfInterest);
 Image* createAlphaChannel(Image* image,float alpha);
 Image* convertGrayImage2RGBImage(Image* image_ppm);
 Image* mergeImages(Image* image1, Image* image2);

@@ -117,6 +117,7 @@ GVector* computeHistogramForFeatureVectorGivenNBins(Image *image,int numberBinsP
 
     float binSize = ( (image->scalingFactor+1) / numberBinsPerChannel);
 
+
     int totalNumberBins = pow(numberBinsPerChannel, image->nchannels);
     GVector *histVec = createNullVector(totalNumberBins,sizeof(float));
 

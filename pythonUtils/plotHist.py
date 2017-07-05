@@ -9,7 +9,7 @@ import sys
 
 def plotGrayHistogram(x,y):
   plt.bar(x,y)
-  plt.title("Histogram")
+  plt.title(inFile)
   plt.xlabel("bins")
   plt.ylabel("counts")
   plt.show();

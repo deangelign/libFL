@@ -24,6 +24,13 @@ Image* createImage(int nx, int ny,int nchannels){
     image->nchannels = nchannels;
     findAppropriateColorSpace(image);
     image->dataTypeId = FLOAT;
+    image->imageROI.coordinateX = 0;
+    image->imageROI.coordinateY = 0;
+    image->imageROI.coordinateZ = 0;
+    image->imageROI.size_x = image->nx;
+    image->imageROI.size_y = image->ny;
+    image->imageROI.size_z = image->nz;
+    //image->path = NULL;
     for (int i = 0; i < image->nchannels; ++i) {
         image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float));
         //image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float*));
@@ -49,6 +56,13 @@ Image* createImage(int nx, int ny,int nz, int nchannels){
     image->nchannels = nchannels;
     findAppropriateColorSpace(image);
     image->dataTypeId = FLOAT;
+    image->imageROI.coordinateX = 0;
+    image->imageROI.coordinateY = 0;
+    image->imageROI.coordinateZ = 0;
+    image->imageROI.size_x = image->nx;
+    image->imageROI.size_y = image->ny;
+    image->imageROI.size_z = image->nz;
+    //image->path = NULL;
     for (int i = 0; i < image->nchannels; ++i) {
         image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float));
         //image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float*));
@@ -70,8 +84,15 @@ Image* createImage(int nx, int ny){
     image->unid[1] = 'm';
     image->channel = (float**)calloc(1,sizeof(float*));
     image->nchannels = 1;
-    image->colorSpace = GRAYSCALE;
+    image->colorSpace = COLORSPACE_GRAYSCALE;
     image->dataTypeId = FLOAT;
+    image->imageROI.coordinateX = 0;
+    image->imageROI.coordinateY = 0;
+    image->imageROI.coordinateZ = 0;
+    image->imageROI.size_x = image->nx;
+    image->imageROI.size_y = image->ny;
+    image->imageROI.size_z = image->nz;
+    //image->path = NULL;
     for (int i = 0; i < image->nchannels; ++i) {
         image->channel[i] = (float*)calloc(image->numberPixels,sizeof(float*));
     }
@@ -80,19 +101,23 @@ Image* createImage(int nx, int ny){
 
 void findAppropriateColorSpace(Image* image){
     if (image->nchannels == 1){
-        image->colorSpace = GRAYSCALE;
+        image->colorSpace = COLORSPACE_GRAYSCALE;
     }else if(image->nchannels == 3){
-        image->colorSpace = RGB;
+        image->colorSpace = COLORSPACE_RGB;
     }else if(image->nchannels == 4){
-        image->colorSpace = RGBA;
+        image->colorSpace = COLORSPACE_RGBA;
     }else{
-        image->colorSpace = UNKNOWN;
+        image->colorSpace = COLORSPACE_UNKNOWN;
     }
 }
 
 
 void destroyImage(Image**image ){
-    if((*image) == NULL){
+
+    if(image == NULL){
+        return;
+    }
+    if( *image == NULL){
         return;
     }
     for (int i = 0; i < (*image)->nchannels; ++i) {
@@ -100,8 +125,9 @@ void destroyImage(Image**image ){
     }
 
     free((*image)->channel);
-    free((*image));
-    (*image) = NULL;
+    free(*image);
+    *image = NULL;
+    image = NULL;
 }
 
 void destroyImageVoidPointer(void* data){
@@ -130,6 +156,14 @@ Image* readImage(char *filename){
     else{
         printf("image format unknown\n");
     }
+
+    int index = 0;
+    while(filename[index] != '\0'){
+        image->path[index] = filename[index];
+        index++;
+    }
+    image->path[index] = '\0';
+
     return image;
 }
 
@@ -172,7 +206,7 @@ Image *readImagePGM(char *filename)
         img = createImage(ncols,nrows,1);
         img->scalingFactor = maxValue;
         img->channelDepth = (log(maxValue+1)/log(2))+0.1;
-        img->colorSpace = GRAYSCALE;
+        img->colorSpace = COLORSPACE_GRAYSCALE;
         for (int i=0; i < n; i++)
             img->channel[0][i]=(float)value[i];
         free(value);
@@ -191,7 +225,7 @@ Image *readImagePGM(char *filename)
             img = createImage(ncols,nrows,1);
             img->scalingFactor = maxValue;
             img->channelDepth = (log(maxValue+1)/log(1))+0.1;
-            img->colorSpace = GRAYSCALE;
+            img->colorSpace = COLORSPACE_GRAYSCALE;
 
             for (int i=0; i < n; i++)
                 fscanf(fp,"%f",&img->channel[0][i]);
@@ -239,7 +273,7 @@ Image *readImagePPM(char *filename){
 
             I->scalingFactor = Imax;
             I->channelDepth = (log(Imax+1)/log(2))+0.1;
-            I->colorSpace = RGB;
+            I->colorSpace = COLORSPACE_RGB;
             while (fgetc(fp) != '\n');
 
             if (Imax <= 255){
@@ -281,7 +315,7 @@ Image *readImagePPM(char *filename){
             }
 
             I = createImage(nx,ny,3);
-            I->colorSpace = RGB;
+            I->colorSpace = COLORSPACE_RGB;
 
             if (fscanf(fp, "%d", &Imax) != 1) {
                 fprintf(stderr, "Invalid rgb component (error loading '%s')\n",
@@ -311,7 +345,8 @@ Image *readImagePPM(char *filename){
 
         fclose(fp);
     }else{
-        Error(MSG2,"ReadColorImage");
+        printf("[readImagePPM] could not open File");
+        return NULL;
     }
 
     return(I);
@@ -447,19 +482,19 @@ Image *readImagePNG(char *filename){
     unsigned int numberChannels = png_get_channels(png_ptr, info_ptr);
     color_type = png_get_color_type(png_ptr, info_ptr);
     if (color_type == PNG_COLOR_TYPE_GRAY){
-        colorSpace = GRAYSCALE;
+        colorSpace = COLORSPACE_GRAYSCALE;
     }else if(color_type == PNG_COLOR_TYPE_GRAY_ALPHA){
-        colorSpace = GRAYSCALE_ALPHA;
+        colorSpace = COLORSPACE_GRAYSCALE_ALPHA;
     }else if(color_type == PNG_COLOR_TYPE_RGB){
-        colorSpace = RGB;
+        colorSpace = COLORSPACE_RGB;
     }else if(color_type == PNG_COLOR_TYPE_RGB_ALPHA){
-        colorSpace = RGBA;
+        colorSpace = COLORSPACE_RGBA;
     }else if(color_type == PNG_COLOR_TYPE_PALETTE){
         printf("[readImagePNG] PNG_COLOR_TYPE_PALETTE is not implemented yet\n");
-        colorSpace = UNKNOWN;
+        colorSpace = COLORSPACE_UNKNOWN;
     }else{
         printf("[readImagePNG] PNG_COLOR_TYPE_ unknown\n");
-        colorSpace = UNKNOWN;
+        colorSpace = COLORSPACE_UNKNOWN;
     }
     image = createImage(width,height,numberChannels);
     image->scalingFactor = pow(2,bit_depth)-1;
@@ -580,26 +615,26 @@ Image *readImageJPEG(char *filename){
     //printf("%d %d\n",cinfo.jpeg_color_space, cinfo.out_color_space);
 
     if(cinfo.out_color_space == JCS_GRAYSCALE){
-        image->colorSpace = GRAYSCALE;
+        image->colorSpace = COLORSPACE_GRAYSCALE;
     }else if(cinfo.out_color_space == JCS_RGB){//maybe a lib bug?
-        image->colorSpace = RGB;
+        image->colorSpace = COLORSPACE_RGB;
     }else if(cinfo.out_color_space == JCS_YCbCr){//maybe a lib bug?
-        image->colorSpace = YCbCr;
+        image->colorSpace = COLORSPACE_YCbCr;
     }else if(cinfo.out_color_space == JCS_CMYK){
-        image->colorSpace = CMYK;
+        image->colorSpace = COLORSPACE_CMYK;
     }else if(cinfo.out_color_space == JCS_YCCK){
-        image->colorSpace = CMYK;
+        image->colorSpace = COLORSPACE_CMYK;
     } else if(cinfo.out_color_space == JCS_BG_RGB){
         printf("[readImageJPEG] big gamut R/G/B not implemented yet, image color space will be set to RGB\n");
-        image->colorSpace = RGB;
+        image->colorSpace = COLORSPACE_RGB;
         //return NULL;
     }else if(cinfo.out_color_space == JCS_BG_YCC){
         printf("[readImageJPEG] big gamut Y/Cb/Cr not implemented yet, image color space will be set to YCbCr\n");
-        image->colorSpace = YCbCr;
+        image->colorSpace = COLORSPACE_YCbCr;
         //return NULL;
     }else{
         printf("[readImageJPEG] unknown color space\n");
-        image->colorSpace = UNKNOWN;
+        image->colorSpace = COLORSPACE_UNKNOWN;
     }
     unsigned  int imageRow = 0;
     while (cinfo.output_scanline < cinfo.output_height){
@@ -739,23 +774,23 @@ void writeImageJPEG(Image *image,char *filename){
     cinfo.image_height = image->ny;
     cinfo.data_precision = image->channelDepth;
 
-    if(image->colorSpace == RGB || image->colorSpace == RGBA){
+    if(image->colorSpace == COLORSPACE_RGB || image->colorSpace == COLORSPACE_RGBA){
         cinfo.input_components = 3;
         cinfo.in_color_space = JCS_RGB;
         cinfo.jpeg_color_space = JCS_RGB;
-    }else if(image->colorSpace == GRAYSCALE || image->colorSpace == GRAYSCALE_ALPHA){
+    }else if(image->colorSpace == COLORSPACE_GRAYSCALE || image->colorSpace == COLORSPACE_GRAYSCALE_ALPHA){
         cinfo.input_components = 1;
         cinfo.in_color_space = JCS_GRAYSCALE;
         cinfo.jpeg_color_space = JCS_GRAYSCALE;
-    }else if(image->colorSpace == YCbCr){
+    }else if(image->colorSpace == COLORSPACE_YCbCr){
         cinfo.input_components = 3;
         cinfo.in_color_space = JCS_YCbCr;
         cinfo.jpeg_color_space = JCS_YCbCr;
-    }else if(image->colorSpace == CMYK){
+    }else if(image->colorSpace == COLORSPACE_CMYK){
         cinfo.input_components = 4;
         cinfo.in_color_space = JCS_CMYK;
         cinfo.jpeg_color_space = JCS_CMYK;
-    }else if(image->colorSpace == YCbCrK){
+    }else if(image->colorSpace == COLORSPACE_YCbCrK){
         cinfo.input_components = 4;
         cinfo.in_color_space = JCS_YCCK;
         cinfo.jpeg_color_space = JCS_YCCK;
@@ -868,13 +903,13 @@ void writeImagePNG(Image *image,char *filename){
     height = image->ny;
     png_byte bit_depth = image->channelDepth;
     png_byte color_type;
-    if(image->colorSpace == RGB) {
+    if(image->colorSpace == COLORSPACE_RGB) {
         color_type = PNG_COLOR_TYPE_RGB;
-    } else if(image->colorSpace == RGBA) {
+    } else if(image->colorSpace == COLORSPACE_RGBA) {
         color_type = PNG_COLOR_TYPE_RGB_ALPHA;
-    }else if(image->colorSpace == GRAYSCALE){
+    }else if(image->colorSpace == COLORSPACE_GRAYSCALE){
         color_type = PNG_COLOR_TYPE_GRAY;
-    }else if(image->colorSpace == GRAYSCALE_ALPHA){
+    }else if(image->colorSpace == COLORSPACE_GRAYSCALE_ALPHA){
         color_type = PNG_COLOR_TYPE_GRAY_ALPHA;
     }else{
         if(image->nchannels == 1){
@@ -1104,7 +1139,7 @@ Image *convertRGBtoYCbCr(Image *rgbImage)
         ycbcrImage->channel[1][k] = Cb;
         ycbcrImage->channel[2][k] = Cr;
     }
-
+    ycbcrImage->colorSpace = COLORSPACE_YCbCr;
     return(ycbcrImage);
 }
 
@@ -1142,6 +1177,23 @@ void printImage(Image* image){
         }
         printf("\n");
     }
+}
+
+void printImageInfo(Image* image){
+    printf("number of voxels: %d x %d x %d = %d \n",image->nx,image->ny,image->nz, image->numberPixels);
+    printf("voxel size: %f x %f x %f  %s\n",image->dx,image->dy,image->dz, image->unid);
+    printf("number channels: %d \n",image->nchannels);
+    printf("channel depth: %d \n",image->channelDepth);
+    printf("scaling factor: %d \n",image->scalingFactor);
+    printf("color space Id: %d \n",image->colorSpace);
+    printf("ROI: x = %f y = %f z = %f sizeX: %f sizeY: %f sizeZ: %f \n",image->imageROI.coordinateX,image->imageROI.coordinateY,image->imageROI.coordinateZ,
+           image->imageROI.size_x,image->imageROI.size_y,image->imageROI.size_z);
+}
+
+void printImageRegionOfInterest(RegionOfInterest* regionOfInterest){
+    printf("X:%f Y:%f Z:%f sizeX:%f sizeY:%f sizeZ:%f\n",regionOfInterest->coordinateX,
+           regionOfInterest->coordinateY,regionOfInterest->coordinateZ,regionOfInterest->size_x,
+           regionOfInterest->size_y,regionOfInterest->size_z);
 }
 
 Image* createAlphaChannel(Image* image,float alpha){
